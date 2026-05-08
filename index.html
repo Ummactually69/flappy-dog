@@ -3,204 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flappy Bird</title>
+<title>Flappy Dog – Tuất tày tuất lộc</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background: #0a0a1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Press Start 2P', monospace;
-    touch-action: none;
+    background:#0a0a1a;
+    display:flex; justify-content:center; align-items:center;
+    height:100vh; overflow:hidden;
+    font-family:'Press Start 2P',monospace;
+    touch-action:none;
   }
-
   #wrapper {
-    position: relative;
-    width: 420px;
-    height: 640px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 0 60px rgba(0,200,255,0.3), 0 0 120px rgba(0,200,255,0.1);
-    /* scale to fit any screen */
-    transform-origin: center center;
+    position:relative; width:420px; height:640px;
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 0 60px rgba(0,200,255,0.3),0 0 120px rgba(0,200,255,0.1);
+    transform-origin:center center;
   }
-
-  canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-    image-rendering: pixelated;
-  }
+  canvas { display:block; width:100%; height:100%; image-rendering:pixelated; }
 
   .screen {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg, #0d1b2a 0%, #1a2f4a 40%, #0d2a1f 100%);
-    transition: opacity .35s;
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    background:linear-gradient(180deg,#0d1b2a 0%,#1a2f4a 40%,#0d2a1f 100%);
+    transition:opacity .35s;
   }
-  .screen.hidden { opacity: 0; pointer-events: none; }
+  .screen.hidden { opacity:0; pointer-events:none; }
 
+  /* ── LOGO & MENU ── */
   #menuScreen .logo {
-    font-size: 28px;
-    color: #ffe066;
-    text-shadow: 4px 4px 0 #b8860b, 0 0 30px #ffe066aa;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    animation: float 2s ease-in-out infinite;
+    font-size:28px; color:#ffe066;
+    text-shadow:4px 4px 0 #b8860b,0 0 30px #ffe066aa;
+    letter-spacing:2px; margin-bottom:6px;
+    animation:float 2s ease-in-out infinite;
   }
-  #menuScreen .sub {
-    font-size: 9px;
-    color: #7ecfff;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
-  }
+  #menuScreen .sub { font-size:9px; color:#7ecfff; margin-bottom:28px; }
+
   .bird-preview {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 30px;
-    animation: float 1.5s ease-in-out infinite;
-    border-radius: 8px;
+    width:60px; height:60px; margin-bottom:22px;
+    animation:float 1.5s ease-in-out infinite;
+    border-radius:8px;
   }
+
   .btn {
-    background: linear-gradient(135deg, #ffe066, #ff9900);
-    color: #1a0a00;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 11px;
-    padding: 14px 28px;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #b05500, 0 0 20px #ff990055;
-    transition: transform .1s, box-shadow .1s;
-    margin: 8px 0;
-    min-width: 200px;
-    text-align: center;
+    background:linear-gradient(135deg,#ffe066,#ff9900);
+    color:#1a0a00; border:none; border-radius:8px;
+    font-family:'Press Start 2P',monospace; font-size:11px;
+    padding:13px 24px; cursor:pointer;
+    box-shadow:0 6px 0 #b05500,0 0 20px #ff990055;
+    transition:transform .1s,box-shadow .1s;
+    margin:7px 0; min-width:190px; text-align:center;
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #b05500, 0 0 30px #ff990088; }
-  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #b05500; }
+  .btn:hover  { transform:translateY(-2px); box-shadow:0 8px 0 #b05500,0 0 30px #ff990088; }
+  .btn:active { transform:translateY(4px);  box-shadow:0 2px 0 #b05500; }
   .btn.secondary {
-    background: linear-gradient(135deg, #2244aa, #4477ff);
-    box-shadow: 0 6px 0 #112266, 0 0 20px #4477ff55;
-    color: #eef4ff;
+    background:linear-gradient(135deg,#2244aa,#4477ff);
+    box-shadow:0 6px 0 #112266,0 0 20px #4477ff55; color:#eef4ff;
   }
-  .btn.secondary:hover { box-shadow: 0 8px 0 #112266, 0 0 30px #4477ff88; }
-  .btn.secondary:active { box-shadow: 0 2px 0 #112266; }
-
-  .highscore-disp {
-    font-size: 8px;
-    color: #aaa;
-    margin-top: 24px;
+  .btn.secondary:hover  { box-shadow:0 8px 0 #112266,0 0 30px #4477ff88; }
+  .btn.secondary:active { box-shadow:0 2px 0 #112266; }
+  .btn.skin-btn {
+    background:linear-gradient(135deg,#aa44cc,#ff66ff);
+    box-shadow:0 6px 0 #661188,0 0 20px #ff66ff55; color:#fff0ff;
   }
-  .highscore-disp span { color: #ffe066; }
+  .btn.skin-btn:hover  { box-shadow:0 8px 0 #661188,0 0 30px #ff66ff88; }
+  .btn.skin-btn:active { box-shadow:0 2px 0 #661188; }
 
+  .highscore-disp { font-size:8px; color:#aaa; margin-top:18px; }
+  .highscore-disp span { color:#ffe066; }
+
+  /* ── GAME OVER ── */
   #gameoverScreen .go-title {
-    font-size: 22px;
-    color: #ff4455;
-    text-shadow: 3px 3px 0 #880022, 0 0 20px #ff4455aa;
-    margin-bottom: 20px;
-    animation: shake .5s ease-out;
+    font-size:22px; color:#ff4455;
+    text-shadow:3px 3px 0 #880022,0 0 20px #ff4455aa;
+    margin-bottom:20px; animation:shake .5s ease-out;
   }
   .score-box {
-    background: rgba(0,0,0,.5);
-    border: 2px solid #7ecfff44;
-    border-radius: 10px;
-    padding: 18px 32px;
-    margin-bottom: 24px;
-    text-align: center;
+    background:rgba(0,0,0,.5); border:2px solid #7ecfff44;
+    border-radius:10px; padding:18px 32px; margin-bottom:24px; text-align:center;
   }
-  .score-box .label { font-size: 7px; color: #7ecfff; margin-bottom: 6px; }
-  .score-box .val { font-size: 26px; color: #fff; }
-  .score-box .best { font-size: 8px; color: #ffe066; margin-top: 8px; }
+  .score-box .label { font-size:7px; color:#7ecfff; margin-bottom:6px; }
+  .score-box .val   { font-size:26px; color:#fff; }
+  .score-box .best  { font-size:8px; color:#ffe066; margin-top:8px; }
 
+  /* ── HOW TO PLAY ── */
   #howScreen .how-title {
-    font-size: 14px;
-    color: #ffe066;
-    text-shadow: 2px 2px 0 #b8860b;
-    margin-bottom: 24px;
+    font-size:14px; color:#ffe066;
+    text-shadow:2px 2px 0 #b8860b; margin-bottom:20px;
   }
-  .how-list {
-    list-style: none;
-    text-align: left;
-    margin-bottom: 28px;
-  }
+  .how-list { list-style:none; text-align:left; margin-bottom:24px; }
   .how-list li {
-    font-size: 7px;
-    color: #cce;
-    margin-bottom: 12px;
-    padding-left: 14px;
-    position: relative;
-    line-height: 1.8;
+    font-size:7px; color:#cce; margin-bottom:10px;
+    padding-left:14px; position:relative; line-height:1.8;
   }
-  .how-list li::before { content: "▶"; position: absolute; left: 0; color: #ffe066; }
+  .how-list li::before { content:"▶"; position:absolute; left:0; color:#ffe066; }
 
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  /* ── SKIN SCREEN ── */
+  #skinScreen .skin-title {
+    font-size:15px; color:#ff88ff;
+    text-shadow:2px 2px 0 #660088; margin-bottom:6px;
   }
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    20%,60% { transform: translateX(-8px); }
-    40%,80% { transform: translateX(8px); }
-  }
+  #skinScreen .skin-sub { font-size:7px; color:#cc88ff; margin-bottom:20px; }
 
+  .skin-grid {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:10px; margin-bottom:20px;
+    max-height:340px; overflow-y:auto;
+    padding:4px 8px;
+  }
+  .skin-grid::-webkit-scrollbar { width:4px; }
+  .skin-grid::-webkit-scrollbar-thumb { background:#aa44cc; border-radius:4px; }
+
+  .skin-card {
+    display:flex; flex-direction:column; align-items:center;
+    background:rgba(255,255,255,.06); border:2px solid rgba(255,255,255,.1);
+    border-radius:10px; padding:10px 6px; cursor:pointer;
+    transition:all .2s;
+  }
+  .skin-card:hover   { background:rgba(255,180,255,.12); border-color:#ff66ff88; transform:scale(1.05); }
+  .skin-card.active  { border-color:#ff66ff; background:rgba(255,100,255,.18); box-shadow:0 0 14px #ff66ff88; }
+  .skin-card canvas  { width:48px; height:48px; border-radius:6px; }
+  .skin-card .skin-name { font-size:5.5px; color:#ddd; margin-top:6px; text-align:center; line-height:1.5; }
+  .skin-card.active .skin-name { color:#ff88ff; }
+
+  /* ── HUD ── */
   #hud {
-    position: absolute;
-    top: 16px;
-    left: 0; right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    pointer-events: none;
-    transition: opacity .3s;
+    position:absolute; top:16px; left:0; right:0;
+    display:flex; flex-direction:column; align-items:center;
+    pointer-events:none; transition:opacity .3s;
   }
-  #hud.hidden { opacity: 0; }
+  #hud.hidden { opacity:0; }
   .hud-score {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 22px;
-    color: #fff;
-    text-shadow: 3px 3px 0 #00000088, 0 0 12px #7ecfffaa;
-    letter-spacing: 2px;
+    font-family:'Press Start 2P',monospace; font-size:22px; color:#fff;
+    text-shadow:3px 3px 0 #00000088,0 0 12px #7ecfffaa; letter-spacing:2px;
+  }
+  #themeLabel {
+    font-size:7px; color:#fff8; margin-top:4px;
+    text-shadow:1px 1px 0 #0006; letter-spacing:1px;
   }
 
   #speedBadge {
-    position: absolute;
-    top: 54px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 7px;
-    color: #ff4455;
-    background: rgba(0,0,0,.6);
-    border: 1px solid #ff445544;
-    border-radius: 6px;
-    padding: 4px 10px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .5s;
+    position:absolute; top:60px; left:50%; transform:translateX(-50%);
+    font-family:'Press Start 2P',monospace; font-size:7px;
+    color:#ff4455; background:rgba(0,0,0,.7);
+    border:1px solid #ff445544; border-radius:6px;
+    padding:4px 10px; pointer-events:none;
+    opacity:0; transition:opacity .5s; white-space:nowrap;
   }
-  #speedBadge.show { opacity: 1; }
+  #speedBadge.show { opacity:1; }
 
   #pauseHint {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 6px;
-    color: #ffffff55;
-    pointer-events: none;
-    white-space: nowrap;
+    position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
+    font-family:'Press Start 2P',monospace; font-size:6px;
+    color:#ffffff55; pointer-events:none; white-space:nowrap;
   }
+
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
 </style>
 </head>
 <body>
@@ -209,34 +169,45 @@
 
   <div id="hud" class="hidden">
     <div class="hud-score" id="scoreDisplay">0</div>
+    <div id="themeLabel"></div>
   </div>
-  <div id="speedBadge">⚡ TURBO MODE!</div>
+  <div id="speedBadge"></div>
   <div id="pauseHint">ESC / P = PAUSE</div>
 
-  <!-- MENU -->
+  <!-- ═══════════════ MENU ═══════════════ -->
   <div class="screen" id="menuScreen">
     <div class="logo">FLAPPY</div>
     <div class="sub">— ARCADE EDITION —</div>
     <canvas class="bird-preview" id="birdPreview" width="60" height="60"></canvas>
     <button class="btn" onclick="startGame()">▶  CHƠI NGAY</button>
+    <button class="btn skin-btn" onclick="showSkins()">🎨 CHỌN SKIN</button>
     <button class="btn secondary" onclick="showHow()">?  HƯỚNG DẪN</button>
     <div class="highscore-disp">KỶ LỤC: <span id="menuHS">0</span></div>
   </div>
 
-  <!-- HOW TO PLAY -->
+  <!-- ═══════════════ SKIN SELECT ═══════════════ -->
+  <div class="screen hidden" id="skinScreen">
+    <div class="skin-title">CHỌN SKIN CHIM</div>
+    <div class="skin-sub">Thêm ảnh .png vào mảng BIRD_SKINS bên dưới</div>
+    <div class="skin-grid" id="skinGrid"></div>
+    <button class="btn" onclick="showMenu()">← QUAY LẠI</button>
+  </div>
+
+  <!-- ═══════════════ HOW TO PLAY ═══════════════ -->
   <div class="screen hidden" id="howScreen">
     <div class="how-title">HƯỚNG DẪN</div>
     <ul class="how-list">
       <li>SPACE / CLICK / CHẠM<br>để vỗ cánh bay lên</li>
       <li>Tránh va chạm vào cột<br>và mặt đất / trần nhà</li>
-      <li>Qua 1 cặp cột = +1 điểm</li>
-      <li>100 điểm → TURBO MODE<br>tốc độ tăng, cột đổi màu!</li>
+      <li>Qua 1 cặp cột = +10 điểm</li>
+      <li>Mỗi +100 điểm → đổi màu<br>chủ đề mới (8 chủ đề)!</li>
+      <li>🎨 Chọn skin chim yêu thích</li>
       <li>ESC hoặc P để tạm dừng</li>
     </ul>
     <button class="btn" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- GAME OVER -->
+  <!-- ═══════════════ GAME OVER ═══════════════ -->
   <div class="screen hidden" id="gameoverScreen">
     <div class="go-title">GAME OVER</div>
     <div class="score-box">
@@ -245,10 +216,11 @@
       <div class="best" id="bestScore"></div>
     </div>
     <button class="btn" onclick="startGame()">↺  CHƠI LẠI</button>
+    <button class="btn skin-btn" onclick="showSkins()">🎨 ĐỔI SKIN</button>
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 
-  <!-- PAUSE -->
+  <!-- ═══════════════ PAUSE ═══════════════ -->
   <div class="screen hidden" id="pauseScreen">
     <div style="font-size:18px;color:#ffe066;text-shadow:2px 2px 0 #b8860b;margin-bottom:28px;">TẠM DỪNG</div>
     <button class="btn" onclick="resumeGame()">▶  TIẾP TỤC</button>
@@ -257,397 +229,478 @@
 </div>
 
 <script>
+// ╔══════════════════════════════════════════════════════════════╗
+// ║            🐦 BIRD SKINS – THÊM SKIN MỚI Ở ĐÂY             ║
+// ╠══════════════════════════════════════════════════════════════╣
+// ║  Mỗi entry là một object { name, src }                       ║
+// ║  • name : tên hiển thị trong màn hình chọn skin              ║
+// ║  • src  : đường dẫn file .png (đặt cùng thư mục với game)    ║
+// ║                                                              ║
+// ║  Ví dụ thêm skin mới:                                        ║
+// ║    { name: "Rồng Đỏ",  src: "dragon.png"  },                 ║
+// ║    { name: "Vịt Vàng", src: "duck.png"    },                 ║
+// ╚══════════════════════════════════════════════════════════════╝
+const BIRD_SKINS = [
+  { name: "Mặc Định\n(Vẽ sẵn)",  src: null          },  // fallback pixel bird (luôn hoạt động)
+  { name: "Thiên phịt",            src: "helo.png"    }, 
+  { name: "Tí Đẫn",            src: "halo.png"    },
+  { name: "09",            src: "hello.png"    }, // ← file PNG của bạn
+  // ── THÊM SKIN MỚI PHÍA DƯỚI ──────────────────────────────────
+  // { name: "Rồng Đỏ",  src: "dragon.png"  },
+  // { name: "Vịt Vàng", src: "duck.png"    },
+  // { name: "Mèo Bay",  src: "cat.png"     },
+  // { name: "Ninja",    src: "ninja.png"   },
+  // ─────────────────────────────────────────────────────────────
+];
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║        🎨 COLOR THEMES – chu kỳ mỗi 100 điểm                ║
+// ║  Thứ tự: xanh lá → cam → đỏ → vàng → xanh dương            ║
+// ║          → hồng → tím → (lặp lại)                           ║
+// ╚══════════════════════════════════════════════════════════════╝
+const THEMES = [
+  {
+    name: "🌿 XANH LÁ",
+    sky:    ['#0d1b2a','#1a3050','#0d2a1f'],
+    pipe:   ['#27ae60','#2ecc71'],
+    cap:    '#1d8348',
+    ground: ['#2d5a1b','#1a3a0e'],
+    turf:   '#4a8c2a',
+    bump:   '#5aa33a',
+  },
+  {
+    name: "🔥 CAM RỰC",
+    sky:    ['#1a0a00','#2e1500','#1a0800'],
+    pipe:   ['#cc4400','#ff6600'],
+    cap:    '#993300',
+    ground: ['#3d1a00','#1a0800'],
+    turf:   '#7a3300',
+    bump:   '#aa4400',
+  },
+  {
+    name: "🌋 ĐỎ LỬA",
+    sky:    ['#1a0010','#350020','#1a0010'],
+    pipe:   ['#cc0022','#ff2244'],
+    cap:    '#880011',
+    ground: ['#3a0010','#1a0008'],
+    turf:   '#770020',
+    bump:   '#aa0030',
+  },
+  {
+    name: "⚡ VÀNG ĐIỆN",
+    sky:    ['#1a1500','#2e2800','#1a1000'],
+    pipe:   ['#b8860b','#ffe066'],
+    cap:    '#8a6200',
+    ground: ['#3a3000','#1a1800'],
+    turf:   '#6a5500',
+    bump:   '#9a7a00',
+  },
+  {
+    name: "🌊 XANH DƯƠNG",
+    sky:    ['#00101a','#001e36','#00101a'],
+    pipe:   ['#0066bb','#00aaff'],
+    cap:    '#004488',
+    ground: ['#001830','#000e1a'],
+    turf:   '#003366',
+    bump:   '#0055aa',
+  },
+  {
+    name: "🌸 HỒNG ĐÀO",
+    sky:    ['#1a0018','#300030','#1a0018'],
+    pipe:   ['#cc0077','#ff44bb'],
+    cap:    '#880055',
+    ground: ['#3a0030','#1a0018'],
+    turf:   '#770066',
+    bump:   '#aa0088',
+  },
+  {
+    name: "🔮 TÍM MA",
+    sky:    ['#0e0018','#1e0036','#0e0018'],
+    pipe:   ['#5500cc','#9944ff'],
+    cap:    '#330088',
+    ground: ['#1a0030','#0e0018'],
+    turf:   '#330066',
+    bump:   '#5500aa',
+  },
+];
+
 // ─────────────────────── CONFIG ───────────────────────
-// Physics chạy theo deltaTime thực (ms) thay vì frame-count,
-// nên tốc độ KHÔNG phụ thuộc fps màn hình.
 const C = {
-  W: 420, H: 640,
-
-  // ── Physics (đơn vị: pixel / giây hoặc pixel / giây²) ──
-  GRAVITY:      900,    // px/s²  – rơi tự nhiên, không quá nhanh
-  JUMP_VY:     -310,    // px/s   – mỗi lần bấm, bay lên ngần này
-  MAX_FALL:     520,    // px/s   – tốc độ rơi tối đa (giới hạn trần)
-
-  // ── Góc nghiêng ──
-  ANGLE_UP:    -0.40,   // rad khi đang bay lên
-  ANGLE_DOWN:   1.20,   // rad khi rơi nhanh
-
-  // ── Tốc độ cột ──
-  BASE_SPEED:   140,    // px/s
-  SPEED_STEP:    30,    // px/s tăng thêm mỗi 100 điểm
-  SPEED_MILESTONE: 100,
-  SCORE_PER_PIPE: 10,
-
-  // ── Cột ──
-  PIPE_W:        62,
-  GAP:          160,    // khe hở (px) – rộng hơn 1 chút cho dễ chơi
-  PIPE_INTERVAL: 1.6,   // giây giữa các cột
-
-  GROUND_H:      72,
+  W:420, H:640,
+  GRAVITY:900, JUMP_VY:-310, MAX_FALL:520,
+  ANGLE_UP:-0.40, ANGLE_DOWN:1.20,
+  BASE_SPEED:140, SPEED_STEP:30,
+  SPEED_MILESTONE:100,
+  SCORE_PER_PIPE:10,
+  PIPE_W:62, GAP:160, PIPE_INTERVAL:1.6,
+  GROUND_H:72,
 };
 
 const canvas = document.getElementById('gameCanvas');
 const ctx    = canvas.getContext('2d');
 
-// ─────────────────────── STATE ────────────────────────
-let state = 'menu';
-let bird, pipes, score, lastTime, animId, turboMode, scrollX, currentSpeed, speedLevel;
-let pipeTimer = 0;   // giây tích lũy kể từ cột cuối
+// ─────────────────────── SKIN STATE ───────────────────
+let selectedSkin = 0;           // index trong BIRD_SKINS
+let skinImages   = [];          // Image objects đã load
+let skinsLoaded  = false;
+
+function loadAllSkins(cb) {
+  skinImages = [];
+  let pending = BIRD_SKINS.length;
+  BIRD_SKINS.forEach((s, i) => {
+    if (!s.src) { skinImages[i] = null; if (--pending===0) cb(); return; }
+    const img = new Image();
+    img.onload  = () => { skinImages[i] = img; if (--pending===0) cb(); };
+    img.onerror = () => { skinImages[i] = null; if (--pending===0) cb(); };
+    img.src = s.src;
+  });
+}
+
+function currentBirdImg() { return skinImages[selectedSkin] || null; }
+
+// ─────────────────────── SKIN SCREEN ──────────────────
+function buildSkinGrid() {
+  const grid = document.getElementById('skinGrid');
+  grid.innerHTML = '';
+  BIRD_SKINS.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'skin-card' + (i===selectedSkin?' active':'');
+    card.onclick = () => selectSkin(i);
+
+    const cv = document.createElement('canvas');
+    cv.width = 48; cv.height = 48;
+    const px = cv.getContext('2d');
+    if (skinImages[i]) { px.drawImage(skinImages[i],0,0,48,48); }
+    else { drawFallbackBird(px,24,24,0,1.8); }
+
+    const nm = document.createElement('div');
+    nm.className = 'skin-name';
+    nm.textContent = s.name;
+
+    card.appendChild(cv); card.appendChild(nm);
+    grid.appendChild(card);
+  });
+}
+
+function selectSkin(i) {
+  selectedSkin = i;
+  localStorage.setItem('flappy_skin', i);
+  document.querySelectorAll('.skin-card').forEach((c,j) =>
+    c.classList.toggle('active', j===i));
+  drawBirdPreview();
+}
+
+function showSkins() {
+  buildSkinGrid();
+  showScreen('skinScreen');
+}
+
+// ─────────────────────── GAME STATE ──────────────────
+let state='menu', bird, pipes, score, lastTime, animId;
+let turboMode=false, scrollX=0, currentSpeed=C.BASE_SPEED;
+let speedLevel=0, pipeTimer=0;
+let currentThemeIdx=0;
 let highScore = +localStorage.getItem('flappy_hs') || 0;
-let birdImg = null;
 
-// ─────────────────────── BIRD IMAGE ───────────────────
-const birdImgEl = new Image();
-birdImgEl.onload  = () => { birdImg = birdImgEl; drawBirdPreview(); };
-birdImgEl.onerror = () => { birdImg = null; drawBirdPreview(); };
-birdImgEl.src = 'helo.png';
+function getTheme() { return THEMES[currentThemeIdx % THEMES.length]; }
 
-function drawBirdPreview() {
-  const pc = document.getElementById('birdPreview');
-  const px = pc.getContext('2d');
-  if (birdImg) { px.clearRect(0,0,60,60); px.drawImage(birdImg,0,0,60,60); }
-  else drawFallbackBird(px,30,30,0,1.5);
-}
-
-function drawFallbackBird(cx, x, y, angle, scale=1) {
-  cx.save();
-  cx.translate(x, y); cx.rotate(angle); cx.scale(scale, scale);
-  cx.fillStyle = '#ffe066';
-  cx.beginPath(); cx.ellipse(0,0,14,10,0,0,Math.PI*2); cx.fill();
-  cx.fillStyle = '#ffaa00';
-  cx.beginPath(); cx.ellipse(-4,2,9,5,-0.4,0,Math.PI*2); cx.fill();
-  cx.fillStyle = '#fff';
-  cx.beginPath(); cx.arc(8,-2,4,0,Math.PI*2); cx.fill();
-  cx.fillStyle = '#333';
-  cx.beginPath(); cx.arc(9,-2,2,0,Math.PI*2); cx.fill();
-  cx.fillStyle = '#fff';
-  cx.beginPath(); cx.arc(10,-3,0.8,0,Math.PI*2); cx.fill();
-  cx.fillStyle = '#ff7700';
-  cx.beginPath(); cx.moveTo(12,1); cx.lineTo(20,3); cx.lineTo(12,5); cx.closePath(); cx.fill();
-  cx.restore();
-}
-
-// ─────────────────────── INIT ────────────────────────
 function initGame() {
   bird = { x:90, y:C.H/2, vy:0, angle:0, w:44, h:36, alive:true };
-  pipes = [];
-  score = 0;
-  pipeTimer = 0;
-  scrollX = 0;
-  turboMode = false;
-  currentSpeed = C.BASE_SPEED;
-  speedLevel = 0;
-  lastTime = null;
+  pipes=[]; score=0; pipeTimer=0; scrollX=0;
+  turboMode=false; currentSpeed=C.BASE_SPEED; speedLevel=0;
+  currentThemeIdx=0; lastTime=null;
   updateScore(0);
+  updateThemeLabel();
 }
 
 function spawnPipe() {
-  const minTop = 80;
-  const maxTop = C.H - C.GROUND_H - C.GAP - 80;
-  const topH = minTop + Math.random() * (maxTop - minTop);
-  pipes.push({ x: C.W + 20, topH, scored: false });
+  const minTop=80, maxTop=C.H-C.GROUND_H-C.GAP-80;
+  const topH=minTop+Math.random()*(maxTop-minTop);
+  pipes.push({x:C.W+20, topH, scored:false});
 }
 
-// ─────────────────────── UPDATE (deltaTime) ───────────
+// ─────────────────────── UPDATE ──────────────────────
 function update(dt) {
-  if (state !== 'playing') return;
+  if (state!=='playing') return;
+  bird.vy = Math.min(bird.vy+C.GRAVITY*dt, C.MAX_FALL);
+  bird.y += bird.vy*dt;
 
-  const speed = currentSpeed;
+  const tA = bird.vy<0 ? C.ANGLE_UP
+    : C.ANGLE_UP+(C.ANGLE_DOWN-C.ANGLE_UP)*(bird.vy/C.MAX_FALL);
+  bird.angle += (tA-bird.angle)*Math.min(1,dt*8);
 
-  // ── bird physics ──
-  bird.vy = Math.min(bird.vy + C.GRAVITY * dt, C.MAX_FALL);
-  bird.y += bird.vy * dt;
-
-  // Góc nghiêng: smooth theo velocity
-  const targetAngle = bird.vy < 0
-    ? C.ANGLE_UP
-    : C.ANGLE_UP + (C.ANGLE_DOWN - C.ANGLE_UP) * (bird.vy / C.MAX_FALL);
-  bird.angle += (targetAngle - bird.angle) * Math.min(1, dt * 8);
-
-  // ── spawn cột theo thời gian thực ──
   pipeTimer += dt;
-  if (pipeTimer >= C.PIPE_INTERVAL) { pipeTimer = 0; spawnPipe(); }
+  if (pipeTimer>=C.PIPE_INTERVAL) { pipeTimer=0; spawnPipe(); }
 
-  // ── di chuyển & ghi điểm ──
   for (const p of pipes) {
-    p.x -= speed * dt;
-    if (!p.scored && p.x + C.PIPE_W < bird.x) {
-      p.scored = true;
-      score += C.SCORE_PER_PIPE;
-      updateScore(score);
-      const newLevel = Math.floor(score / C.SPEED_MILESTONE);
-      if (newLevel > speedLevel) {
-        speedLevel = newLevel;
-        currentSpeed = C.BASE_SPEED + speedLevel * C.SPEED_STEP;
-        turboMode = speedLevel >= 1;
-        if (turboMode) activateTurbo(speedLevel);
+    p.x -= currentSpeed*dt;
+    if (!p.scored && p.x+C.PIPE_W < bird.x) {
+      p.scored=true; score+=C.SCORE_PER_PIPE; updateScore(score);
+      const newLevel = Math.floor(score/C.SPEED_MILESTONE);
+      if (newLevel>speedLevel) {
+        speedLevel=newLevel;
+        currentSpeed=C.BASE_SPEED+speedLevel*C.SPEED_STEP;
+        turboMode=speedLevel>=1;
+        currentThemeIdx=speedLevel;     // ← đổi màu chủ đề
+        updateThemeLabel();
+        activateBadge(speedLevel);
       }
     }
   }
-  pipes = pipes.filter(p => p.x + C.PIPE_W > -10);
+  pipes=pipes.filter(p=>p.x+C.PIPE_W>-10);
+  scrollX=(scrollX+currentSpeed*dt*0.4)%(C.W*2);
 
-  scrollX = (scrollX + speed * dt * 0.4) % (C.W * 2);
-
-  // ── va chạm ──
-  if (bird.y + bird.h/2 > C.H - C.GROUND_H || bird.y - bird.h/2 < 0) { die(); return; }
+  if (bird.y+bird.h/2>C.H-C.GROUND_H || bird.y-bird.h/2<0){die();return;}
   for (const p of pipes) {
-    const gapTop = p.topH, gapBot = p.topH + C.GAP;
-    const bx1 = bird.x - bird.w/2 + 6, bx2 = bird.x + bird.w/2 - 6;
-    const by1 = bird.y - bird.h/2 + 4, by2 = bird.y + bird.h/2 - 4;
-    if (bx2 > p.x && bx1 < p.x + C.PIPE_W) {
-      if (by1 < gapTop || by2 > gapBot) { die(); return; }
+    const gT=p.topH, gB=p.topH+C.GAP;
+    const bx1=bird.x-bird.w/2+6, bx2=bird.x+bird.w/2-6;
+    const by1=bird.y-bird.h/2+4, by2=bird.y+bird.h/2-4;
+    if (bx2>p.x && bx1<p.x+C.PIPE_W){
+      if (by1<gT||by2>gB){die();return;}
     }
   }
 }
 
-function activateTurbo(level) {
-  const badge = document.getElementById('speedBadge');
-  badge.textContent = `⚡ TỐC ĐỘ x${level+1} !`;
-  badge.classList.add('show');
-  clearTimeout(badge._timeout);
-  badge._timeout = setTimeout(() => badge.classList.remove('show'), 2500);
+function updateThemeLabel() {
+  const el=document.getElementById('themeLabel');
+  if (el) el.textContent = getTheme().name;
 }
 
-function updateScore(s) {
-  document.getElementById('scoreDisplay').textContent = s;
+function activateBadge(level) {
+  const T=getTheme();
+  const badge=document.getElementById('speedBadge');
+  badge.textContent=`${T.name}  ×${level+1} ⚡`;
+  badge.classList.add('show');
+  clearTimeout(badge._t);
+  badge._t=setTimeout(()=>badge.classList.remove('show'),2800);
 }
+
+function updateScore(s){document.getElementById('scoreDisplay').textContent=s;}
 
 // ─────────────────────── DRAW ─────────────────────────
 function draw() {
-  if (turboMode) {
-    const sg = ctx.createLinearGradient(0,0,0,C.H);
-    sg.addColorStop(0,'#1a0a00'); sg.addColorStop(1,'#3a1500');
-    ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
-  } else {
-    const sg = ctx.createLinearGradient(0,0,0,C.H);
-    sg.addColorStop(0,'#0d1b2a'); sg.addColorStop(0.6,'#1a3050'); sg.addColorStop(1,'#0d2a1f');
-    ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
-  }
-  drawBg(); drawPipes(); drawGround(); drawBirdSprite();
+  const T=getTheme();
+  const sg=ctx.createLinearGradient(0,0,0,C.H);
+  sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
+  ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
+  drawBg(T); drawPipes(T); drawGround(T); drawBirdSprite();
 }
 
-function drawBg() {
+function drawBg(T) {
   ctx.save();
-  ctx.globalAlpha = turboMode ? 0.15 : 0.25;
-  ctx.fillStyle = '#fff';
-  const seed=[30,110,200,320,370], yseed=[60,110,80,140,90];
-  for (let i=0;i<5;i++) {
-    const ox=((seed[i]-scrollX*0.3)%C.W+C.W)%C.W, oy=yseed[i];
+  ctx.globalAlpha=0.22; ctx.fillStyle='#fff';
+  const sx=[30,110,200,320,370], sy=[60,110,80,140,90];
+  for (let i=0;i<5;i++){
+    const ox=((sx[i]-scrollX*0.3)%C.W+C.W)%C.W, oy=sy[i];
     ctx.beginPath(); ctx.arc(ox,oy,10,0,Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.arc(ox+18,oy-6,14,0,Math.PI*2); ctx.fill();
     ctx.beginPath(); ctx.arc(ox+36,oy,10,0,Math.PI*2); ctx.fill();
   }
-  if (!turboMode) {
-    ctx.globalAlpha=0.5; ctx.fillStyle='#fff';
-    const stars=[[50,30],[150,20],[300,45],[380,25],[220,55],[100,75],[340,70]];
-    for (const [sx,sy] of stars) ctx.fillRect(sx,sy,2,2);
-  }
+  ctx.globalAlpha=0.45; ctx.fillStyle='#fff';
+  [[50,30],[150,20],[300,45],[380,25],[220,55],[100,75],[340,70]]
+    .forEach(([a,b])=>ctx.fillRect(a,b,2,2));
   ctx.restore();
 }
 
-function getPipeColor(isLight) {
-  return turboMode ? (isLight?'#ff4d00':'#cc2200') : (isLight?'#2ecc71':'#27ae60');
-}
-function getPipeCapColor() { return turboMode?'#ff7700':'#1d8348'; }
-
-function drawPipes() {
+function drawPipes(T) {
   for (const p of pipes) {
-    const gapTop=p.topH, gapBot=p.topH+C.GAP;
+    const gT=p.topH, gB=p.topH+C.GAP;
     const pw=C.PIPE_W, capW=pw+14, capH=22;
-    // top
-    {
-      const g=ctx.createLinearGradient(p.x,0,p.x+pw,0);
-      g.addColorStop(0,getPipeColor(false)); g.addColorStop(0.5,getPipeColor(true)); g.addColorStop(1,getPipeColor(false));
-      ctx.fillStyle=g; ctx.beginPath(); ctx.roundRect(p.x,0,pw,gapTop-capH,[0,0,4,4]); ctx.fill();
-      const gc=ctx.createLinearGradient(p.x-7,0,p.x-7+capW,0);
-      gc.addColorStop(0,getPipeCapColor()); gc.addColorStop(0.5,getPipeColor(true)); gc.addColorStop(1,getPipeCapColor());
-      ctx.fillStyle=gc; ctx.beginPath(); ctx.roundRect(p.x-7,gapTop-capH,capW,capH,4); ctx.fill();
-      ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.fillRect(p.x+6,0,10,gapTop-capH);
-    }
-    // bottom
-    {
-      const g=ctx.createLinearGradient(p.x,0,p.x+pw,0);
-      g.addColorStop(0,getPipeColor(false)); g.addColorStop(0.5,getPipeColor(true)); g.addColorStop(1,getPipeColor(false));
-      ctx.fillStyle=g; ctx.beginPath(); ctx.roundRect(p.x,gapBot+capH,pw,C.H-C.GROUND_H-gapBot-capH,[4,4,0,0]); ctx.fill();
-      const gc=ctx.createLinearGradient(p.x-7,0,p.x-7+capW,0);
-      gc.addColorStop(0,getPipeCapColor()); gc.addColorStop(0.5,getPipeColor(true)); gc.addColorStop(1,getPipeCapColor());
-      ctx.fillStyle=gc; ctx.beginPath(); ctx.roundRect(p.x-7,gapBot,capW,capH,4); ctx.fill();
-      ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.fillRect(p.x+6,gapBot+capH,10,C.H-C.GROUND_H-gapBot-capH);
-    }
+
+    const makeG=(x)=>{
+      const g=ctx.createLinearGradient(x,0,x+pw,0);
+      g.addColorStop(0,T.pipe[0]); g.addColorStop(0.5,T.pipe[1]); g.addColorStop(1,T.pipe[0]);
+      return g;
+    };
+    const makeCapG=(x)=>{
+      const g=ctx.createLinearGradient(x-7,0,x-7+capW,0);
+      g.addColorStop(0,T.cap); g.addColorStop(0.5,T.pipe[1]); g.addColorStop(1,T.cap);
+      return g;
+    };
+
+    // top pipe
+    ctx.fillStyle=makeG(p.x);
+    ctx.beginPath(); ctx.roundRect(p.x,0,pw,gT-capH,[0,0,4,4]); ctx.fill();
+    ctx.fillStyle=makeCapG(p.x);
+    ctx.beginPath(); ctx.roundRect(p.x-7,gT-capH,capW,capH,4); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.12)';
+    ctx.fillRect(p.x+6,0,10,gT-capH);
+
+    // bottom pipe
+    ctx.fillStyle=makeG(p.x);
+    ctx.beginPath(); ctx.roundRect(p.x,gB+capH,pw,C.H-C.GROUND_H-gB-capH,[4,4,0,0]); ctx.fill();
+    ctx.fillStyle=makeCapG(p.x);
+    ctx.beginPath(); ctx.roundRect(p.x-7,gB,capW,capH,4); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.12)';
+    ctx.fillRect(p.x+6,gB+capH,10,C.H-C.GROUND_H-gB-capH);
   }
 }
 
-function drawGround() {
+function drawGround(T) {
   const gy=C.H-C.GROUND_H;
   const gg=ctx.createLinearGradient(0,gy,0,C.H);
-  gg.addColorStop(0,turboMode?'#3d1a00':'#2d5a1b'); gg.addColorStop(1,turboMode?'#1a0800':'#1a3a0e');
+  gg.addColorStop(0,T.ground[0]); gg.addColorStop(1,T.ground[1]);
   ctx.fillStyle=gg; ctx.fillRect(0,gy,C.W,C.GROUND_H);
-  ctx.fillStyle=turboMode?'#8b2500':'#4a8c2a'; ctx.fillRect(0,gy,C.W,16);
-  const bumpX=(-scrollX*0.9%60+60)%60;
-  ctx.fillStyle=turboMode?'#aa3300':'#5aa33a';
-  for (let bx=bumpX-30;bx<C.W+30;bx+=60) {
-    ctx.beginPath(); ctx.arc(bx,gy+3,18,Math.PI,0); ctx.fill();
+  ctx.fillStyle=T.turf; ctx.fillRect(0,gy,C.W,16);
+  const bx=(-scrollX*0.9%60+60)%60;
+  ctx.fillStyle=T.bump;
+  for (let x=bx-30;x<C.W+30;x+=60){
+    ctx.beginPath(); ctx.arc(x,gy+3,18,Math.PI,0); ctx.fill();
   }
-  ctx.strokeStyle=turboMode?'#ff660044':'#2d8a1888';
+  ctx.strokeStyle='rgba(255,255,255,0.08)';
   ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(0,gy+16); ctx.lineTo(C.W,gy+16); ctx.stroke();
 }
 
 function drawBirdSprite() {
   ctx.save();
-  ctx.translate(bird.x, bird.y); ctx.rotate(bird.angle);
-  if (birdImg) ctx.drawImage(birdImg,-bird.w/2,-bird.h/2,bird.w,bird.h);
+  ctx.translate(bird.x,bird.y); ctx.rotate(bird.angle);
+  const img=currentBirdImg();
+  if (img) ctx.drawImage(img,-bird.w/2,-bird.h/2,bird.w,bird.h);
   else drawFallbackBird(ctx,0,0,0,1);
   ctx.restore();
+}
+
+function drawFallbackBird(cx,x,y,angle,scale=1){
+  cx.save();
+  cx.translate(x,y); cx.rotate(angle); cx.scale(scale,scale);
+  cx.fillStyle='#ffe066'; cx.beginPath(); cx.ellipse(0,0,14,10,0,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#ffaa00'; cx.beginPath(); cx.ellipse(-4,2,9,5,-0.4,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#fff'; cx.beginPath(); cx.arc(8,-2,4,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#333'; cx.beginPath(); cx.arc(9,-2,2,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#fff'; cx.beginPath(); cx.arc(10,-3,0.8,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#ff7700'; cx.beginPath();
+  cx.moveTo(12,1); cx.lineTo(20,3); cx.lineTo(12,5); cx.closePath(); cx.fill();
+  cx.restore();
+}
+
+function drawBirdPreview(){
+  const pc=document.getElementById('birdPreview');
+  const px=pc.getContext('2d');
+  px.clearRect(0,0,60,60);
+  const img=currentBirdImg();
+  if (img) px.drawImage(img,0,0,60,60);
+  else drawFallbackBird(px,30,30,0,1.5);
 }
 
 // ─────────────────────── GAME LOOP ────────────────────
-function loop(timestamp) {
-  if (!lastTime) lastTime = timestamp;
-  // Clamp dt tối đa 100ms (tránh jump lớn khi tab bị ẩn)
-  const dt = Math.min((timestamp - lastTime) / 1000, 0.1);
-  lastTime = timestamp;
-
-  update(dt);
-  draw();
-  animId = requestAnimationFrame(loop);
+function loop(ts){
+  if (!lastTime) lastTime=ts;
+  const dt=Math.min((ts-lastTime)/1000,0.1); lastTime=ts;
+  update(dt); draw();
+  animId=requestAnimationFrame(loop);
 }
 
-// ─────────────────────── ACTIONS ──────────────────────
-function flap() {
-  if (state === 'playing' && bird.alive) {
-    bird.vy = C.JUMP_VY;
-  }
-}
+// ─────────────────────── ACTIONS ─────────────────────
+function flap(){ if(state==='playing'&&bird.alive) bird.vy=C.JUMP_VY; }
 
-function die() {
-  bird.alive = false;
-  state = 'over';
-  cancelAnimationFrame(animId);
-  draw();
-  ctx.fillStyle = 'rgba(255,0,0,0.18)'; ctx.fillRect(0,0,C.W,C.H);
-  document.getElementById('finalScore').textContent = score;
-  if (score > highScore) {
-    highScore = score;
-    localStorage.setItem('flappy_hs', highScore);
-    document.getElementById('bestScore').textContent = '🏆 KỶ LỤC MỚI!';
+function die(){
+  bird.alive=false; state='over';
+  cancelAnimationFrame(animId); draw();
+  ctx.fillStyle='rgba(255,0,0,0.18)'; ctx.fillRect(0,0,C.W,C.H);
+  document.getElementById('finalScore').textContent=score;
+  if(score>highScore){
+    highScore=score; localStorage.setItem('flappy_hs',highScore);
+    document.getElementById('bestScore').textContent='🏆 KỶ LỤC MỚI!';
   } else {
-    document.getElementById('bestScore').textContent = 'Kỷ lục: ' + highScore;
+    document.getElementById('bestScore').textContent='Kỷ lục: '+highScore;
   }
-  document.getElementById('menuHS').textContent = highScore;
+  document.getElementById('menuHS').textContent=highScore;
   showScreen('gameoverScreen');
 }
 
-// ─────────────────────── SCREENS ──────────────────────
-function showScreen(id) {
-  ['menuScreen','howScreen','gameoverScreen','pauseScreen'].forEach(s => {
-    document.getElementById(s).classList.toggle('hidden', s !== id);
-  });
+// ─────────────────────── SCREENS ─────────────────────
+function showScreen(id){
+  ['menuScreen','skinScreen','howScreen','gameoverScreen','pauseScreen']
+    .forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==id));
 }
 
-function showMenu() {
-  state='menu';
-  cancelAnimationFrame(animId);
-  document.getElementById('menuHS').textContent = highScore;
+function showMenu(){
+  state='menu'; cancelAnimationFrame(animId);
+  document.getElementById('menuHS').textContent=highScore;
   document.getElementById('hud').classList.add('hidden');
   document.getElementById('pauseHint').style.opacity='0';
-  showScreen('menuScreen');
-  drawMenuBg();
+  showScreen('menuScreen'); drawMenuBg();
 }
 
-function showHow() { showScreen('howScreen'); }
+function showHow(){ showScreen('howScreen'); }
 
-function startGame() {
+function startGame(){
   showScreen('');
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('pauseHint').style.opacity='1';
-  initGame();
-  state='playing';
-  cancelAnimationFrame(animId);
-  lastTime = null;
-  animId = requestAnimationFrame(loop);
+  initGame(); state='playing';
+  cancelAnimationFrame(animId); lastTime=null;
+  animId=requestAnimationFrame(loop);
 }
 
-function resumeGame() {
-  showScreen('');
-  state='playing';
-  lastTime = null;
-  animId = requestAnimationFrame(loop);
+function resumeGame(){
+  showScreen(''); state='playing'; lastTime=null;
+  animId=requestAnimationFrame(loop);
 }
 
-function togglePause() {
-  if (state==='playing') {
-    state='paused';
-    cancelAnimationFrame(animId);
-    showScreen('pauseScreen');
-  } else if (state==='paused') {
-    resumeGame();
-  }
+function togglePause(){
+  if(state==='playing'){ state='paused'; cancelAnimationFrame(animId); showScreen('pauseScreen'); }
+  else if(state==='paused') resumeGame();
 }
 
 // ─────────────────────── MENU BG ─────────────────────
-let menuLastTime = null, menuBirdY=320, menuBirdVY=-80;
-function drawMenuBg(ts) {
-  if (state!=='menu') return;
-  const dt = menuLastTime ? Math.min((ts - menuLastTime)/1000, 0.1) : 0.016;
-  menuLastTime = ts;
-
-  menuBirdVY += C.GRAVITY * dt;
-  if (menuBirdVY > 200) menuBirdVY = 200;
-  menuBirdY  += menuBirdVY * dt;
-  if (menuBirdY > C.H*0.72) { menuBirdY=C.H*0.72; menuBirdVY=-200; }
-  if (menuBirdY < C.H*0.25) { menuBirdY=C.H*0.25; menuBirdVY=80; }
-
+let menuLast=null, menuBirdY=320, menuBirdVY=-80;
+function drawMenuBg(ts){
+  if(state!=='menu') return;
+  const dt=menuLast?Math.min((ts-menuLast)/1000,0.1):0.016; menuLast=ts;
+  menuBirdVY+=C.GRAVITY*dt;
+  if(menuBirdVY>200)menuBirdVY=200;
+  menuBirdY+=menuBirdVY*dt;
+  if(menuBirdY>C.H*0.72){menuBirdY=C.H*0.72;menuBirdVY=-200;}
+  if(menuBirdY<C.H*0.25){menuBirdY=C.H*0.25;menuBirdVY=80;}
+  const T=THEMES[0];
   const sg=ctx.createLinearGradient(0,0,0,C.H);
-  sg.addColorStop(0,'#0d1b2a'); sg.addColorStop(0.6,'#1a3050'); sg.addColorStop(1,'#0d2a1f');
+  sg.addColorStop(0,T.sky[0]);sg.addColorStop(0.6,T.sky[1]);sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
   scrollX=(scrollX+120*dt*0.4)%(C.W*2);
-  drawBg(); drawGround();
-
+  drawBg(T); drawGround(T);
   ctx.save();
-  ctx.translate(100, menuBirdY);
-  ctx.rotate(Math.sin(menuBirdY * 0.02) * 0.15);
-  if (birdImg) ctx.drawImage(birdImg,-22,-18,44,36);
+  ctx.translate(100,menuBirdY);
+  ctx.rotate(Math.sin(menuBirdY*0.02)*0.15);
+  const img=currentBirdImg();
+  if(img) ctx.drawImage(img,-22,-18,44,36);
   else drawFallbackBird(ctx,0,0,0,1);
   ctx.restore();
-
   requestAnimationFrame(drawMenuBg);
 }
 
 // ─────────────────────── INPUT ────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.code==='Space'||e.code==='ArrowUp') {
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'||e.code==='ArrowUp'){
     e.preventDefault();
-    if (state==='playing') flap();
-    else if (state==='menu') startGame();
-    else if (state==='over') startGame();
+    if(state==='playing') flap();
+    else if(state==='menu'||state==='over') startGame();
   }
-  if (e.code==='Escape'||e.code==='KeyP') {
-    if (state==='playing'||state==='paused') togglePause();
+  if(e.code==='Escape'||e.code==='KeyP'){
+    if(state==='playing'||state==='paused') togglePause();
   }
 });
+canvas.addEventListener('click',()=>{ if(state==='playing') flap(); });
+canvas.addEventListener('touchstart',e=>{ e.preventDefault(); if(state==='playing') flap(); },{passive:false});
 
-canvas.addEventListener('click', () => { if (state==='playing') flap(); });
-canvas.addEventListener('touchstart', e => {
-  e.preventDefault();
-  if (state==='playing') flap();
-}, {passive:false});
-
-// ─────────────────────── RESPONSIVE SCALE ─────────────
-function scaleGame() {
-  const wrapper = document.getElementById('wrapper');
-  const scaleX = window.innerWidth  / 420;
-  const scaleY = window.innerHeight / 640;
-  const scale  = Math.min(scaleX, scaleY, 1);
-  wrapper.style.transform = `scale(${scale})`;
+// ─────────────────────── SCALE ────────────────────────
+function scaleGame(){
+  const w=document.getElementById('wrapper');
+  const s=Math.min(window.innerWidth/420,window.innerHeight/640,1);
+  w.style.transform=`scale(${s})`;
 }
-scaleGame();
-window.addEventListener('resize', scaleGame);
+scaleGame(); window.addEventListener('resize',scaleGame);
 
 // ─────────────────────── BOOT ─────────────────────────
-document.getElementById('menuHS').textContent = highScore;
-scrollX = 0;
-requestAnimationFrame(drawMenuBg);
-drawBirdPreview();
+selectedSkin = Math.min(+localStorage.getItem('flappy_skin')||0, BIRD_SKINS.length-1);
+document.getElementById('menuHS').textContent=highScore;
+scrollX=0;
+
+loadAllSkins(()=>{
+  skinsLoaded=true;
+  drawBirdPreview();
+  requestAnimationFrame(drawMenuBg);
+});
 </script>
 </body>
 </html>
