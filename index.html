@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flappy Bird</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Press Start 2P', monospace;
+    touch-action: none;
+  }
+
+  #wrapper {
+    position: relative;
+    width: 420px;
+    height: 640px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,200,255,0.3), 0 0 120px rgba(0,200,255,0.1);
+    /* scale to fit any screen */
+    transform-origin: center center;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+  }
+
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #0d1b2a 0%, #1a2f4a 40%, #0d2a1f 100%);
+    transition: opacity .35s;
+  }
+  .screen.hidden { opacity: 0; pointer-events: none; }
+
+  #menuScreen .logo {
+    font-size: 28px;
+    color: #ffe066;
+    text-shadow: 4px 4px 0 #b8860b, 0 0 30px #ffe066aa;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    animation: float 2s ease-in-out infinite;
+  }
+  #menuScreen .sub {
+    font-size: 9px;
+    color: #7ecfff;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+  }
+  .bird-preview {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 30px;
+    animation: float 1.5s ease-in-out infinite;
+    border-radius: 8px;
+  }
+  .btn {
+    background: linear-gradient(135deg, #ffe066, #ff9900);
+    color: #1a0a00;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    padding: 14px 28px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #b05500, 0 0 20px #ff990055;
+    transition: transform .1s, box-shadow .1s;
+    margin: 8px 0;
+    min-width: 200px;
+    text-align: center;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #b05500, 0 0 30px #ff990088; }
+  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #b05500; }
+  .btn.secondary {
+    background: linear-gradient(135deg, #2244aa, #4477ff);
+    box-shadow: 0 6px 0 #112266, 0 0 20px #4477ff55;
+    color: #eef4ff;
+  }
+  .btn.secondary:hover { box-shadow: 0 8px 0 #112266, 0 0 30px #4477ff88; }
+  .btn.secondary:active { box-shadow: 0 2px 0 #112266; }
+
+  .highscore-disp {
+    font-size: 8px;
+    color: #aaa;
+    margin-top: 24px;
+  }
+  .highscore-disp span { color: #ffe066; }
+
+  #gameoverScreen .go-title {
+    font-size: 22px;
+    color: #ff4455;
+    text-shadow: 3px 3px 0 #880022, 0 0 20px #ff4455aa;
+    margin-bottom: 20px;
+    animation: shake .5s ease-out;
+  }
+  .score-box {
+    background: rgba(0,0,0,.5);
+    border: 2px solid #7ecfff44;
+    border-radius: 10px;
+    padding: 18px 32px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .score-box .label { font-size: 7px; color: #7ecfff; margin-bottom: 6px; }
+  .score-box .val { font-size: 26px; color: #fff; }
+  .score-box .best { font-size: 8px; color: #ffe066; margin-top: 8px; }
+
+  #howScreen .how-title {
+    font-size: 14px;
+    color: #ffe066;
+    text-shadow: 2px 2px 0 #b8860b;
+    margin-bottom: 24px;
+  }
+  .how-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+  }
+  .how-list li {
+    font-size: 7px;
+    color: #cce;
+    margin-bottom: 12px;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.8;
+  }
+  .how-list li::before { content: "▶"; position: absolute; left: 0; color: #ffe066; }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%,60% { transform: translateX(-8px); }
+    40%,80% { transform: translateX(8px); }
+  }
+
+  #hud {
+    position: absolute;
+    top: 16px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  #hud.hidden { opacity: 0; }
+  .hud-score {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 22px;
+    color: #fff;
+    text-shadow: 3px 3px 0 #00000088, 0 0 12px #7ecfffaa;
+    letter-spacing: 2px;
+  }
+
+  #speedBadge {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #ff4455;
+    background: rgba(0,0,0,.6);
+    border: 1px solid #ff445544;
+    border-radius: 6px;
+    padding: 4px 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .5s;
+  }
+  #speedBadge.show { opacity: 1; }
+
+  #pauseHint {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    color: #ffffff55;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <canvas id="gameCanvas" width="420" height="640"></canvas>
+
+  <div id="hud" class="hidden">
+    <div class="hud-score" id="scoreDisplay">0</div>
+  </div>
+  <div id="speedBadge">⚡ TURBO MODE!</div>
+  <div id="pauseHint">ESC / P = PAUSE</div>
+
+  <!-- MENU -->
+  <div class="screen" id="menuScreen">
+    <div class="logo">FLAPPY</div>
+    <div class="sub">— ARCADE EDITION —</div>
+    <canvas class="bird-preview" id="birdPreview" width="60" height="60"></canvas>
+    <button class="btn" onclick="startGame()">▶  CHƠI NGAY</button>
+    <button class="btn secondary" onclick="showHow()">?  HƯỚNG DẪN</button>
+    <div class="highscore-disp">KỶ LỤC: <span id="menuHS">0</span></div>
+  </div>
+
+  <!-- HOW TO PLAY -->
+  <div class="screen hidden" id="howScreen">
+    <div class="how-title">HƯỚNG DẪN</div>
+    <ul class="how-list">
+      <li>SPACE / CLICK / CHẠM<br>để vỗ cánh bay lên</li>
+      <li>Tránh va chạm vào cột<br>và mặt đất / trần nhà</li>
+      <li>Qua 1 cặp cột = +1 điểm</li>
+      <li>100 điểm → TURBO MODE<br>tốc độ tăng, cột đổi màu!</li>
+      <li>ESC hoặc P để tạm dừng</li>
+    </ul>
+    <button class="btn" onclick="showMenu()">← QUAY LẠI</button>
+  </div>
+
+  <!-- GAME OVER -->
+  <div class="screen hidden" id="gameoverScreen">
+    <div class="go-title">GAME OVER</div>
+    <div class="score-box">
+      <div class="label">ĐIỂM SỐ</div>
+      <div class="val" id="finalScore">0</div>
+      <div class="best" id="bestScore"></div>
+    </div>
+    <button class="btn" onclick="startGame()">↺  CHƠI LẠI</button>
+    <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
+  </div>
+
+  <!-- PAUSE -->
+  <div class="screen hidden" id="pauseScreen">
+    <div style="font-size:18px;color:#ffe066;text-shadow:2px 2px 0 #b8860b;margin-bottom:28px;">TẠM DỪNG</div>
+    <button class="btn" onclick="resumeGame()">▶  TIẾP TỤC</button>
+    <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
+  </div>
+</div>
+
+<script>
+// ─────────────────────── CONFIG ───────────────────────
+// Physics chạy theo deltaTime thực (ms) thay vì frame-count,
+// nên tốc độ KHÔNG phụ thuộc fps màn hình.
+const C = {
+  W: 420, H: 640,
+
+  // ── Physics (đơn vị: pixel / giây hoặc pixel / giây²) ──
+  GRAVITY:      900,    // px/s²  – rơi tự nhiên, không quá nhanh
+  JUMP_VY:     -310,    // px/s   – mỗi lần bấm, bay lên ngần này
+  MAX_FALL:     520,    // px/s   – tốc độ rơi tối đa (giới hạn trần)
+
+  // ── Góc nghiêng ──
+  ANGLE_UP:    -0.40,   // rad khi đang bay lên
+  ANGLE_DOWN:   1.20,   // rad khi rơi nhanh
+
+  // ── Tốc độ cột ──
+  BASE_SPEED:   140,    // px/s
+  SPEED_STEP:    30,    // px/s tăng thêm mỗi 100 điểm
+  SPEED_MILESTONE: 100,
+  SCORE_PER_PIPE: 10,
+
+  // ── Cột ──
+  PIPE_W:        62,
+  GAP:          160,    // khe hở (px) – rộng hơn 1 chút cho dễ chơi
+  PIPE_INTERVAL: 1.6,   // giây giữa các cột
+
+  GROUND_H:      72,
+};
+
+const canvas = document.getElementById('gameCanvas');
+const ctx    = canvas.getContext('2d');
+
+// ─────────────────────── STATE ────────────────────────
+let state = 'menu';
+let bird, pipes, score, lastTime, animId, turboMode, scrollX, currentSpeed, speedLevel;
+let pipeTimer = 0;   // giây tích lũy kể từ cột cuối
+let highScore = +localStorage.getItem('flappy_hs') || 0;
+let birdImg = null;
+
+// ─────────────────────── BIRD IMAGE ───────────────────
+const birdImgEl = new Image();
+birdImgEl.onload  = () => { birdImg = birdImgEl; drawBirdPreview(); };
+birdImgEl.onerror = () => { birdImg = null; drawBirdPreview(); };
+birdImgEl.src = 'helo.png';
+
+function drawBirdPreview() {
+  const pc = document.getElementById('birdPreview');
+  const px = pc.getContext('2d');
+  if (birdImg) { px.clearRect(0,0,60,60); px.drawImage(birdImg,0,0,60,60); }
+  else drawFallbackBird(px,30,30,0,1.5);
+}
+
+function drawFallbackBird(cx, x, y, angle, scale=1) {
+  cx.save();
+  cx.translate(x, y); cx.rotate(angle); cx.scale(scale, scale);
+  cx.fillStyle = '#ffe066';
+  cx.beginPath(); cx.ellipse(0,0,14,10,0,0,Math.PI*2); cx.fill();
+  cx.fillStyle = '#ffaa00';
+  cx.beginPath(); cx.ellipse(-4,2,9,5,-0.4,0,Math.PI*2); cx.fill();
+  cx.fillStyle = '#fff';
+  cx.beginPath(); cx.arc(8,-2,4,0,Math.PI*2); cx.fill();
+  cx.fillStyle = '#333';
+  cx.beginPath(); cx.arc(9,-2,2,0,Math.PI*2); cx.fill();
+  cx.fillStyle = '#fff';
+  cx.beginPath(); cx.arc(10,-3,0.8,0,Math.PI*2); cx.fill();
+  cx.fillStyle = '#ff7700';
+  cx.beginPath(); cx.moveTo(12,1); cx.lineTo(20,3); cx.lineTo(12,5); cx.closePath(); cx.fill();
+  cx.restore();
+}
+
+// ─────────────────────── INIT ────────────────────────
+function initGame() {
+  bird = { x:90, y:C.H/2, vy:0, angle:0, w:44, h:36, alive:true };
+  pipes = [];
+  score = 0;
+  pipeTimer = 0;
+  scrollX = 0;
+  turboMode = false;
+  currentSpeed = C.BASE_SPEED;
+  speedLevel = 0;
+  lastTime = null;
+  updateScore(0);
+}
+
+function spawnPipe() {
+  const minTop = 80;
+  const maxTop = C.H - C.GROUND_H - C.GAP - 80;
+  const topH = minTop + Math.random() * (maxTop - minTop);
+  pipes.push({ x: C.W + 20, topH, scored: false });
+}
+
+// ─────────────────────── UPDATE (deltaTime) ───────────
+function update(dt) {
+  if (state !== 'playing') return;
+
+  const speed = currentSpeed;
+
+  // ── bird physics ──
+  bird.vy = Math.min(bird.vy + C.GRAVITY * dt, C.MAX_FALL);
+  bird.y += bird.vy * dt;
+
+  // Góc nghiêng: smooth theo velocity
+  const targetAngle = bird.vy < 0
+    ? C.ANGLE_UP
+    : C.ANGLE_UP + (C.ANGLE_DOWN - C.ANGLE_UP) * (bird.vy / C.MAX_FALL);
+  bird.angle += (targetAngle - bird.angle) * Math.min(1, dt * 8);
+
+  // ── spawn cột theo thời gian thực ──
+  pipeTimer += dt;
+  if (pipeTimer >= C.PIPE_INTERVAL) { pipeTimer = 0; spawnPipe(); }
+
+  // ── di chuyển & ghi điểm ──
+  for (const p of pipes) {
+    p.x -= speed * dt;
+    if (!p.scored && p.x + C.PIPE_W < bird.x) {
+      p.scored = true;
+      score += C.SCORE_PER_PIPE;
+      updateScore(score);
+      const newLevel = Math.floor(score / C.SPEED_MILESTONE);
+      if (newLevel > speedLevel) {
+        speedLevel = newLevel;
+        currentSpeed = C.BASE_SPEED + speedLevel * C.SPEED_STEP;
+        turboMode = speedLevel >= 1;
+        if (turboMode) activateTurbo(speedLevel);
+      }
+    }
+  }
+  pipes = pipes.filter(p => p.x + C.PIPE_W > -10);
+
+  scrollX = (scrollX + speed * dt * 0.4) % (C.W * 2);
+
+  // ── va chạm ──
+  if (bird.y + bird.h/2 > C.H - C.GROUND_H || bird.y - bird.h/2 < 0) { die(); return; }
+  for (const p of pipes) {
+    const gapTop = p.topH, gapBot = p.topH + C.GAP;
+    const bx1 = bird.x - bird.w/2 + 6, bx2 = bird.x + bird.w/2 - 6;
+    const by1 = bird.y - bird.h/2 + 4, by2 = bird.y + bird.h/2 - 4;
+    if (bx2 > p.x && bx1 < p.x + C.PIPE_W) {
+      if (by1 < gapTop || by2 > gapBot) { die(); return; }
+    }
+  }
+}
+
+function activateTurbo(level) {
+  const badge = document.getElementById('speedBadge');
+  badge.textContent = `⚡ TỐC ĐỘ x${level+1} !`;
+  badge.classList.add('show');
+  clearTimeout(badge._timeout);
+  badge._timeout = setTimeout(() => badge.classList.remove('show'), 2500);
+}
+
+function updateScore(s) {
+  document.getElementById('scoreDisplay').textContent = s;
+}
+
+// ─────────────────────── DRAW ─────────────────────────
+function draw() {
+  if (turboMode) {
+    const sg = ctx.createLinearGradient(0,0,0,C.H);
+    sg.addColorStop(0,'#1a0a00'); sg.addColorStop(1,'#3a1500');
+    ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
+  } else {
+    const sg = ctx.createLinearGradient(0,0,0,C.H);
+    sg.addColorStop(0,'#0d1b2a'); sg.addColorStop(0.6,'#1a3050'); sg.addColorStop(1,'#0d2a1f');
+    ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
+  }
+  drawBg(); drawPipes(); drawGround(); drawBirdSprite();
+}
+
+function drawBg() {
+  ctx.save();
+  ctx.globalAlpha = turboMode ? 0.15 : 0.25;
+  ctx.fillStyle = '#fff';
+  const seed=[30,110,200,320,370], yseed=[60,110,80,140,90];
+  for (let i=0;i<5;i++) {
+    const ox=((seed[i]-scrollX*0.3)%C.W+C.W)%C.W, oy=yseed[i];
+    ctx.beginPath(); ctx.arc(ox,oy,10,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(ox+18,oy-6,14,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(ox+36,oy,10,0,Math.PI*2); ctx.fill();
+  }
+  if (!turboMode) {
+    ctx.globalAlpha=0.5; ctx.fillStyle='#fff';
+    const stars=[[50,30],[150,20],[300,45],[380,25],[220,55],[100,75],[340,70]];
+    for (const [sx,sy] of stars) ctx.fillRect(sx,sy,2,2);
+  }
+  ctx.restore();
+}
+
+function getPipeColor(isLight) {
+  return turboMode ? (isLight?'#ff4d00':'#cc2200') : (isLight?'#2ecc71':'#27ae60');
+}
+function getPipeCapColor() { return turboMode?'#ff7700':'#1d8348'; }
+
+function drawPipes() {
+  for (const p of pipes) {
+    const gapTop=p.topH, gapBot=p.topH+C.GAP;
+    const pw=C.PIPE_W, capW=pw+14, capH=22;
+    // top
+    {
+      const g=ctx.createLinearGradient(p.x,0,p.x+pw,0);
+      g.addColorStop(0,getPipeColor(false)); g.addColorStop(0.5,getPipeColor(true)); g.addColorStop(1,getPipeColor(false));
+      ctx.fillStyle=g; ctx.beginPath(); ctx.roundRect(p.x,0,pw,gapTop-capH,[0,0,4,4]); ctx.fill();
+      const gc=ctx.createLinearGradient(p.x-7,0,p.x-7+capW,0);
+      gc.addColorStop(0,getPipeCapColor()); gc.addColorStop(0.5,getPipeColor(true)); gc.addColorStop(1,getPipeCapColor());
+      ctx.fillStyle=gc; ctx.beginPath(); ctx.roundRect(p.x-7,gapTop-capH,capW,capH,4); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.fillRect(p.x+6,0,10,gapTop-capH);
+    }
+    // bottom
+    {
+      const g=ctx.createLinearGradient(p.x,0,p.x+pw,0);
+      g.addColorStop(0,getPipeColor(false)); g.addColorStop(0.5,getPipeColor(true)); g.addColorStop(1,getPipeColor(false));
+      ctx.fillStyle=g; ctx.beginPath(); ctx.roundRect(p.x,gapBot+capH,pw,C.H-C.GROUND_H-gapBot-capH,[4,4,0,0]); ctx.fill();
+      const gc=ctx.createLinearGradient(p.x-7,0,p.x-7+capW,0);
+      gc.addColorStop(0,getPipeCapColor()); gc.addColorStop(0.5,getPipeColor(true)); gc.addColorStop(1,getPipeCapColor());
+      ctx.fillStyle=gc; ctx.beginPath(); ctx.roundRect(p.x-7,gapBot,capW,capH,4); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.fillRect(p.x+6,gapBot+capH,10,C.H-C.GROUND_H-gapBot-capH);
+    }
+  }
+}
+
+function drawGround() {
+  const gy=C.H-C.GROUND_H;
+  const gg=ctx.createLinearGradient(0,gy,0,C.H);
+  gg.addColorStop(0,turboMode?'#3d1a00':'#2d5a1b'); gg.addColorStop(1,turboMode?'#1a0800':'#1a3a0e');
+  ctx.fillStyle=gg; ctx.fillRect(0,gy,C.W,C.GROUND_H);
+  ctx.fillStyle=turboMode?'#8b2500':'#4a8c2a'; ctx.fillRect(0,gy,C.W,16);
+  const bumpX=(-scrollX*0.9%60+60)%60;
+  ctx.fillStyle=turboMode?'#aa3300':'#5aa33a';
+  for (let bx=bumpX-30;bx<C.W+30;bx+=60) {
+    ctx.beginPath(); ctx.arc(bx,gy+3,18,Math.PI,0); ctx.fill();
+  }
+  ctx.strokeStyle=turboMode?'#ff660044':'#2d8a1888';
+  ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(0,gy+16); ctx.lineTo(C.W,gy+16); ctx.stroke();
+}
+
+function drawBirdSprite() {
+  ctx.save();
+  ctx.translate(bird.x, bird.y); ctx.rotate(bird.angle);
+  if (birdImg) ctx.drawImage(birdImg,-bird.w/2,-bird.h/2,bird.w,bird.h);
+  else drawFallbackBird(ctx,0,0,0,1);
+  ctx.restore();
+}
+
+// ─────────────────────── GAME LOOP ────────────────────
+function loop(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  // Clamp dt tối đa 100ms (tránh jump lớn khi tab bị ẩn)
+  const dt = Math.min((timestamp - lastTime) / 1000, 0.1);
+  lastTime = timestamp;
+
+  update(dt);
+  draw();
+  animId = requestAnimationFrame(loop);
+}
+
+// ─────────────────────── ACTIONS ──────────────────────
+function flap() {
+  if (state === 'playing' && bird.alive) {
+    bird.vy = C.JUMP_VY;
+  }
+}
+
+function die() {
+  bird.alive = false;
+  state = 'over';
+  cancelAnimationFrame(animId);
+  draw();
+  ctx.fillStyle = 'rgba(255,0,0,0.18)'; ctx.fillRect(0,0,C.W,C.H);
+  document.getElementById('finalScore').textContent = score;
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem('flappy_hs', highScore);
+    document.getElementById('bestScore').textContent = '🏆 KỶ LỤC MỚI!';
+  } else {
+    document.getElementById('bestScore').textContent = 'Kỷ lục: ' + highScore;
+  }
+  document.getElementById('menuHS').textContent = highScore;
+  showScreen('gameoverScreen');
+}
+
+// ─────────────────────── SCREENS ──────────────────────
+function showScreen(id) {
+  ['menuScreen','howScreen','gameoverScreen','pauseScreen'].forEach(s => {
+    document.getElementById(s).classList.toggle('hidden', s !== id);
+  });
+}
+
+function showMenu() {
+  state='menu';
+  cancelAnimationFrame(animId);
+  document.getElementById('menuHS').textContent = highScore;
+  document.getElementById('hud').classList.add('hidden');
+  document.getElementById('pauseHint').style.opacity='0';
+  showScreen('menuScreen');
+  drawMenuBg();
+}
+
+function showHow() { showScreen('howScreen'); }
+
+function startGame() {
+  showScreen('');
+  document.getElementById('hud').classList.remove('hidden');
+  document.getElementById('pauseHint').style.opacity='1';
+  initGame();
+  state='playing';
+  cancelAnimationFrame(animId);
+  lastTime = null;
+  animId = requestAnimationFrame(loop);
+}
+
+function resumeGame() {
+  showScreen('');
+  state='playing';
+  lastTime = null;
+  animId = requestAnimationFrame(loop);
+}
+
+function togglePause() {
+  if (state==='playing') {
+    state='paused';
+    cancelAnimationFrame(animId);
+    showScreen('pauseScreen');
+  } else if (state==='paused') {
+    resumeGame();
+  }
+}
+
+// ─────────────────────── MENU BG ─────────────────────
+let menuLastTime = null, menuBirdY=320, menuBirdVY=-80;
+function drawMenuBg(ts) {
+  if (state!=='menu') return;
+  const dt = menuLastTime ? Math.min((ts - menuLastTime)/1000, 0.1) : 0.016;
+  menuLastTime = ts;
+
+  menuBirdVY += C.GRAVITY * dt;
+  if (menuBirdVY > 200) menuBirdVY = 200;
+  menuBirdY  += menuBirdVY * dt;
+  if (menuBirdY > C.H*0.72) { menuBirdY=C.H*0.72; menuBirdVY=-200; }
+  if (menuBirdY < C.H*0.25) { menuBirdY=C.H*0.25; menuBirdVY=80; }
+
+  const sg=ctx.createLinearGradient(0,0,0,C.H);
+  sg.addColorStop(0,'#0d1b2a'); sg.addColorStop(0.6,'#1a3050'); sg.addColorStop(1,'#0d2a1f');
+  ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
+  scrollX=(scrollX+120*dt*0.4)%(C.W*2);
+  drawBg(); drawGround();
+
+  ctx.save();
+  ctx.translate(100, menuBirdY);
+  ctx.rotate(Math.sin(menuBirdY * 0.02) * 0.15);
+  if (birdImg) ctx.drawImage(birdImg,-22,-18,44,36);
+  else drawFallbackBird(ctx,0,0,0,1);
+  ctx.restore();
+
+  requestAnimationFrame(drawMenuBg);
+}
+
+// ─────────────────────── INPUT ────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.code==='Space'||e.code==='ArrowUp') {
+    e.preventDefault();
+    if (state==='playing') flap();
+    else if (state==='menu') startGame();
+    else if (state==='over') startGame();
+  }
+  if (e.code==='Escape'||e.code==='KeyP') {
+    if (state==='playing'||state==='paused') togglePause();
+  }
+});
+
+canvas.addEventListener('click', () => { if (state==='playing') flap(); });
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  if (state==='playing') flap();
+}, {passive:false});
+
+// ─────────────────────── RESPONSIVE SCALE ─────────────
+function scaleGame() {
+  const wrapper = document.getElementById('wrapper');
+  const scaleX = window.innerWidth  / 420;
+  const scaleY = window.innerHeight / 640;
+  const scale  = Math.min(scaleX, scaleY, 1);
+  wrapper.style.transform = `scale(${scale})`;
+}
+scaleGame();
+window.addEventListener('resize', scaleGame);
+
+// ─────────────────────── BOOT ─────────────────────────
+document.getElementById('menuHS').textContent = highScore;
+scrollX = 0;
+requestAnimationFrame(drawMenuBg);
+drawBirdPreview();
+</script>
+</body>
+</html>
