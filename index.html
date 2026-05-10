@@ -8,159 +8,177 @@
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background:#0a0a1a;
-    display:flex; justify-content:center; align-items:center;
-    height:100vh; overflow:hidden;
-    font-family:'Press Start 2P',monospace;
-    touch-action:none;
+    background: #050510;
+    display: flex; justify-content: center; align-items: center;
+    height: 100vh; overflow: hidden;
+    font-family: 'Press Start 2P', monospace;
+    touch-action: none;
   }
   #wrapper {
-    position:relative; width:420px; height:640px;
-    border-radius:16px; overflow:hidden;
-    box-shadow:0 0 60px rgba(0,200,255,0.3),0 0 120px rgba(0,200,255,0.1);
-    transform-origin:center center;
+    position: relative; width: 420px; height: 640px;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 0 40px rgba(0, 200, 255, 0.2), 0 0 80px rgba(0, 200, 255, 0.1), inset 0 0 20px rgba(255,255,255,0.05);
+    transform-origin: center center;
+    border: 2px solid rgba(255, 255, 255, 0.1);
   }
-  canvas { display:block; width:100%; height:100%; image-rendering:pixelated; }
+  canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
 
   .screen {
-    position:absolute; inset:0;
-    display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
-    background:linear-gradient(180deg,#0d1b2a 0%,#1a2f4a 40%,#0d2a1f 100%);
-    transition:opacity .35s;
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(13, 27, 42, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: opacity .4s ease, transform .4s ease;
   }
-  .screen.hidden { opacity:0; pointer-events:none; }
+  .screen.hidden { opacity: 0; pointer-events: none; transform: scale(1.05); }
 
-  /* ── LOGO & MENU ── */
   #menuScreen .logo {
-    font-size:28px; color:#ffe066;
-    text-shadow:4px 4px 0 #b8860b,0 0 30px #ffe066aa;
-    letter-spacing:2px; margin-bottom:6px;
-    animation:float 2s ease-in-out infinite;
+    font-size: 32px; color: #ffe066;
+    text-shadow: 4px 4px 0 #b8860b, 0 0 25px rgba(255, 224, 102, 0.8);
+    letter-spacing: 2px; margin-bottom: 8px;
+    animation: float 2.5s ease-in-out infinite;
+    text-align: center; line-height: 1.4;
   }
-  #menuScreen .sub { font-size:20px; color:#7ecfff; margin-bottom:28px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;}
+  #menuScreen .sub { 
+    font-size: 16px; color: #7ecfff; margin-bottom: 30px; 
+    font-family: Cambria, Cochin, Georgia, serif; font-style: italic;
+    text-shadow: 0 0 10px rgba(126, 207, 255, 0.5);
+  }
 
   .bird-preview {
-    width:60px; height:60px; margin-bottom:22px;
-    animation:float 1.5s ease-in-out infinite;
-    border-radius:8px;
+    width: 64px; height: 64px; margin-bottom: 25px;
+    animation: float 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
   }
 
   .btn {
-    background:linear-gradient(135deg,#ffe066,#ff9900);
-    color:#1a0a00; border:none; border-radius:8px;
-    font-family:'Press Start 2P',monospace; font-size:11px;
-    padding:13px 24px; cursor:pointer;
-    box-shadow:0 6px 0 #b05500,0 0 20px #ff990055;
-    transition:transform .1s,box-shadow .1s;
-    margin:7px 0; min-width:190px; text-align:center;
+    background: linear-gradient(135deg, #ffe066, #ff9900);
+    color: #1a0a00; border: 2px solid rgba(255,255,255,0.2); 
+    border-radius: 12px;
+    font-family: 'Press Start 2P', monospace; font-size: 11px;
+    padding: 15px 24px; cursor: pointer;
+    box-shadow: 0 6px 0 #b05500, 0 10px 20px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.4);
+    transition: all .15s ease;
+    margin: 8px 0; min-width: 210px; text-align: center;
+    text-transform: uppercase; letter-spacing: 1px;
   }
-  .btn:hover  { transform:translateY(-2px); box-shadow:0 8px 0 #b05500,0 0 30px #ff990088; }
-  .btn:active { transform:translateY(4px);  box-shadow:0 2px 0 #b05500; }
+  .btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 #b05500, 0 15px 25px rgba(255, 153, 0, 0.4), inset 0 2px 5px rgba(255,255,255,0.5); filter: brightness(1.1); }
+  .btn:active { transform: translateY(4px);  box-shadow: 0 2px 0 #b05500, 0 2px 5px rgba(0,0,0,0.4); }
+  
   .btn.secondary {
-    background:linear-gradient(135deg,#2244aa,#4477ff);
-    box-shadow:0 6px 0 #112266,0 0 20px #4477ff55; color:#eef4ff;
+    background: linear-gradient(135deg, #2244aa, #4477ff);
+    box-shadow: 0 6px 0 #112266, 0 10px 20px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.3); color: #eef4ff;
   }
-  .btn.secondary:hover  { box-shadow:0 8px 0 #112266,0 0 30px #4477ff88; }
-  .btn.secondary:active { box-shadow:0 2px 0 #112266; }
+  .btn.secondary:hover  { box-shadow: 0 8px 0 #112266, 0 15px 25px rgba(68, 119, 255, 0.4); }
+  .btn.secondary:active { box-shadow: 0 2px 0 #112266; }
+  
   .btn.skin-btn {
-    background:linear-gradient(135deg,#aa44cc,#ff66ff);
-    box-shadow:0 6px 0 #661188,0 0 20px #ff66ff55; color:#fff0ff;
+    background: linear-gradient(135deg, #aa44cc, #ff66ff);
+    box-shadow: 0 6px 0 #661188, 0 10px 20px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.3); color: #fff0ff;
   }
-  .btn.skin-btn:hover  { box-shadow:0 8px 0 #661188,0 0 30px #ff66ff88; }
-  .btn.skin-btn:active { box-shadow:0 2px 0 #661188; }
+  .btn.skin-btn:hover  { box-shadow: 0 8px 0 #661188, 0 15px 25px rgba(255, 102, 255, 0.4); }
+  .btn.skin-btn:active { box-shadow: 0 2px 0 #661188; }
 
-  .highscore-disp { font-size:8px; color:#aaa; margin-top:18px; }
-  .highscore-disp span { color:#ffe066; }
+  .highscore-disp { 
+    font-size: 10px; color: #ccc; margin-top: 25px; 
+    background: rgba(0,0,0,0.4); padding: 8px 16px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .highscore-disp span { color: #ffe066; text-shadow: 0 0 5px #ffe066; }
 
-  /* ── GAME OVER ── */
   #gameoverScreen .go-title {
-    font-size:22px; color:#ff4455;
-    text-shadow:3px 3px 0 #880022,0 0 20px #ff4455aa;
-    margin-bottom:20px; animation:shake .5s ease-out;
+    font-size: 28px; color: #ff4455;
+    text-shadow: 4px 4px 0 #880022, 0 0 25px rgba(255, 68, 85, 0.8);
+    margin-bottom: 25px; animation: shake .5s ease-out;
   }
   .score-box {
-    background:rgba(0,0,0,.5); border:2px solid #7ecfff44;
-    border-radius:10px; padding:18px 32px; margin-bottom:24px; text-align:center;
+    background: rgba(0,0,0,0.6); border: 2px solid #7ecfff;
+    border-radius: 16px; padding: 20px 40px; margin-bottom: 30px; text-align: center;
+    box-shadow: 0 0 20px rgba(126, 207, 255, 0.3), inset 0 0 15px rgba(126, 207, 255, 0.1);
   }
-  .score-box .label { font-size:7px; color:#7ecfff; margin-bottom:6px; }
-  .score-box .val   { font-size:26px; color:#fff; }
-  .score-box .best  { font-size:8px; color:#ffe066; margin-top:8px; }
+  .score-box .label { font-size: 9px; color: #7ecfff; margin-bottom: 10px; letter-spacing: 1px; }
+  .score-box .val   { font-size: 32px; color: #fff; text-shadow: 2px 2px 0 #000; }
+  .score-box .best  { font-size: 9px; color: #ffe066; margin-top: 12px; background: rgba(255, 224, 102, 0.15); padding: 4px 8px; border-radius: 6px; }
 
-  /* ── HOW TO PLAY ── */
   #howScreen .how-title {
-    font-size:14px; color:#ffe066;
-    text-shadow:2px 2px 0 #b8860b; margin-bottom:20px;
+    font-size: 18px; color: #ffe066;
+    text-shadow: 3px 3px 0 #b8860b; margin-bottom: 25px;
   }
-  .how-list { list-style:none; text-align:left; margin-bottom:24px; }
+  .how-list { list-style: none; text-align: left; margin-bottom: 30px; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
   .how-list li {
-    font-size:7px; color:#cce; margin-bottom:10px;
-    padding-left:14px; position:relative; line-height:1.8;
+    font-size: 8px; color: #e0e0ff; margin-bottom: 14px;
+    padding-left: 20px; position: relative; line-height: 1.8;
   }
-  .how-list li::before { content:"▶"; position:absolute; left:0; color:#ffe066; }
+  .how-list li:last-child { margin-bottom: 0; }
+  .how-list li::before { content: "▶"; position: absolute; left: 0; color: #ffe066; }
 
-  /* ── SKIN SCREEN ── */
   #skinScreen .skin-title {
-    font-size:15px; color:#ff88ff;
-    text-shadow:2px 2px 0 #660088; margin-bottom:6px;
+    font-size: 18px; color: #ff88ff;
+    text-shadow: 3px 3px 0 #660088; margin-bottom: 10px;
   }
-  #skinScreen .skin-sub { font-size:7px; color:#cc88ff; margin-bottom:20px; }
+  #skinScreen .skin-sub { font-size: 8px; color: #cc88ff; margin-bottom: 25px; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 8px; }
 
   .skin-grid {
-    display:grid; grid-template-columns:repeat(3,1fr);
-    gap:10px; margin-bottom:20px;
-    max-height:340px; overflow-y:auto;
-    padding:4px 8px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 15px; margin-bottom: 25px;
+    max-height: 360px; overflow-y: auto;
+    padding: 10px; width: 90%;
   }
-  .skin-grid::-webkit-scrollbar { width:4px; }
-  .skin-grid::-webkit-scrollbar-thumb { background:#aa44cc; border-radius:4px; }
+  .skin-grid::-webkit-scrollbar { width: 6px; }
+  .skin-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 10px; }
+  .skin-grid::-webkit-scrollbar-thumb { background: #aa44cc; border-radius: 10px; }
 
   .skin-card {
-    display:flex; flex-direction:column; align-items:center;
-    background:rgba(255,255,255,.06); border:2px solid rgba(255,255,255,.1);
-    border-radius:10px; padding:10px 6px; cursor:pointer;
-    transition:all .2s;
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 12px; padding: 12px 8px; cursor: pointer;
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
-  .skin-card:hover   { background:rgba(255,180,255,.12); border-color:#ff66ff88; transform:scale(1.05); }
-  .skin-card.active  { border-color:#ff66ff; background:rgba(255,100,255,.18); box-shadow:0 0 14px #ff66ff88; }
-  .skin-card canvas  { width:48px; height:48px; border-radius:6px; }
-  .skin-card .skin-name { font-size:5.5px; color:#ddd; margin-top:6px; text-align:center; line-height:1.5; }
-  .skin-card.active .skin-name { color:#ff88ff; }
+  .skin-card:hover   { background: rgba(255,180,255,0.15); border-color: #ff66ff; transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 15px rgba(255, 102, 255, 0.3); }
+  .skin-card.active  { border-color: #ffe066; background: rgba(255, 224, 102, 0.2); box-shadow: 0 0 20px rgba(255, 224, 102, 0.5); transform: scale(1.08); }
+  .skin-card canvas  { width: 52px; height: 52px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5)); }
+  .skin-card .skin-name { font-size: 6px; color: #eee; margin-top: 10px; text-align: center; line-height: 1.6; }
+  .skin-card.active .skin-name { color: #ffe066; }
 
-  /* ── HUD ── */
   #hud {
-    position:absolute; top:16px; left:0; right:0;
-    display:flex; flex-direction:column; align-items:center;
-    pointer-events:none; transition:opacity .3s;
+    position: absolute; top: 20px; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center;
+    pointer-events: none; transition: opacity .3s;
   }
-  #hud.hidden { opacity:0; }
+  #hud.hidden { opacity: 0; }
   .hud-score {
-    font-family:'Press Start 2P',monospace; font-size:22px; color:#fff;
-    text-shadow:3px 3px 0 #00000088,0 0 12px #7ecfffaa; letter-spacing:2px;
+    font-family: 'Press Start 2P', monospace; font-size: 28px; color: #fff;
+    text-shadow: 4px 4px 0 #000, 0 0 15px #7ecfff; letter-spacing: 2px;
   }
   #themeLabel {
-    font-size:7px; color:#fff8; margin-top:4px;
-    text-shadow:1px 1px 0 #0006; letter-spacing:1px;
+    font-size: 8px; color: rgba(255,255,255,0.8); margin-top: 8px;
+    text-shadow: 2px 2px 0 #000; letter-spacing: 1px;
+    background: rgba(0,0,0,0.4); padding: 4px 10px; border-radius: 10px;
   }
 
   #speedBadge {
-    position:absolute; top:60px; left:50%; transform:translateX(-50%);
-    font-family:'Press Start 2P',monospace; font-size:7px;
-    color:#ff4455; background:rgba(0,0,0,.7);
-    border:1px solid #ff445544; border-radius:6px;
-    padding:4px 10px; pointer-events:none;
-    opacity:0; transition:opacity .5s; white-space:nowrap;
+    position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace; font-size: 9px;
+    color: #ff4455; background: rgba(0,0,0,0.8);
+    border: 2px solid #ff4455; border-radius: 8px;
+    padding: 6px 12px; pointer-events: none;
+    opacity: 0; transition: opacity .5s, transform .3s; white-space: nowrap;
+    box-shadow: 0 0 15px rgba(255, 68, 85, 0.5);
   }
-  #speedBadge.show { opacity:1; }
+  #speedBadge.show { opacity: 1; transform: translateX(-50%) scale(1.1); }
 
   #pauseHint {
-    position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
-    font-family:'Press Start 2P',monospace; font-size:6px;
-    color:#ffffff55; pointer-events:none; white-space:nowrap;
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace; font-size: 7px;
+    color: rgba(255,255,255,0.5); pointer-events: none; white-space: nowrap;
+    background: rgba(0,0,0,0.5); padding: 6px 12px; border-radius: 12px;
   }
 
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)} }
 </style>
 </head>
 <body>
@@ -174,26 +192,25 @@
   <div id="speedBadge"></div>
   <div id="pauseHint">ESC / P = PAUSE</div>
 
-  <!-- ═══════════════ MENU ═══════════════ -->
+  <audio id="bgMusic" preload="auto"></audio>
+
   <div class="screen" id="menuScreen">
     <div class="logo">FLAPPY TUẤT</div>
     <div class="sub">— Tuất tày tuất lộc —</div>
-    <canvas class="bird-preview" id="birdPreview" width="60" height="60"></canvas>
+    <canvas class="bird-preview" id="birdPreview" width="64" height="64"></canvas>
     <button class="btn" onclick="startGame()">▶  CHƠI NGAY</button>
     <button class="btn skin-btn" onclick="showSkins()">🎨 CHỌN SKIN</button>
     <button class="btn secondary" onclick="showHow()">?  HƯỚNG DẪN</button>
     <div class="highscore-disp">KỶ LỤC: <span id="menuHS">0</span></div>
   </div>
 
-  <!-- ═══════════════ SKIN SELECT ═══════════════ -->
   <div class="screen hidden" id="skinScreen">
     <div class="skin-title">CHỌN SKIN CHIM</div>
     <div class="skin-sub">Thêm ảnh .png vào mảng BIRD_SKINS bên dưới</div>
     <div class="skin-grid" id="skinGrid"></div>
-    <button class="btn" onclick="showMenu()">← QUAY LẠI</button>
+    <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- ═══════════════ HOW TO PLAY ═══════════════ -->
   <div class="screen hidden" id="howScreen">
     <div class="how-title">HƯỚNG DẪN</div>
     <ul class="how-list">
@@ -204,10 +221,9 @@
       <li>🎨 Chọn skin chim yêu thích</li>
       <li>ESC hoặc P để tạm dừng</li>
     </ul>
-    <button class="btn" onclick="showMenu()">← QUAY LẠI</button>
+    <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- ═══════════════ GAME OVER ═══════════════ -->
   <div class="screen hidden" id="gameoverScreen">
     <div class="go-title">GAME OVER</div>
     <div class="score-box">
@@ -220,108 +236,57 @@
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 
-  <!-- ═══════════════ PAUSE ═══════════════ -->
   <div class="screen hidden" id="pauseScreen">
-    <div style="font-size:18px;color:#ffe066;text-shadow:2px 2px 0 #b8860b;margin-bottom:28px;">TẠM DỪNG</div>
+    <div style="font-size:24px;color:#ffe066;text-shadow:3px 3px 0 #b8860b;margin-bottom:35px; animation: float 2s infinite;">TẠM DỪNG</div>
     <button class="btn" onclick="resumeGame()">▶  TIẾP TỤC</button>
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 </div>
 
 <script>
+const bgMusic = document.getElementById('bgMusic');
+
 // ╔══════════════════════════════════════════════════════════════╗
-// ║            🐦 BIRD SKINS – THÊM SKIN MỚI Ở ĐÂY             ║
-// ╠══════════════════════════════════════════════════════════════╣
-// ║  Mỗi entry là một object { name, src }                       ║
-// ║  • name : tên hiển thị trong màn hình chọn skin              ║
-// ║  • src  : đường dẫn file .png (đặt cùng thư mục với game)    ║
-// ║                                                              ║
-// ║  Ví dụ thêm skin mới:                                        ║
-// ║    { name: "Rồng Đỏ",  src: "dragon.png"  },                 ║
-// ║    { name: "Vịt Vàng", src: "duck.png"    },                 ║
+// ║          🎵 DANH SÁCH NHẠC – THÊM / SỬA Ở ĐÂY                ║
+// ╚══════════════════════════════════════════════════════════════╝
+const PLAYLIST = [
+  "maybe in another life.mp3",
+  "goodnight.mp3",
+  "dep.mp3"
+];
+let currentSongIndex = 0;
+
+// Lắng nghe sự kiện bài hát kết thúc để tự động chuyển bài
+bgMusic.addEventListener('ended', () => {
+  currentSongIndex++; // Chuyển sang bài tiếp theo
+  if (currentSongIndex >= PLAYLIST.length) {
+    currentSongIndex = 0; // Nếu hết danh sách thì quay lại bài đầu
+  }
+  bgMusic.src = PLAYLIST[currentSongIndex];
+  bgMusic.play().catch(e => console.log("Lỗi tự động chuyển bài:", e));
+});
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║            🐦 BIRD SKINS – THÊM SKIN MỚI Ở ĐÂY               ║
 // ╚══════════════════════════════════════════════════════════════╝
 const BIRD_SKINS = [
-  { name: "Mặc Định\n(Vẽ sẵn)",  src: null          },  // fallback pixel bird (luôn hoạt động)
-  { name: "Thiên phịt",            src: "helo.png"    }, 
-  { name: "Tí Đẫn",            src: "halo.png"    },
-  { name: "09",            src: "hello.png"    }, // ← file PNG của bạn
-  // ── THÊM SKIN MỚI PHÍA DƯỚI ──────────────────────────────────
-  // { name: "Rồng Đỏ",  src: "dragon.png"  },
-  // { name: "Vịt Vàng", src: "duck.png"    },
-  // { name: "Mèo Bay",  src: "cat.png"     },
-  // { name: "Ninja",    src: "ninja.png"   },
-  // ─────────────────────────────────────────────────────────────
+  { name: "Mặc Định\n(Vẽ sẵn)",  src: null          },  
+  { name: "Thiên phịt",          src: "helo.png"    },  
+  { name: "Tí Đẫn",              src: "halo.png"    },
+  { name: "09",                  src: "hello.png"   }, 
 ];
 
 // ╔══════════════════════════════════════════════════════════════╗
-// ║        🎨 COLOR THEMES – chu kỳ mỗi 100 điểm                ║
-// ║  Thứ tự: xanh lá → cam → đỏ → vàng → xanh dương            ║
-// ║          → hồng → tím → (lặp lại)                           ║
+// ║        🎨 COLOR THEMES – chu kỳ mỗi 100 điểm                 ║
 // ╚══════════════════════════════════════════════════════════════╝
 const THEMES = [
-  {
-    name: "🌿 XANH LÁ",
-    sky:    ['#0d1b2a','#1a3050','#0d2a1f'],
-    pipe:   ['#27ae60','#2ecc71'],
-    cap:    '#1d8348',
-    ground: ['#2d5a1b','#1a3a0e'],
-    turf:   '#4a8c2a',
-    bump:   '#5aa33a',
-  },
-  {
-    name: "🔥 CAM RỰC",
-    sky:    ['#1a0a00','#2e1500','#1a0800'],
-    pipe:   ['#cc4400','#ff6600'],
-    cap:    '#993300',
-    ground: ['#3d1a00','#1a0800'],
-    turf:   '#7a3300',
-    bump:   '#aa4400',
-  },
-  {
-    name: "🌋 ĐỎ LỬA",
-    sky:    ['#1a0010','#350020','#1a0010'],
-    pipe:   ['#cc0022','#ff2244'],
-    cap:    '#880011',
-    ground: ['#3a0010','#1a0008'],
-    turf:   '#770020',
-    bump:   '#aa0030',
-  },
-  {
-    name: "⚡ VÀNG ĐIỆN",
-    sky:    ['#1a1500','#2e2800','#1a1000'],
-    pipe:   ['#b8860b','#ffe066'],
-    cap:    '#8a6200',
-    ground: ['#3a3000','#1a1800'],
-    turf:   '#6a5500',
-    bump:   '#9a7a00',
-  },
-  {
-    name: "🌊 XANH DƯƠNG",
-    sky:    ['#00101a','#001e36','#00101a'],
-    pipe:   ['#0066bb','#00aaff'],
-    cap:    '#004488',
-    ground: ['#001830','#000e1a'],
-    turf:   '#003366',
-    bump:   '#0055aa',
-  },
-  {
-    name: "🌸 HỒNG ĐÀO",
-    sky:    ['#1a0018','#300030','#1a0018'],
-    pipe:   ['#cc0077','#ff44bb'],
-    cap:    '#880055',
-    ground: ['#3a0030','#1a0018'],
-    turf:   '#770066',
-    bump:   '#aa0088',
-  },
-  {
-    name: "🔮 TÍM MA",
-    sky:    ['#0e0018','#1e0036','#0e0018'],
-    pipe:   ['#5500cc','#9944ff'],
-    cap:    '#330088',
-    ground: ['#1a0030','#0e0018'],
-    turf:   '#330066',
-    bump:   '#5500aa',
-  },
+  { name: "🌿 XANH LÁ", sky: ['#0d1b2a','#1a3050','#0d2a1f'], pipe: ['#27ae60','#2ecc71'], cap: '#1d8348', ground: ['#2d5a1b','#1a3a0e'], turf: '#4a8c2a', bump: '#5aa33a' },
+  { name: "🔥 CAM RỰC", sky: ['#1a0a00','#2e1500','#1a0800'], pipe: ['#cc4400','#ff6600'], cap: '#993300', ground: ['#3d1a00','#1a0800'], turf: '#7a3300', bump: '#aa4400' },
+  { name: "🌋 ĐỎ LỬA", sky: ['#1a0010','#350020','#1a0010'], pipe: ['#cc0022','#ff2244'], cap: '#880011', ground: ['#3a0010','#1a0008'], turf: '#770020', bump: '#aa0030' },
+  { name: "⚡ VÀNG ĐIỆN", sky: ['#1a1500','#2e2800','#1a1000'], pipe: ['#b8860b','#ffe066'], cap: '#8a6200', ground: ['#3a3000','#1a1800'], turf: '#6a5500', bump: '#9a7a00' },
+  { name: "🌊 XANH DƯƠNG", sky: ['#00101a','#001e36','#00101a'], pipe: ['#0066bb','#00aaff'], cap: '#004488', ground: ['#001830','#000e1a'], turf: '#003366', bump: '#0055aa' },
+  { name: "🌸 HỒNG ĐÀO", sky: ['#1a0018','#300030','#1a0018'], pipe: ['#cc0077','#ff44bb'], cap: '#880055', ground: ['#3a0030','#1a0018'], turf: '#770066', bump: '#aa0088' },
+  { name: "🔮 TÍM MA", sky: ['#0e0018','#1e0036','#0e0018'], pipe: ['#5500cc','#9944ff'], cap: '#330088', ground: ['#1a0030','#0e0018'], turf: '#330066', bump: '#5500aa' },
 ];
 
 // ─────────────────────── CONFIG ───────────────────────
@@ -340,8 +305,8 @@ const canvas = document.getElementById('gameCanvas');
 const ctx    = canvas.getContext('2d');
 
 // ─────────────────────── SKIN STATE ───────────────────
-let selectedSkin = 0;           // index trong BIRD_SKINS
-let skinImages   = [];          // Image objects đã load
+let selectedSkin = 0;           
+let skinImages   = [];          
 let skinsLoaded  = false;
 
 function loadAllSkins(cb) {
@@ -368,10 +333,10 @@ function buildSkinGrid() {
     card.onclick = () => selectSkin(i);
 
     const cv = document.createElement('canvas');
-    cv.width = 48; cv.height = 48;
+    cv.width = 52; cv.height = 52;
     const px = cv.getContext('2d');
-    if (skinImages[i]) { px.drawImage(skinImages[i],0,0,48,48); }
-    else { drawFallbackBird(px,24,24,0,1.8); }
+    if (skinImages[i]) { px.drawImage(skinImages[i],0,0,52,52); }
+    else { drawFallbackBird(px,26,26,0,1.8); }
 
     const nm = document.createElement('div');
     nm.className = 'skin-name';
@@ -441,7 +406,7 @@ function update(dt) {
         speedLevel=newLevel;
         currentSpeed=C.BASE_SPEED+speedLevel*C.SPEED_STEP;
         turboMode=speedLevel>=1;
-        currentThemeIdx=speedLevel;     // ← đổi màu chủ đề
+        currentThemeIdx=speedLevel;
         updateThemeLabel();
         activateBadge(speedLevel);
       }
@@ -518,7 +483,6 @@ function drawPipes(T) {
       return g;
     };
 
-    // top pipe
     ctx.fillStyle=makeG(p.x);
     ctx.beginPath(); ctx.roundRect(p.x,0,pw,gT-capH,[0,0,4,4]); ctx.fill();
     ctx.fillStyle=makeCapG(p.x);
@@ -526,7 +490,6 @@ function drawPipes(T) {
     ctx.fillStyle='rgba(255,255,255,0.12)';
     ctx.fillRect(p.x+6,0,10,gT-capH);
 
-    // bottom pipe
     ctx.fillStyle=makeG(p.x);
     ctx.beginPath(); ctx.roundRect(p.x,gB+capH,pw,C.H-C.GROUND_H-gB-capH,[4,4,0,0]); ctx.fill();
     ctx.fillStyle=makeCapG(p.x);
@@ -576,10 +539,10 @@ function drawFallbackBird(cx,x,y,angle,scale=1){
 function drawBirdPreview(){
   const pc=document.getElementById('birdPreview');
   const px=pc.getContext('2d');
-  px.clearRect(0,0,60,60);
+  px.clearRect(0,0,64,64);
   const img=currentBirdImg();
-  if (img) px.drawImage(img,0,0,60,60);
-  else drawFallbackBird(px,30,30,0,1.5);
+  if (img) px.drawImage(img,0,0,64,64);
+  else drawFallbackBird(px,32,32,0,1.6);
 }
 
 // ─────────────────────── GAME LOOP ────────────────────
@@ -595,6 +558,7 @@ function flap(){ if(state==='playing'&&bird.alive) bird.vy=C.JUMP_VY; }
 
 function die(){
   bird.alive=false; state='over';
+  bgMusic.pause(); // Tắt nhạc khi thua
   cancelAnimationFrame(animId); draw();
   ctx.fillStyle='rgba(255,0,0,0.18)'; ctx.fillRect(0,0,C.W,C.H);
   document.getElementById('finalScore').textContent=score;
@@ -616,6 +580,7 @@ function showScreen(id){
 
 function showMenu(){
   state='menu'; cancelAnimationFrame(animId);
+  bgMusic.pause(); 
   document.getElementById('menuHS').textContent=highScore;
   document.getElementById('hud').classList.add('hidden');
   document.getElementById('pauseHint').style.opacity='0';
@@ -628,6 +593,13 @@ function startGame(){
   showScreen('');
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('pauseHint').style.opacity='1';
+  
+  // Nạp bài đầu tiên nếu thẻ audio chưa có nguồn
+  if (!bgMusic.getAttribute('src')) {
+    bgMusic.src = PLAYLIST[currentSongIndex];
+  }
+  bgMusic.play().catch(e => console.log("Không thể tự động phát nhạc:", e));
+
   initGame(); state='playing';
   cancelAnimationFrame(animId); lastTime=null;
   animId=requestAnimationFrame(loop);
@@ -635,11 +607,16 @@ function startGame(){
 
 function resumeGame(){
   showScreen(''); state='playing'; lastTime=null;
+  bgMusic.play(); 
   animId=requestAnimationFrame(loop);
 }
 
 function togglePause(){
-  if(state==='playing'){ state='paused'; cancelAnimationFrame(animId); showScreen('pauseScreen'); }
+  if(state==='playing'){ 
+    state='paused'; cancelAnimationFrame(animId); 
+    bgMusic.pause(); 
+    showScreen('pauseScreen'); 
+  }
   else if(state==='paused') resumeGame();
 }
 
