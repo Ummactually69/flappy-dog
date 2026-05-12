@@ -221,7 +221,6 @@
 
   <audio id="bgMusic" preload="auto"></audio>
 
-  <!-- MENU -->
   <div class="screen" id="menuScreen">
     <div class="logo">FLAPPY TUẤT</div>
     <div class="sub">— Tuất tày tuất lộc —</div>
@@ -234,7 +233,6 @@
     <div class="highscore-disp">KỶ LỤC: <span id="menuHS">0</span></div>
   </div>
 
-  <!-- QUEST -->
   <div class="screen hidden" id="questScreen">
     <div class="q-screen-title">📋 NHIỆM VỤ</div>
     <div class="coin-ui" style="margin-bottom:12px;">💰 <span id="questCoinDisplay">0</span> xu</div>
@@ -242,7 +240,6 @@
     <button class="btn secondary" onclick="showMenu()" style="margin-top:12px;">← QUAY LẠI</button>
   </div>
 
-  <!-- SKIN SHOP -->
   <div class="screen hidden" id="skinScreen">
     <div class="skin-title">🎨 SHOP SKIN</div>
     <div class="skin-sub">💰 <span id="shopCoinDisplay">0</span> xu — Mua skin bằng xu kiếm được!</div>
@@ -250,7 +247,6 @@
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- HOW TO PLAY -->
   <div class="screen hidden" id="howScreen">
     <div class="how-title">HƯỚNG DẪN</div>
     <ul class="how-list">
@@ -260,11 +256,12 @@
       <li><b style="color:#ff66ff">halo.png</b>: 13% xóa cột + bắn LASER 🔵</li>
       <li><b style="color:#ff66ff">concu.png</b>: Hồi sinh 1 lần/mạng</li>
       <li><b style="color:#ff66ff">mq.png</b>: Thử đi r biết 😱</li>
+      <li><b style="color:#ff66ff">hello.png</b>: +0.0018% đột tử mỗi lần nhảy 💀</li>
+      <li><b style="color:#ff66ff">alr.png</b>: Tắt điện toàn map 🔦</li>
     </ul>
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- GAME OVER -->
   <div class="screen hidden" id="gameoverScreen">
     <div class="go-title">GAME OVER</div>
     <div class="score-box">
@@ -277,7 +274,6 @@
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 
-  <!-- PAUSE -->
   <div class="screen hidden" id="pauseScreen">
     <div style="font-size:24px;color:#ffe066;text-shadow:3px 3px 0 #b8860b;margin-bottom:35px;animation:float 2s infinite;">TẠM DỪNG</div>
     <button class="btn" onclick="resumeGame()">▶  TIẾP TỤC</button>
@@ -381,9 +377,10 @@ const BIRD_SKINS = [
   { name:"Mặc Định",         src:null,        price:0  },
   { name:"Thiên phịt",       src:"helo.png",  price:0  },
   { name:"Tí Đẫn\n(Bar where?)",src:"halo.png",  price:0  },
-  { name:"09",               src:"hello.png", price:10 },
+  { name:"09\n(Tu than rau cau)",               src:"hello.png", price:0 },
   { name:"Móm\n(BA SÁU)", src:"mq.png",    price:5  },
   { name:"CHO DAI\n(Nội tại sống chó)",src:"concu.png",price:30 },
+  { name:"HD\n(Tắt điện)",src:"alr.png", price:40 }
 ];
 
 // Which skins the player has unlocked (indices)
@@ -403,6 +400,8 @@ function currentBirdImg() { return skinImages[selectedSkin] || null; }
 function isHalo()  { return BIRD_SKINS[selectedSkin].src==='halo.png';  }
 function isConcu() { return BIRD_SKINS[selectedSkin].src==='concu.png'; }
 function isMq()    { return BIRD_SKINS[selectedSkin].src==='mq.png';    }
+function is09()    { return BIRD_SKINS[selectedSkin].src==='hello.png'; }
+function isHiDieu(){ return BIRD_SKINS[selectedSkin].src==='alr.png';   }
 
 function loadAllSkins(cb) {
   skinImages = [];
@@ -518,6 +517,7 @@ let state='menu', bird, pipes, orbs, score, lastTime, animId;
 let scrollX=0, currentSpeed=C.BASE_SPEED, speedLevel=0, pipeTimer=0;
 let currentThemeIdx=0, revivedThisRun=false;
 let laserEffects=[], particles=[], orbTimer=0, nextOrbDelay=getRandOrbDelay();
+let deathChance09 = 0; // Tỉ lệ đột tử của con 09
 
 function getTheme() { return THEMES[currentThemeIdx % THEMES.length]; }
 function getRandOrbDelay() { return 2.5 + Math.random()*2.5; } // 2.5–5 seconds
@@ -528,6 +528,7 @@ function initGame() {
   speedLevel=0; currentThemeIdx=0; revivedThisRun=false;
   laserEffects=[]; particles=[];
   orbTimer=0; nextOrbDelay=getRandOrbDelay();
+  deathChance09 = 0;
 
   currentSpeed = isMq() ? C.BASE_SPEED*20 : C.BASE_SPEED;
   updateScore(0); updateThemeLabel();
@@ -544,11 +545,34 @@ function spawnPipe() {
 }
 
 function spawnRandomOrb() {
-  // Random y across the whole open sky (avoid ground & very top)
   const minY = 45;
   const maxY = C.H - C.GROUND_H - 45;
-  const orbY = minY + Math.random()*(maxY-minY);
-  orbs.push({x:C.W+40, y:orbY, collected:false, wobble:Math.random()*Math.PI*2});
+
+  let safe = false;
+  let attempts = 0;
+  let orbX = C.W + 40;
+  let orbY;
+
+  // Cố gắng tìm vị trí an toàn tối đa 10 lần để tránh lặp vô hạn
+  while (!safe && attempts < 10) {
+    orbY = minY + Math.random() * (maxY - minY);
+    safe = true;
+    
+    for (const p of pipes) {
+      if (p.deleted) continue;
+      // Tránh spawn đè lên ống nước
+      if (orbX + 25 > p.x && orbX - 25 < p.x + C.PIPE_W) {
+        if (orbY - 25 < p.topH || orbY + 25 > p.topH + C.GAP) {
+          safe = false;
+          break; // Đụng cột, tìm lại
+        }
+      }
+    }
+    // Nếu đụng, dời lùi lại để né ống
+    if (!safe) orbX += 60; 
+    attempts++;
+  }
+  orbs.push({x: orbX, y: orbY, collected: false, wobble: Math.random()*Math.PI*2});
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -719,6 +743,28 @@ function draw() {
   drawGround(T);
   drawBirdSprite();
   drawParticles();
+  
+  // Vẽ màn đêm tắt điện nếu chọn chim Hỉ điếu
+  drawDarkness(bird.x, bird.y);
+}
+
+// Hàm hỗ trợ vẽ bóng tối cho skin Hỉ điếu
+function drawDarkness(x, y) {
+  if (!isHiDieu()) return;
+  const rad = 44; // Chiều rộng xấp xỉ của chim
+  
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0); // Đảm bảo overlay bao phủ toàn bộ màn hình kể cả khi đang bị transform
+  
+  const grad = ctx.createRadialGradient(x, y, rad * 0.4, x, y, rad * 3.5);
+  grad.addColorStop(0, 'rgba(0,0,0,0)'); // Xuyên thấu tâm chim
+  grad.addColorStop(0.4, 'rgba(255, 255, 0, 0.15)'); // Viền vàng nhẹ
+  grad.addColorStop(0.8, 'rgba(0,0,0,0.98)');
+  grad.addColorStop(1, '#000000'); // Đen kịt phần còn lại
+  
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, C.W, C.H);
+  ctx.restore();
 }
 
 function drawBg(T) {
@@ -895,7 +941,18 @@ function loop(ts) {
 // ═══════════════════════════════════════════════════════════════
 //  ACTIONS
 // ═══════════════════════════════════════════════════════════════
-function flap() { if(state==='playing'&&bird.alive) bird.vy=C.JUMP_VY; }
+function flap() { 
+  if(state==='playing' && bird.alive) {
+    if (is09()) {
+      deathChance09 += 0.0018; // Cộng dồn 0.0018%
+      if (Math.random() < deathChance09) {
+        die(); // Chết đột tử
+        return;
+      }
+    }
+    bird.vy = C.JUMP_VY; 
+  } 
+}
 
 function processQuestsOnDeath() {
   totalScoreGlobal += score;
@@ -986,6 +1043,10 @@ function drawMenuBg(ts) {
   const img=currentBirdImg();
   if(img) ctx.drawImage(img,-22,-18,44,36); else drawFallbackBird(ctx,0,0,0,1);
   ctx.restore();
+  
+  // Vẽ hiệu ứng tắt điện cả ngoài menu nếu đang trang bị skin
+  drawDarkness(100, menuBirdY);
+  
   requestAnimationFrame(drawMenuBg);
 }
 
