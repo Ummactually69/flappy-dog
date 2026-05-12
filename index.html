@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head> 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flappy Dog – Tuất tày tuất lộc</title>
@@ -46,7 +46,6 @@
     text-shadow:0 0 10px rgba(126,207,255,.5);
   }
 
-  /* ── Currency UI ── */
   .coin-ui {
     font-size:14px; color:#ffd700; margin-bottom:20px;
     text-shadow:2px 2px 0 #b8860b;
@@ -60,7 +59,6 @@
     filter:drop-shadow(0 10px 10px rgba(0,0,0,.5));
   }
 
-  /* ── Buttons ── */
   .btn {
     background:linear-gradient(135deg,#ffe066,#ff9900);
     color:#1a0a00; border:2px solid rgba(255,255,255,.2);
@@ -103,7 +101,6 @@
   }
   .highscore-disp span { color:#ffe066; text-shadow:0 0 5px #ffe066; }
 
-  /* ── Game Over ── */
   #gameoverScreen .go-title {
     font-size:28px; color:#ff4455;
     text-shadow:4px 4px 0 #880022,0 0 25px rgba(255,68,85,.8);
@@ -118,7 +115,6 @@
   .score-box .val   { font-size:32px; color:#fff; text-shadow:2px 2px 0 #000; }
   .score-box .best  { font-size:9px; color:#ffe066; margin-top:12px; background:rgba(255,224,102,.15); padding:4px 8px; border-radius:6px; }
 
-  /* ── Quest Screen ── */
   #questScreen .q-screen-title { font-size:18px; color:#2ecc71; text-shadow:3px 3px 0 #1e8449; margin-bottom:20px; }
   .quest-list { width:90%; max-height:410px; overflow-y:auto; }
   .quest-card {
@@ -129,7 +125,6 @@
   .quest-card .q-title { font-size:8px; color:#fff; margin-bottom:7px; line-height:1.5; padding-right:70px; }
   .quest-card .q-prog-text { font-size:7px; color:#aaa; margin-bottom:6px; }
 
-  /* Progress bar */
   .q-bar-wrap { width:100%; height:8px; background:rgba(255,255,255,.1); border-radius:4px; margin-bottom:8px; overflow:hidden; }
   .q-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#2ecc71,#00ff99); transition:width .4s ease; }
   .q-bar-fill.done { background:linear-gradient(90deg,#ffe066,#ffaa00); }
@@ -147,7 +142,6 @@
   }
   .quest-card .q-claim-btn.claimable:hover { filter:brightness(1.15); }
 
-  /* ── Skin Screen ── */
   #skinScreen .skin-title { font-size:18px; color:#ff88ff; text-shadow:3px 3px 0 #660088; margin-bottom:6px; }
   #skinScreen .skin-sub   { font-size:7px; color:#cc88ff; margin-bottom:20px; background:rgba(0,0,0,.3); padding:6px 12px; border-radius:8px; }
 
@@ -182,14 +176,12 @@
   .skin-buy-btn:active { transform:translateY(2px); box-shadow:0 1px 0 #b05500; }
   .skin-buy-btn:disabled { background:rgba(255,255,255,.1); color:#555; cursor:not-allowed; box-shadow:none; }
 
-  /* ── How Screen ── */
   #howScreen .how-title { font-size:18px; color:#ffe066; text-shadow:3px 3px 0 #b8860b; margin-bottom:25px; }
   .how-list { list-style:none; text-align:left; margin-bottom:30px; background:rgba(0,0,0,.4); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,.1); }
   .how-list li { font-size:8px; color:#e0e0ff; margin-bottom:14px; padding-left:20px; position:relative; line-height:1.8; }
   .how-list li:last-child { margin-bottom:0; }
   .how-list li::before { content:"▶"; position:absolute; left:0; color:#ffe066; }
 
-  /* ── HUD ── */
   #hud { position:absolute; top:20px; left:0; right:0; display:flex; flex-direction:column; align-items:center; pointer-events:none; transition:opacity .3s; }
   #hud.hidden { opacity:0; }
   .hud-score { font-family:'Press Start 2P',monospace; font-size:28px; color:#fff; text-shadow:4px 4px 0 #000,0 0 15px #7ecfff; letter-spacing:2px; }
@@ -199,12 +191,34 @@
   #speedBadge.show { opacity:1; transform:translateX(-50%) scale(1.1); }
   #pauseHint { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-family:'Press Start 2P',monospace; font-size:7px; color:rgba(255,255,255,.5); pointer-events:none; white-space:nowrap; background:rgba(0,0,0,.5); padding:6px 12px; border-radius:12px; }
 
-  /* ── Laser flash overlay ── */
   #laserFlash { position:absolute; inset:0; background:rgba(0,220,255,.18); pointer-events:none; opacity:0; border-radius:20px; }
+
+  /* Mister flash overlay – positioned above canvas, below UI screens */
+  #misterOverlay {
+    position:absolute; inset:0;
+    pointer-events:none;
+    opacity:0;
+    border-radius:20px;
+    background:#000;
+    z-index:5;
+    transition: none;
+  }
+  #misterOverlay img {
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    border-radius:20px;
+  }
 
   @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
   @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)} }
   @keyframes pulse { 0%,100%{transform:translateY(-50%) scale(1)} 50%{transform:translateY(-50%) scale(1.08)} }
+
+  /* Blood drip animation for hell theme wrapper border */
+  #wrapper.hell-mode {
+    border-color: rgba(220,0,0,.6) !important;
+    box-shadow: 0 0 40px rgba(220,0,0,.4), 0 0 80px rgba(180,0,0,.2), inset 0 0 20px rgba(255,0,0,.08) !important;
+  }
 </style>
 </head>
 <body>
@@ -218,6 +232,9 @@
   <div id="speedBadge"></div>
   <div id="pauseHint">ESC / P = PAUSE</div>
   <div id="laserFlash"></div>
+
+  <!-- Mister flash DOM overlay (used as fallback) -->
+  <div id="misterOverlay"><img id="misterImg" src="mister.jpg" alt=""></div>
 
   <audio id="bgMusic" preload="auto"></audio>
 
@@ -258,6 +275,7 @@
       <li><b style="color:#ff66ff">mq.png</b>: Thử đi r biết 😱</li>
       <li><b style="color:#ff66ff">hello.png</b>: +0.0018% đột tử mỗi lần nhảy 💀</li>
       <li><b style="color:#ff66ff">alr.png</b>: Tắt điện toàn map 🔦</li>
+      <li><b style="color:#ff4444">didi.png</b>: REDROOM 🩸 map đỏ địa ngục</li>
     </ul>
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
@@ -289,10 +307,23 @@ const bgMusic = document.getElementById('bgMusic');
 const PLAYLIST = ["maybe in another life.mp3","goodnight.mp3","dep.mp3"];
 let currentSongIndex = 0;
 bgMusic.addEventListener('ended',()=>{
-  currentSongIndex = (currentSongIndex+1) % PLAYLIST.length;
-  bgMusic.src = PLAYLIST[currentSongIndex];
-  bgMusic.play().catch(()=>{});
+  if (isCangHoc()) {
+    // Loop ligma.mp3
+    bgMusic.src = 'ligma.mp3';
+    bgMusic.play().catch(()=>{});
+  } else {
+    currentSongIndex = (currentSongIndex+1) % PLAYLIST.length;
+    bgMusic.src = PLAYLIST[currentSongIndex];
+    bgMusic.play().catch(()=>{});
+  }
 });
+
+function setMusicForSkin() {
+  const src = isCangHoc() ? 'ligma.mp3' : PLAYLIST[currentSongIndex];
+  if (bgMusic.src !== src && !bgMusic.src.endsWith(encodeURIComponent(src)) && !bgMusic.src.endsWith(src)) {
+    bgMusic.src = src;
+  }
+}
 
 // ═══════════════════════════════════════════════════════════════
 //  CURRENCY & QUESTS
@@ -364,7 +395,6 @@ function claimQuest(idx) {
     quests[idx] = generateQuest(quests[idx].type);
     saveQuests();
     showQuests();
-    // Refresh shop coin display if open
     const sh = document.getElementById('shopCoinDisplay');
     if (sh) sh.textContent = coins;
   }
@@ -374,21 +404,20 @@ function claimQuest(idx) {
 //  SKINS & SHOP
 // ═══════════════════════════════════════════════════════════════
 const BIRD_SKINS = [
-  { name:"Mặc Định",         src:null,        price:0  },
-  { name:"Thiên phịt",       src:"helo.png",  price:0  },
-  { name:"Tí Đẫn\n(Bar where?)",src:"halo.png",  price:0  },
-  { name:"09\n(Tu than rau cau)",               src:"hello.png", price:0 },
-  { name:"Móm\n(BA SÁU)", src:"mq.png",    price:5  },
-  { name:"CHO DAI\n(Nội tại sống chó)",src:"concu.png",price:30 },
-  { name:"HD\n(Tắt điện)",src:"alr.png", price:40 }
+  { name:"Mặc Định",             src:null,        price:0  },
+  { name:"Thiên phịt",           src:"helo.png",  price:0  },
+  { name:"Tí Đẫn\n(Bar where?)", src:"halo.png",  price:0  },
+  { name:"09\n(Tu than rau cau)", src:"hello.png", price:0  },
+  { name:"Móm\n(BA SÁU)",        src:"mq.png",    price:5  },
+  { name:"CHO DAI\n(Nội tại sống chó)", src:"concu.png", price:30 },
+  { name:"HD\n(Tắt điện)",       src:"alr.png",   price:40 },
+  { name:"Cang Hoc\n(REDROOM)",  src:"didi.png",  price:40 },
 ];
 
-// Which skins the player has unlocked (indices)
 let unlockedSkins = JSON.parse(localStorage.getItem('flappy_unlocked')) || [0,1,2];
 function saveUnlocked() { localStorage.setItem('flappy_unlocked',JSON.stringify(unlockedSkins)); }
 
 let selectedSkin = Math.min(+localStorage.getItem('flappy_skin')||0, BIRD_SKINS.length-1);
-// Ensure selected skin is actually unlocked
 if (!unlockedSkins.includes(selectedSkin)) selectedSkin = 0;
 
 let skinImages = [];
@@ -396,12 +425,21 @@ let skinImages = [];
 const orbImg = new Image();
 orbImg.src = "al.png";
 
+// Pre-load mister image into JS Image object for canvas drawing
+const misterImgEl = new Image();
+misterImgEl.src = "mister.jpg";
+
+// SFX for mister flash
+const misterSfx = new Audio('r.mp3');
+misterSfx.preload = 'auto';
+
 function currentBirdImg() { return skinImages[selectedSkin] || null; }
-function isHalo()  { return BIRD_SKINS[selectedSkin].src==='halo.png';  }
-function isConcu() { return BIRD_SKINS[selectedSkin].src==='concu.png'; }
-function isMq()    { return BIRD_SKINS[selectedSkin].src==='mq.png';    }
-function is09()    { return BIRD_SKINS[selectedSkin].src==='hello.png'; }
-function isHiDieu(){ return BIRD_SKINS[selectedSkin].src==='alr.png';   }
+function isHalo()    { return BIRD_SKINS[selectedSkin].src==='halo.png';  }
+function isConcu()   { return BIRD_SKINS[selectedSkin].src==='concu.png'; }
+function isMq()      { return BIRD_SKINS[selectedSkin].src==='mq.png';    }
+function is09()      { return BIRD_SKINS[selectedSkin].src==='hello.png'; }
+function isHiDieu()  { return BIRD_SKINS[selectedSkin].src==='alr.png';   }
+function isCangHoc() { return BIRD_SKINS[selectedSkin].src==='didi.png';  }
 
 function loadAllSkins(cb) {
   skinImages = [];
@@ -443,14 +481,12 @@ function buildSkinGrid() {
     card.appendChild(nm);
 
     if (owned) {
-      // Price tag showing owned / free
       const pt = document.createElement('div');
       pt.className = 'skin-price-tag ' + (isFree?'free':'owned');
       pt.textContent = isFree ? '✓ FREE' : '✓ Đã mua';
       card.appendChild(pt);
       card.onclick = ()=> selectSkin(i);
     } else {
-      // Locked: show price & buy button
       const pt = document.createElement('div');
       pt.className = 'skin-price-tag locked-price';
       pt.textContent = `🔒 ${s.price} xu`;
@@ -474,6 +510,13 @@ function selectSkin(i) {
   localStorage.setItem('flappy_skin',i);
   buildSkinGrid();
   drawBirdPreview();
+  // Update wrapper border style for hell mode
+  applyHellModeWrapper();
+  // Switch music immediately if already playing
+  if (state === 'playing' || state === 'menu') {
+    setMusicForSkin();
+    if (!bgMusic.paused) bgMusic.play().catch(()=>{});
+  }
 }
 
 function buySkin(i) {
@@ -484,22 +527,39 @@ function buySkin(i) {
   unlockedSkins.push(i);
   saveUnlocked();
   buildSkinGrid();
-  // Auto-select the newly bought skin
   selectSkin(i);
 }
 
 function showSkins() { buildSkinGrid(); showScreen('skinScreen'); }
 
+// ─── Hell Mode wrapper border toggle ───────────────────────────
+function applyHellModeWrapper() {
+  const w = document.getElementById('wrapper');
+  if (isCangHoc()) w.classList.add('hell-mode');
+  else w.classList.remove('hell-mode');
+}
+
 // ═══════════════════════════════════════════════════════════════
 //  THEMES & CONSTANTS
 // ═══════════════════════════════════════════════════════════════
 const THEMES = [
-  { name:"🌿 XANH LÁ",   sky:['#0d1b2a','#1a3050','#0d2a1f'], pipe:['#27ae60','#2ecc71'], cap:'#1d8348', ground:['#2d5a1b','#1a3a0e'], turf:'#4a8c2a', bump:'#5aa33a' },
-  { name:"🔥 CAM RỰC",   sky:['#1a0a00','#2e1500','#1a0800'], pipe:['#cc4400','#ff6600'], cap:'#993300', ground:['#3d1a00','#1a0800'], turf:'#7a3300', bump:'#aa4400' },
-  { name:"🌋 ĐỎ LỬA",   sky:['#1a0010','#350020','#1a0010'], pipe:['#cc0022','#ff2244'], cap:'#880011', ground:['#3a0010','#1a0008'], turf:'#770020', bump:'#aa0030' },
-  { name:"⚡ VÀNG ĐIỆN", sky:['#1a1500','#2e2800','#1a1000'], pipe:['#b8860b','#ffe066'], cap:'#8a6200', ground:['#3a3000','#1a1800'], turf:'#6a5500', bump:'#9a7a00' },
-  { name:"🌊 XANH DƯƠNG",sky:['#00101a','#001e36','#00101a'], pipe:['#0066bb','#00aaff'], cap:'#004488', ground:['#001830','#000e1a'], turf:'#003366', bump:'#0055aa' },
+  { name:"🌿 XANH LÁ",    sky:['#0d1b2a','#1a3050','#0d2a1f'], pipe:['#27ae60','#2ecc71'], cap:'#1d8348', ground:['#2d5a1b','#1a3a0e'], turf:'#4a8c2a', bump:'#5aa33a' },
+  { name:"🔥 CAM RỰC",    sky:['#1a0a00','#2e1500','#1a0800'], pipe:['#cc4400','#ff6600'], cap:'#993300', ground:['#3d1a00','#1a0800'], turf:'#7a3300', bump:'#aa4400' },
+  { name:"🌋 ĐỎ LỬA",    sky:['#1a0010','#350020','#1a0010'], pipe:['#cc0022','#ff2244'], cap:'#880011', ground:['#3a0010','#1a0008'], turf:'#770020', bump:'#aa0030' },
+  { name:"⚡ VÀNG ĐIỆN",  sky:['#1a1500','#2e2800','#1a1000'], pipe:['#b8860b','#ffe066'], cap:'#8a6200', ground:['#3a3000','#1a1800'], turf:'#6a5500', bump:'#9a7a00' },
+  { name:"🌊 XANH DƯƠNG", sky:['#00101a','#001e36','#00101a'], pipe:['#0066bb','#00aaff'], cap:'#004488', ground:['#001830','#000e1a'], turf:'#003366', bump:'#0055aa' },
 ];
+
+// ─── HELL THEME for Cang Hoc skin ───────────────────────────────
+const HELL_THEME = {
+  name:"🩸 REDROOM",
+  sky:   ['#080000','#150000','#080000'],
+  pipe:  ['#8b0000','#cc0000'],
+  cap:   '#5a0000',
+  ground:['#150000','#080000'],
+  turf:  '#4a0000',
+  bump:  '#6b0000'
+};
 
 const C = {
   W:420, H:640, GRAVITY:900, JUMP_VY:-310, MAX_FALL:520,
@@ -517,10 +577,18 @@ let state='menu', bird, pipes, orbs, score, lastTime, animId;
 let scrollX=0, currentSpeed=C.BASE_SPEED, speedLevel=0, pipeTimer=0;
 let currentThemeIdx=0, revivedThisRun=false;
 let laserEffects=[], particles=[], orbTimer=0, nextOrbDelay=getRandOrbDelay();
-let deathChance09 = 0; // Tỉ lệ đột tử của con 09
+let deathChance09 = 0;
 
-function getTheme() { return THEMES[currentThemeIdx % THEMES.length]; }
-function getRandOrbDelay() { return 2.5 + Math.random()*2.5; } // 2.5–5 seconds
+// ─── Cang Hoc / REDROOM state ────────────────────────────────────
+let misterFlashAlpha  = 0;   // 0–1 canvas overlay alpha
+let misterFlashTimer  = 0;   // seconds since last roll
+let hellPulseTime     = 0;   // for animated red vignette pulse
+
+function getTheme() {
+  if (isCangHoc()) return HELL_THEME;
+  return THEMES[currentThemeIdx % THEMES.length];
+}
+function getRandOrbDelay() { return 2.5 + Math.random()*2.5; }
 
 function initGame() {
   bird   = {x:90, y:C.H/2, vy:0, angle:0, w:44, h:36, alive:true};
@@ -529,6 +597,12 @@ function initGame() {
   laserEffects=[]; particles=[];
   orbTimer=0; nextOrbDelay=getRandOrbDelay();
   deathChance09 = 0;
+
+  // Reset hell state
+  misterFlashAlpha = 0;
+  misterFlashTimer = 0;
+  hellPulseTime    = 0;
+  hideMisterOverlay();
 
   currentSpeed = isMq() ? C.BASE_SPEED*20 : C.BASE_SPEED;
   updateScore(0); updateThemeLabel();
@@ -553,33 +627,43 @@ function spawnRandomOrb() {
   let orbX = C.W + 40;
   let orbY;
 
-  // Cố gắng tìm vị trí an toàn tối đa 10 lần để tránh lặp vô hạn
   while (!safe && attempts < 10) {
     orbY = minY + Math.random() * (maxY - minY);
     safe = true;
-    
     for (const p of pipes) {
       if (p.deleted) continue;
-      // Tránh spawn đè lên ống nước
       if (orbX + 25 > p.x && orbX - 25 < p.x + C.PIPE_W) {
         if (orbY - 25 < p.topH || orbY + 25 > p.topH + C.GAP) {
           safe = false;
-          break; // Đụng cột, tìm lại
+          break;
         }
       }
     }
-    // Nếu đụng, dời lùi lại để né ống
-    if (!safe) orbX += 60; 
+    if (!safe) orbX += 60;
     attempts++;
   }
   orbs.push({x: orbX, y: orbY, collected: false, wobble: Math.random()*Math.PI*2});
 }
 
 // ═══════════════════════════════════════════════════════════════
+//  MISTER FLASH HELPERS
+// ═══════════════════════════════════════════════════════════════
+// Canvas-based flash (main approach)
+function triggerMisterFlash() {
+  misterFlashAlpha = 1.0;
+  // Play SFX
+  misterSfx.currentTime = 0;
+  misterSfx.play().catch(()=>{});
+}
+function hideMisterOverlay() {
+  const ov = document.getElementById('misterOverlay');
+  if (ov) ov.style.opacity = '0';
+}
+
+// ═══════════════════════════════════════════════════════════════
 //  LASER EFFECT HELPERS
 // ═══════════════════════════════════════════════════════════════
 function fireLaser(pipe) {
-  // Main beam + pipe explosion
   laserEffects.push({
     bx: bird.x, by: bird.y,
     px: pipe.x + C.PIPE_W/2,
@@ -587,7 +671,6 @@ function fireLaser(pipe) {
     life: 0.7, maxLife: 0.7
   });
 
-  // Particles at pipe location
   const colors = ['#00ffff','#ffffff','#aaffff','#66ffff','#00ddff'];
   for (let i=0; i<18; i++) {
     const spd = 80 + Math.random()*280;
@@ -600,7 +683,6 @@ function fireLaser(pipe) {
       color: colors[Math.floor(Math.random()*colors.length)]
     });
   }
-  // Top pipe burst
   for (let i=0; i<8; i++) {
     const spd = 60+Math.random()*160;
     particles.push({
@@ -610,7 +692,6 @@ function fireLaser(pipe) {
       color: colors[Math.floor(Math.random()*colors.length)]
     });
   }
-  // Flash overlay
   const fl = document.getElementById('laserFlash');
   fl.style.opacity='1';
   setTimeout(()=>{ fl.style.transition='opacity .35s'; fl.style.opacity='0';
@@ -623,17 +704,36 @@ function fireLaser(pipe) {
 function update(dt) {
   if (state!=='playing') return;
 
+  hellPulseTime += dt;
+
+  // ── Cang Hoc: mister flash logic ────────────────────────────
+  if (isCangHoc()) {
+    // Roll every ~1 second for a 10% chance to flash
+    misterFlashTimer += dt;
+    if (misterFlashTimer >= 1.0) {
+      misterFlashTimer = 0;
+      if (Math.random() < 0.10) {
+        triggerMisterFlash();
+      }
+    }
+    // Fade flash out
+    if (misterFlashAlpha > 0) {
+      misterFlashAlpha -= dt * 2.5; // ~0.4s fade
+      if (misterFlashAlpha < 0) misterFlashAlpha = 0;
+    }
+  } else {
+    misterFlashAlpha = 0;
+  }
+
   // Bird physics
   bird.vy = Math.min(bird.vy + C.GRAVITY*dt, C.MAX_FALL);
   bird.y  += bird.vy*dt;
   const tA = bird.vy<0 ? C.ANGLE_UP : C.ANGLE_UP+(C.ANGLE_DOWN-C.ANGLE_UP)*(bird.vy/C.MAX_FALL);
   bird.angle += (tA-bird.angle)*Math.min(1,dt*8);
 
-  // Pipe spawn timer
   pipeTimer += isMq() ? dt*100 : dt;
   if (pipeTimer>=C.PIPE_INTERVAL) { pipeTimer=0; spawnPipe(); }
 
-  // Independent orb timer
   orbTimer += dt;
   if (orbTimer >= nextOrbDelay) {
     orbTimer=0; nextOrbDelay=getRandOrbDelay();
@@ -644,7 +744,6 @@ function update(dt) {
   for (const p of pipes) {
     p.x -= currentSpeed*dt;
 
-    // Trigger laser for deleted pipes before they reach the bird
     if (p.deleted && !p.laserFired && p.x - bird.x < 180 && p.x > bird.x - 80) {
       p.laserFired = true;
       fireLaser(p);
@@ -657,7 +756,8 @@ function update(dt) {
         if (newLevel>speedLevel) {
           speedLevel=newLevel;
           currentSpeed=C.BASE_SPEED+speedLevel*C.SPEED_STEP;
-          currentThemeIdx=speedLevel;
+          // Hell theme stays locked to HELL_THEME regardless of level
+          if (!isCangHoc()) currentThemeIdx=speedLevel;
           updateThemeLabel(); activateBadge(speedLevel);
         }
       }
@@ -674,13 +774,11 @@ function update(dt) {
       if (dx*dx+dy*dy < 32*32) {
         o.collected=true;
         score+=20; updateScore(score);
-        // Orb quest progress
         if (quests[2].type===2 && !quests[2].done) {
           quests[2].prog++;
           if (quests[2].prog>=quests[2].req) quests[2].done=true;
           saveQuests();
         }
-        // Tiny collect particles
         for (let i=0;i<8;i++) {
           const spd=60+Math.random()*100, ang=Math.random()*Math.PI*2;
           particles.push({x:o.x,y:o.y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,
@@ -691,11 +789,9 @@ function update(dt) {
   }
   orbs = orbs.filter(o=>o.x>-60);
 
-  // Laser effects fade
   for (const l of laserEffects) { l.life -= dt; }
   laserEffects = laserEffects.filter(l=>l.life>0);
 
-  // Particles
   for (const p of particles) {
     p.x+=p.vx*dt; p.y+=p.vy*dt;
     p.vx*=0.92; p.vy*=0.92;
@@ -718,7 +814,10 @@ function update(dt) {
   }
 }
 
-function updateThemeLabel() { const el=document.getElementById('themeLabel'); if(el) el.textContent=getTheme().name; }
+function updateThemeLabel() {
+  const el=document.getElementById('themeLabel');
+  if(el) el.textContent=getTheme().name;
+}
 function activateBadge(level) {
   const T=getTheme(), badge=document.getElementById('speedBadge');
   badge.textContent=`${T.name}  ×${level+1} ⚡`;
@@ -732,9 +831,32 @@ function updateScore(s) { document.getElementById('scoreDisplay').textContent=s;
 // ═══════════════════════════════════════════════════════════════
 function draw() {
   const T=getTheme();
+
+  // ── Sky gradient ────────────────────────────────────────────
   const sg=ctx.createLinearGradient(0,0,0,C.H);
   sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
+
+  // ── Persistent red hell overlay (Cang Hoc only) ─────────────
+  if (isCangHoc()) {
+    // Subtle animated blood-red vignette
+    const pulse = 0.12 + Math.sin(hellPulseTime * 1.2) * 0.04;
+    const hellGrad = ctx.createRadialGradient(C.W/2, C.H/2, 60, C.W/2, C.H/2, C.W*0.85);
+    hellGrad.addColorStop(0, `rgba(80,0,0,0)`);
+    hellGrad.addColorStop(0.6, `rgba(140,0,0,${pulse})`);
+    hellGrad.addColorStop(1, `rgba(200,0,0,${pulse * 2})`);
+    ctx.fillStyle = hellGrad;
+    ctx.fillRect(0,0,C.W,C.H);
+
+    // Scanline-like horizontal blood streaks (subtle)
+    ctx.save();
+    ctx.globalAlpha = 0.06 + Math.sin(hellPulseTime * 3) * 0.02;
+    ctx.fillStyle = '#ff0000';
+    for (let y = 0; y < C.H; y += 6) {
+      ctx.fillRect(0, y, C.W, 1);
+    }
+    ctx.restore();
+  }
 
   drawBg(T);
   drawPipes(T);
@@ -743,25 +865,51 @@ function draw() {
   drawGround(T);
   drawBirdSprite();
   drawParticles();
-  
-  // Vẽ màn đêm tắt điện nếu chọn chim Hỉ điếu
+
+  // ── Darkness overlay (Hi Dieu skin) ─────────────────────────
   drawDarkness(bird.x, bird.y);
+
+  // ── Mister flash overlay (Cang Hoc skin) ────────────────────
+  drawMisterFlash();
 }
 
-// Hàm hỗ trợ vẽ bóng tối cho skin Hỉ điếu
+// ── Cang Hoc: draw mister.jpg flash on canvas ──────────────────
+function drawMisterFlash() {
+  if (!isCangHoc() || misterFlashAlpha <= 0) return;
+
+  const a = Math.max(0, misterFlashAlpha);
+  ctx.save();
+
+  if (misterImgEl.complete && misterImgEl.naturalHeight !== 0) {
+    // Fade in/out with slight red tint
+    ctx.globalAlpha = a;
+    ctx.drawImage(misterImgEl, 0, 0, C.W, C.H);
+
+    // Red flash tint on top of image
+    ctx.globalAlpha = a * 0.35;
+    ctx.fillStyle = '#ff0000';
+    ctx.fillRect(0, 0, C.W, C.H);
+  } else {
+    // Fallback: red flash if image not loaded
+    ctx.globalAlpha = a * 0.7;
+    ctx.fillStyle = '#cc0000';
+    ctx.fillRect(0, 0, C.W, C.H);
+  }
+
+  ctx.restore();
+}
+
+// ── Hi Dieu: darkness overlay ──────────────────────────────────
 function drawDarkness(x, y) {
   if (!isHiDieu()) return;
-  const rad = 44; // Chiều rộng xấp xỉ của chim
-  
+  const rad = 44;
   ctx.save();
-  ctx.setTransform(1, 0, 0, 1, 0, 0); // Đảm bảo overlay bao phủ toàn bộ màn hình kể cả khi đang bị transform
-  
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   const grad = ctx.createRadialGradient(x, y, rad * 0.4, x, y, rad * 3.5);
-  grad.addColorStop(0, 'rgba(0,0,0,0)'); // Xuyên thấu tâm chim
-  grad.addColorStop(0.4, 'rgba(255, 255, 0, 0.15)'); // Viền vàng nhẹ
+  grad.addColorStop(0, 'rgba(0,0,0,0)');
+  grad.addColorStop(0.4, 'rgba(255, 255, 0, 0.15)');
   grad.addColorStop(0.8, 'rgba(0,0,0,0.98)');
-  grad.addColorStop(1, '#000000'); // Đen kịt phần còn lại
-  
+  grad.addColorStop(1, '#000000');
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, C.W, C.H);
   ctx.restore();
@@ -796,46 +944,60 @@ function drawPipes(T) {
     ctx.fillStyle=makeG(p.x); ctx.beginPath(); ctx.roundRect(p.x,gB+capH,pw,C.H-C.GROUND_H-gB-capH,[4,4,0,0]); ctx.fill();
     ctx.fillStyle=makeCapG(p.x); ctx.beginPath(); ctx.roundRect(p.x-7,gB,capW,capH,4); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(p.x+6,gB+capH,10,C.H-C.GROUND_H-gB-capH);
+
+    // ── Blood drip on hell pipes ─────────────────────────────
+    if (isCangHoc()) {
+      ctx.save();
+      ctx.fillStyle = '#8b0000';
+      ctx.shadowColor = '#ff0000';
+      ctx.shadowBlur = 6;
+      // Small drips from bottom of top pipe cap
+      const drips = [p.x+10, p.x+28, p.x+46];
+      drips.forEach((dx, di) => {
+        const dripLen = 8 + Math.sin(hellPulseTime*2 + di*1.3) * 4;
+        ctx.beginPath();
+        ctx.ellipse(dx, gT + dripLen/2, 3, dripLen/2, 0, 0, Math.PI*2);
+        ctx.fill();
+        // droplet
+        ctx.beginPath();
+        ctx.arc(dx, gT + dripLen + 3, 3.5, 0, Math.PI*2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
   }
 }
 
-// ── LASER DRAW ──────────────────────────────────────────────────
 function drawLasers() {
   for (const l of laserEffects) {
-    const t   = l.life/l.maxLife;   // 1 → 0
-    const a   = Math.pow(t, 0.5);   // fade curve
+    const t   = l.life/l.maxLife;
+    const a   = Math.pow(t, 0.5);
     const grd = C.H - C.GROUND_H;
 
     ctx.save();
     ctx.globalAlpha = a;
 
-    // Main horizontal beam: bird → pipe
     const beamY = l.by;
     ctx.shadowColor='#00ffff'; ctx.shadowBlur=30;
     ctx.strokeStyle='#00ffff'; ctx.lineWidth=5;
     ctx.beginPath(); ctx.moveTo(l.bx,beamY); ctx.lineTo(l.px,beamY); ctx.stroke();
-    // White core
     ctx.strokeStyle='#ffffff'; ctx.lineWidth=2; ctx.shadowBlur=0;
     ctx.beginPath(); ctx.moveTo(l.bx,beamY); ctx.lineTo(l.px,beamY); ctx.stroke();
 
-    // Impact ring at pipe
     const ringR = (1-t)*55 + 15;
     ctx.shadowColor='#00ffff'; ctx.shadowBlur=25;
     ctx.strokeStyle=`rgba(0,255,255,${a*0.7})`;
     ctx.lineWidth=4;
     ctx.beginPath(); ctx.arc(l.px, beamY, ringR,0,Math.PI*2); ctx.stroke();
 
-    // Vertical column-erase beams
     const cx = l.px;
     ctx.shadowBlur=20; ctx.lineWidth=6;
-    // Top pipe column
     const tG=ctx.createLinearGradient(0,0,0,l.topH);
     tG.addColorStop(0,'rgba(0,255,255,0)');
     tG.addColorStop(0.7,`rgba(0,255,255,${a})`);
     tG.addColorStop(1,`rgba(255,255,255,${a})`);
     ctx.strokeStyle=tG;
     ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,l.topH); ctx.stroke();
-    // Bottom pipe column
     const bG=ctx.createLinearGradient(0,l.topH+C.GAP,0,grd);
     bG.addColorStop(0,`rgba(255,255,255,${a})`);
     bG.addColorStop(0.3,`rgba(0,255,255,${a})`);
@@ -843,7 +1005,6 @@ function drawLasers() {
     ctx.strokeStyle=bG;
     ctx.beginPath(); ctx.moveTo(cx,l.topH+C.GAP); ctx.lineTo(cx,grd); ctx.stroke();
 
-    // Shockwave cross
     if (t > 0.4) {
       const crossA = (t-0.4)/0.6;
       ctx.globalAlpha=a*crossA*0.5;
@@ -857,12 +1018,11 @@ function drawLasers() {
   }
 }
 
-// ── ORBS DRAW ───────────────────────────────────────────────────
 function drawOrbs() {
   const now = performance.now()/1000;
   for (const o of orbs) {
     if (o.collected) continue;
-    const wobY = Math.sin((o.wobble||0) + now*2)*5; // gentle float
+    const wobY = Math.sin((o.wobble||0) + now*2)*5;
     ctx.save();
     ctx.shadowColor='#ff00ff'; ctx.shadowBlur=16;
     if (orbImg.complete && orbImg.naturalHeight!==0) {
@@ -877,7 +1037,6 @@ function drawOrbs() {
   }
 }
 
-// ── PARTICLES DRAW ──────────────────────────────────────────────
 function drawParticles() {
   for (const p of particles) {
     const a = p.life/p.maxLife;
@@ -941,17 +1100,14 @@ function loop(ts) {
 // ═══════════════════════════════════════════════════════════════
 //  ACTIONS
 // ═══════════════════════════════════════════════════════════════
-function flap() { 
+function flap() {
   if(state==='playing' && bird.alive) {
     if (is09()) {
-      deathChance09 += 0.0018; // Cộng dồn 0.0018%
-      if (Math.random() < deathChance09) {
-        die(); // Chết đột tử
-        return;
-      }
+      deathChance09 += 0.0018;
+      if (Math.random() < deathChance09) { die(); return; }
     }
-    bird.vy = C.JUMP_VY; 
-  } 
+    bird.vy = C.JUMP_VY;
+  }
 }
 
 function processQuestsOnDeath() {
@@ -976,6 +1132,8 @@ function die() {
     return;
   }
   processQuestsOnDeath();
+  // Reset any hell flash on death
+  misterFlashAlpha = 0;
   bird.alive=false; state='over'; bgMusic.pause(); cancelAnimationFrame(animId); draw();
   ctx.fillStyle='rgba(255,0,0,.18)'; ctx.fillRect(0,0,C.W,C.H);
   document.getElementById('finalScore').textContent=score;
@@ -1003,6 +1161,7 @@ function showMenu() {
   updateCoinUI();
   document.getElementById('hud').classList.add('hidden');
   document.getElementById('pauseHint').style.opacity='0';
+  applyHellModeWrapper();
   showScreen('menuScreen'); drawMenuBg();
 }
 
@@ -1012,8 +1171,9 @@ function startGame() {
   showScreen('');
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('pauseHint').style.opacity='1';
-  if (!bgMusic.getAttribute('src')) bgMusic.src=PLAYLIST[currentSongIndex];
+  setMusicForSkin();
   bgMusic.play().catch(()=>{});
+  applyHellModeWrapper();
   initGame(); state='playing'; cancelAnimationFrame(animId); lastTime=null; animId=requestAnimationFrame(loop);
 }
 
@@ -1034,19 +1194,31 @@ function drawMenuBg(ts) {
   menuBirdY+=menuBirdVY*dt;
   if(menuBirdY>C.H*.72){menuBirdY=C.H*.72;menuBirdVY=-200;}
   if(menuBirdY<C.H*.25){menuBirdY=C.H*.25;menuBirdVY=80;}
-  const T=THEMES[0];
+  const T=getTheme(); // use hell theme in menu too if equipped
   const sg=ctx.createLinearGradient(0,0,0,C.H); sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
+
+  // Hell vignette in menu
+  if (isCangHoc()) {
+    hellPulseTime += dt;
+    const pulse = 0.12 + Math.sin(hellPulseTime * 1.2) * 0.04;
+    const hellGrad = ctx.createRadialGradient(C.W/2, C.H/2, 60, C.W/2, C.H/2, C.W*0.85);
+    hellGrad.addColorStop(0, `rgba(80,0,0,0)`);
+    hellGrad.addColorStop(0.6, `rgba(140,0,0,${pulse})`);
+    hellGrad.addColorStop(1, `rgba(200,0,0,${pulse * 2})`);
+    ctx.fillStyle = hellGrad;
+    ctx.fillRect(0,0,C.W,C.H);
+  }
+
   scrollX=(scrollX+120*dt*.4)%(C.W*2);
   drawBg(T); drawGround(T);
   ctx.save(); ctx.translate(100,menuBirdY); ctx.rotate(Math.sin(menuBirdY*.02)*.15);
   const img=currentBirdImg();
   if(img) ctx.drawImage(img,-22,-18,44,36); else drawFallbackBird(ctx,0,0,0,1);
   ctx.restore();
-  
-  // Vẽ hiệu ứng tắt điện cả ngoài menu nếu đang trang bị skin
+
   drawDarkness(100, menuBirdY);
-  
+
   requestAnimationFrame(drawMenuBg);
 }
 
@@ -1079,6 +1251,7 @@ updateCoinUI(); scrollX=0;
 
 loadAllSkins(()=>{
   drawBirdPreview();
+  applyHellModeWrapper();
   requestAnimationFrame(drawMenuBg);
 });
 </script>
