@@ -187,13 +187,22 @@
   .hud-score { font-family:'Press Start 2P',monospace; font-size:28px; color:#fff; text-shadow:4px 4px 0 #000,0 0 15px #7ecfff; letter-spacing:2px; }
   #themeLabel { font-size:8px; color:rgba(255,255,255,.8); margin-top:8px; text-shadow:2px 2px 0 #000; letter-spacing:1px; background:rgba(0,0,0,.4); padding:4px 10px; border-radius:10px; }
 
+  /* MOAC death chance HUD */
+  #moacBar {
+    position:absolute; bottom:80px; left:10px; right:10px;
+    pointer-events:none; opacity:0; transition:opacity .3s;
+  }
+  #moacBar.show { opacity:1; }
+  #moacBarLabel { font-family:'Press Start 2P',monospace; font-size:7px; color:#ff4455; text-shadow:1px 1px 0 #000; margin-bottom:4px; text-align:center; }
+  #moacBarTrack { width:100%; height:10px; background:rgba(0,0,0,.6); border-radius:5px; border:1px solid rgba(255,68,85,.4); overflow:hidden; }
+  #moacBarFill  { height:100%; width:0%; background:linear-gradient(90deg,#ff4455,#ff0000); border-radius:5px; transition:width .3s ease; box-shadow: 0 0 8px rgba(255,0,0,.6); }
+
   #speedBadge { position:absolute; top:80px; left:50%; transform:translateX(-50%); font-family:'Press Start 2P',monospace; font-size:9px; color:#ff4455; background:rgba(0,0,0,.8); border:2px solid #ff4455; border-radius:8px; padding:6px 12px; pointer-events:none; opacity:0; transition:opacity .5s,transform .3s; white-space:nowrap; box-shadow:0 0 15px rgba(255,68,85,.5); }
   #speedBadge.show { opacity:1; transform:translateX(-50%) scale(1.1); }
   #pauseHint { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-family:'Press Start 2P',monospace; font-size:7px; color:rgba(255,255,255,.5); pointer-events:none; white-space:nowrap; background:rgba(0,0,0,.5); padding:6px 12px; border-radius:12px; }
 
   #laserFlash { position:absolute; inset:0; background:rgba(0,220,255,.18); pointer-events:none; opacity:0; border-radius:20px; }
 
-  /* Mister flash overlay – positioned above canvas, below UI screens */
   #misterOverlay {
     position:absolute; inset:0;
     pointer-events:none;
@@ -214,7 +223,6 @@
   @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)} }
   @keyframes pulse { 0%,100%{transform:translateY(-50%) scale(1)} 50%{transform:translateY(-50%) scale(1.08)} }
 
-  /* Blood drip animation for hell theme wrapper border */
   #wrapper.hell-mode {
     border-color: rgba(220,0,0,.6) !important;
     box-shadow: 0 0 40px rgba(220,0,0,.4), 0 0 80px rgba(180,0,0,.2), inset 0 0 20px rgba(255,0,0,.08) !important;
@@ -233,7 +241,12 @@
   <div id="pauseHint">ESC / P = PAUSE</div>
   <div id="laserFlash"></div>
 
-  <!-- Mister flash DOM overlay (used as fallback) -->
+  <!-- MOAC death-chance bar -->
+  <div id="moacBar">
+    <div id="moacBarLabel">☠ TỬ THẦN: <span id="moacPct">0</span>%</div>
+    <div id="moacBarTrack"><div id="moacBarFill"></div></div>
+  </div>
+
   <div id="misterOverlay"><img id="misterImg" src="mister.jpg" alt=""></div>
 
   <audio id="bgMusic" preload="auto"></audio>
@@ -276,6 +289,7 @@
       <li><b style="color:#ff66ff">hello.png</b>: +0.0018% đột tử mỗi lần nhảy 💀</li>
       <li><b style="color:#ff66ff">alr.png</b>: Tắt điện toàn map 🔦</li>
       <li><b style="color:#ff4444">didi.png</b>: REDROOM 🩸 map đỏ địa ngục</li>
+      <li><b style="color:#ffaa00">map.png (MOAC)</b>: To 12.5x, chỉ lăn 🫏<br>Mỗi cột phá = +5% tử thần 💥</li>
     </ul>
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
@@ -308,7 +322,6 @@ const PLAYLIST = ["maybe in another life.mp3","goodnight.mp3","dep.mp3"];
 let currentSongIndex = 0;
 bgMusic.addEventListener('ended',()=>{
   if (isCangHoc()) {
-    // Loop ligma.mp3
     bgMusic.src = 'ligma.mp3';
     bgMusic.play().catch(()=>{});
   } else {
@@ -412,6 +425,7 @@ const BIRD_SKINS = [
   { name:"CHO DAI\n(Nội tại sống chó)", src:"concu.png", price:30 },
   { name:"HD\n(Tắt điện)",       src:"alr.png",   price:40 },
   { name:"Cang Hoc\n(REDROOM)",  src:"didi.png",  price:40 },
+  { name:"MOAC\n(Lăn Ta Lăn Tăng)",  src:"map.png",   price: 60 },
 ];
 
 let unlockedSkins = JSON.parse(localStorage.getItem('flappy_unlocked')) || [0,1,2];
@@ -425,11 +439,9 @@ let skinImages = [];
 const orbImg = new Image();
 orbImg.src = "al.png";
 
-// Pre-load mister image into JS Image object for canvas drawing
 const misterImgEl = new Image();
 misterImgEl.src = "mister.jpg";
 
-// SFX for mister flash
 const misterSfx = new Audio('r.mp3');
 misterSfx.preload = 'auto';
 
@@ -440,6 +452,16 @@ function isMq()      { return BIRD_SKINS[selectedSkin].src==='mq.png';    }
 function is09()      { return BIRD_SKINS[selectedSkin].src==='hello.png'; }
 function isHiDieu()  { return BIRD_SKINS[selectedSkin].src==='alr.png';   }
 function isCangHoc() { return BIRD_SKINS[selectedSkin].src==='didi.png';  }
+// ─── MOAC helper ────────────────────────────────────────────────
+function isMoac()    { return BIRD_SKINS[selectedSkin].src==='map.png';   }
+
+// Normal bird base size
+const BASE_BIRD_W = 44;
+const BASE_BIRD_H = 36;
+// MOAC is 12.5× bigger
+const MOAC_SCALE  = 12.5;
+const MOAC_W = BASE_BIRD_W * MOAC_SCALE; // 550
+const MOAC_H = BASE_BIRD_H * MOAC_SCALE; // 450
 
 function loadAllSkins(cb) {
   skinImages = [];
@@ -510,9 +532,7 @@ function selectSkin(i) {
   localStorage.setItem('flappy_skin',i);
   buildSkinGrid();
   drawBirdPreview();
-  // Update wrapper border style for hell mode
   applyHellModeWrapper();
-  // Switch music immediately if already playing
   if (state === 'playing' || state === 'menu') {
     setMusicForSkin();
     if (!bgMusic.paused) bgMusic.play().catch(()=>{});
@@ -532,7 +552,6 @@ function buySkin(i) {
 
 function showSkins() { buildSkinGrid(); showScreen('skinScreen'); }
 
-// ─── Hell Mode wrapper border toggle ───────────────────────────
 function applyHellModeWrapper() {
   const w = document.getElementById('wrapper');
   if (isCangHoc()) w.classList.add('hell-mode');
@@ -550,7 +569,6 @@ const THEMES = [
   { name:"🌊 XANH DƯƠNG", sky:['#00101a','#001e36','#00101a'], pipe:['#0066bb','#00aaff'], cap:'#004488', ground:['#001830','#000e1a'], turf:'#003366', bump:'#0055aa' },
 ];
 
-// ─── HELL THEME for Cang Hoc skin ───────────────────────────────
 const HELL_THEME = {
   name:"🩸 REDROOM",
   sky:   ['#080000','#150000','#080000'],
@@ -580,9 +598,13 @@ let laserEffects=[], particles=[], orbTimer=0, nextOrbDelay=getRandOrbDelay();
 let deathChance09 = 0;
 
 // ─── Cang Hoc / REDROOM state ────────────────────────────────────
-let misterFlashAlpha  = 0;   // 0–1 canvas overlay alpha
-let misterFlashTimer  = 0;   // seconds since last roll
-let hellPulseTime     = 0;   // for animated red vignette pulse
+let misterFlashAlpha  = 0;
+let misterFlashTimer  = 0;
+let hellPulseTime     = 0;
+
+// ─── MOAC state ─────────────────────────────────────────────────
+let moacDeathChance = 0;   // cumulative death chance (0–1)
+let moacRollAngle   = 0;   // rolling rotation in radians
 
 function getTheme() {
   if (isCangHoc()) return HELL_THEME;
@@ -590,8 +612,27 @@ function getTheme() {
 }
 function getRandOrbDelay() { return 2.5 + Math.random()*2.5; }
 
+// ─── MOAC bar UI helper ─────────────────────────────────────────
+function updateMoacBar() {
+  const bar  = document.getElementById('moacBar');
+  const fill = document.getElementById('moacBarFill');
+  const pct  = document.getElementById('moacPct');
+  if (isMoac() && state === 'playing') {
+    bar.classList.add('show');
+    const p = Math.min(100, Math.round(moacDeathChance * 100));
+    fill.style.width = p + '%';
+    pct.textContent  = p;
+    // Turn orange → red as danger rises
+    if (p < 40) fill.style.background = 'linear-gradient(90deg,#ffaa00,#ff6600)';
+    else if (p < 70) fill.style.background = 'linear-gradient(90deg,#ff6600,#ff2200)';
+    else fill.style.background = 'linear-gradient(90deg,#ff2200,#ff0000)';
+  } else {
+    bar.classList.remove('show');
+  }
+}
+
 function initGame() {
-  bird   = {x:90, y:C.H/2, vy:0, angle:0, w:44, h:36, alive:true};
+  bird   = {x:90, y:C.H/2, vy:0, angle:0, w:BASE_BIRD_W, h:BASE_BIRD_H, alive:true};
   pipes  = []; orbs = []; score=0; pipeTimer=0; scrollX=0;
   speedLevel=0; currentThemeIdx=0; revivedThisRun=false;
   laserEffects=[]; particles=[];
@@ -604,8 +645,20 @@ function initGame() {
   hellPulseTime    = 0;
   hideMisterOverlay();
 
+  // ─── MOAC init ─────────────────────────────────────────────
+  moacDeathChance = 0;
+  moacRollAngle   = 0;
+  if (isMoac()) {
+    bird.w = MOAC_W;
+    bird.h = MOAC_H;
+    // Park MOAC on the ground (bottom of bird touches ground surface)
+    bird.y = C.H - C.GROUND_H - bird.h / 2;
+    bird.vy = 0;
+  }
+
   currentSpeed = isMq() ? C.BASE_SPEED*20 : C.BASE_SPEED;
   updateScore(0); updateThemeLabel();
+  updateMoacBar();
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -646,12 +699,40 @@ function spawnRandomOrb() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+//  MOAC CRASH PARTICLES
+// ═══════════════════════════════════════════════════════════════
+function spawnMoacCrashParticles(p) {
+  const colors = ['#ff4400','#ff8800','#ffcc00','#ffffff','#ff2200'];
+  const cx = p.x + C.PIPE_W / 2;
+  // Spray from top and bottom pipe area near MOAC
+  for (let i = 0; i < 28; i++) {
+    const spd = 120 + Math.random() * 320;
+    const ang = Math.random() * Math.PI * 2;
+    const yOff = (Math.random() - 0.5) * C.H * 0.6;
+    particles.push({
+      x: cx, y: C.H / 2 + yOff,
+      vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+      life: 0.5 + Math.random() * 0.5, maxLife: 1.0,
+      r: 3 + Math.random() * 5,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+  // Screen shake via canvas offset (brief)
+  const fl = document.getElementById('laserFlash');
+  fl.style.background = 'rgba(255,100,0,.25)';
+  fl.style.opacity = '1';
+  setTimeout(()=>{
+    fl.style.transition = 'opacity .25s';
+    fl.style.opacity = '0';
+    setTimeout(()=>{ fl.style.transition=''; fl.style.background='rgba(0,220,255,.18)'; }, 280);
+  }, 40);
+}
+
+// ═══════════════════════════════════════════════════════════════
 //  MISTER FLASH HELPERS
 // ═══════════════════════════════════════════════════════════════
-// Canvas-based flash (main approach)
 function triggerMisterFlash() {
   misterFlashAlpha = 1.0;
-  // Play SFX
   misterSfx.currentTime = 0;
   misterSfx.play().catch(()=>{});
 }
@@ -706,30 +787,35 @@ function update(dt) {
 
   hellPulseTime += dt;
 
-  // ── Cang Hoc: mister flash logic ────────────────────────────
+  // ── Cang Hoc: mister flash logic ─────────────────────────────
   if (isCangHoc()) {
-    // Roll every ~1 second for a 10% chance to flash
     misterFlashTimer += dt;
     if (misterFlashTimer >= 1.0) {
       misterFlashTimer = 0;
-      if (Math.random() < 0.10) {
-        triggerMisterFlash();
-      }
+      if (Math.random() < 0.10) triggerMisterFlash();
     }
-    // Fade flash out
     if (misterFlashAlpha > 0) {
-      misterFlashAlpha -= dt * 2.5; // ~0.4s fade
+      misterFlashAlpha -= dt * 2.5;
       if (misterFlashAlpha < 0) misterFlashAlpha = 0;
     }
   } else {
     misterFlashAlpha = 0;
   }
 
-  // Bird physics
-  bird.vy = Math.min(bird.vy + C.GRAVITY*dt, C.MAX_FALL);
-  bird.y  += bird.vy*dt;
-  const tA = bird.vy<0 ? C.ANGLE_UP : C.ANGLE_UP+(C.ANGLE_DOWN-C.ANGLE_UP)*(bird.vy/C.MAX_FALL);
-  bird.angle += (tA-bird.angle)*Math.min(1,dt*8);
+  // ── Bird physics ─────────────────────────────────────────────
+  if (isMoac()) {
+    // MOAC stays glued to the ground — no gravity, no jumping
+    bird.y  = C.H - C.GROUND_H - bird.h / 2;
+    bird.vy = 0;
+    // Roll clockwise as it moves (radius ≈ half height)
+    moacRollAngle += (currentSpeed / (bird.h * 0.45)) * dt;
+    bird.angle = moacRollAngle;
+  } else {
+    bird.vy = Math.min(bird.vy + C.GRAVITY*dt, C.MAX_FALL);
+    bird.y  += bird.vy*dt;
+    const tA = bird.vy<0 ? C.ANGLE_UP : C.ANGLE_UP+(C.ANGLE_DOWN-C.ANGLE_UP)*(bird.vy/C.MAX_FALL);
+    bird.angle += (tA-bird.angle)*Math.min(1,dt*8);
+  }
 
   pipeTimer += isMq() ? dt*100 : dt;
   if (pipeTimer>=C.PIPE_INTERVAL) { pipeTimer=0; spawnPipe(); }
@@ -740,23 +826,24 @@ function update(dt) {
     spawnRandomOrb();
   }
 
-  // Pipes
+  // ── Pipes ────────────────────────────────────────────────────
   for (const p of pipes) {
     p.x -= currentSpeed*dt;
 
+    // Halo laser trigger
     if (p.deleted && !p.laserFired && p.x - bird.x < 180 && p.x > bird.x - 80) {
       p.laserFired = true;
       fireLaser(p);
     }
 
+    // Scoring
     if (!p.scored && p.x+C.PIPE_W < bird.x) {
       p.scored=true; score+=C.SCORE_PER_PIPE; updateScore(score);
-      if (!isMq()) {
+      if (!isMq() && !isMoac()) {
         const newLevel = Math.floor(score/C.SPEED_MILESTONE);
         if (newLevel>speedLevel) {
           speedLevel=newLevel;
           currentSpeed=C.BASE_SPEED+speedLevel*C.SPEED_STEP;
-          // Hell theme stays locked to HELL_THEME regardless of level
           if (!isCangHoc()) currentThemeIdx=speedLevel;
           updateThemeLabel(); activateBadge(speedLevel);
         }
@@ -765,13 +852,15 @@ function update(dt) {
   }
   pipes = pipes.filter(p=>p.x+C.PIPE_W>-120);
 
-  // Orbs
+  // ── Orbs ─────────────────────────────────────────────────────
   for (const o of orbs) {
     o.x -= currentSpeed*dt;
     if (o.wobble!==undefined) o.wobble += dt*3;
     if (!o.collected) {
       const dx=o.x-bird.x, dy=o.y-bird.y;
-      if (dx*dx+dy*dy < 32*32) {
+      // For MOAC use a much bigger collection radius (it's massive)
+      const collectR = isMoac() ? (bird.w * 0.45) : 32;
+      if (dx*dx+dy*dy < collectR*collectR) {
         o.collected=true;
         score+=20; updateScore(score);
         if (quests[2].type===2 && !quests[2].done) {
@@ -801,15 +890,35 @@ function update(dt) {
 
   scrollX=(scrollX+currentSpeed*dt*0.4)%(C.W*2);
 
-  // Collisions
-  if (bird.y+bird.h/2 > C.H-C.GROUND_H || bird.y-bird.h/2 < 0) { die(); return; }
-  for (const p of pipes) {
-    if (p.deleted) continue;
-    const gT=p.topH, gB=p.topH+C.GAP;
-    const bx1=bird.x-bird.w/2+6, bx2=bird.x+bird.w/2-6;
-    const by1=bird.y-bird.h/2+4, by2=bird.y+bird.h/2-4;
-    if (bx2>p.x && bx1<p.x+C.PIPE_W) {
-      if (by1<gT||by2>gB) { die(); return; }
+  // ── Collisions ───────────────────────────────────────────────
+  if (isMoac()) {
+    // MOAC cannot die from ground/ceiling — it lives on the ground
+    // MOAC destroys pipes on contact; each adds +5% death chance
+    for (const p of pipes) {
+      if (p.deleted) continue;
+      // Use a tighter horizontal box (don't use the full 550 width visually)
+      const bx1 = bird.x - bird.w * 0.42;
+      const bx2 = bird.x + bird.w * 0.42;
+      if (bx2 > p.x && bx1 < p.x + C.PIPE_W) {
+        // BOOM — pipe destroyed
+        p.deleted = true;
+        moacDeathChance = Math.min(1, moacDeathChance + 0.05);
+        spawnMoacCrashParticles(p);
+        updateMoacBar();
+        if (Math.random() < moacDeathChance) { die(); return; }
+      }
+    }
+  } else {
+    // Normal collision
+    if (bird.y+bird.h/2 > C.H-C.GROUND_H || bird.y-bird.h/2 < 0) { die(); return; }
+    for (const p of pipes) {
+      if (p.deleted) continue;
+      const gT=p.topH, gB=p.topH+C.GAP;
+      const bx1=bird.x-bird.w/2+6, bx2=bird.x+bird.w/2-6;
+      const by1=bird.y-bird.h/2+4, by2=bird.y+bird.h/2-4;
+      if (bx2>p.x && bx1<p.x+C.PIPE_W) {
+        if (by1<gT||by2>gB) { die(); return; }
+      }
     }
   }
 }
@@ -832,14 +941,11 @@ function updateScore(s) { document.getElementById('scoreDisplay').textContent=s;
 function draw() {
   const T=getTheme();
 
-  // ── Sky gradient ────────────────────────────────────────────
   const sg=ctx.createLinearGradient(0,0,0,C.H);
   sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
 
-  // ── Persistent red hell overlay (Cang Hoc only) ─────────────
   if (isCangHoc()) {
-    // Subtle animated blood-red vignette
     const pulse = 0.12 + Math.sin(hellPulseTime * 1.2) * 0.04;
     const hellGrad = ctx.createRadialGradient(C.W/2, C.H/2, 60, C.W/2, C.H/2, C.W*0.85);
     hellGrad.addColorStop(0, `rgba(80,0,0,0)`);
@@ -848,13 +954,10 @@ function draw() {
     ctx.fillStyle = hellGrad;
     ctx.fillRect(0,0,C.W,C.H);
 
-    // Scanline-like horizontal blood streaks (subtle)
     ctx.save();
     ctx.globalAlpha = 0.06 + Math.sin(hellPulseTime * 3) * 0.02;
     ctx.fillStyle = '#ff0000';
-    for (let y = 0; y < C.H; y += 6) {
-      ctx.fillRect(0, y, C.W, 1);
-    }
+    for (let y = 0; y < C.H; y += 6) { ctx.fillRect(0, y, C.W, 1); }
     ctx.restore();
   }
 
@@ -865,41 +968,56 @@ function draw() {
   drawGround(T);
   drawBirdSprite();
   drawParticles();
-
-  // ── Darkness overlay (Hi Dieu skin) ─────────────────────────
   drawDarkness(bird.x, bird.y);
-
-  // ── Mister flash overlay (Cang Hoc skin) ────────────────────
   drawMisterFlash();
+
+  // ── MOAC: draw destruction streak on ground ──────────────────
+  if (isMoac()) {
+    drawMoacGroundTrail();
+  }
 }
 
-// ── Cang Hoc: draw mister.jpg flash on canvas ──────────────────
+// ─── MOAC ground crack/trail effect ────────────────────────────
+function drawMoacGroundTrail() {
+  const gy = C.H - C.GROUND_H;
+  ctx.save();
+  ctx.globalAlpha = 0.45;
+  ctx.strokeStyle = '#ff4400';
+  ctx.lineWidth = 3;
+  ctx.shadowColor = '#ff6600';
+  ctx.shadowBlur = 6;
+  // Draw cracks behind MOAC (scroll with terrain)
+  const trailX = bird.x - bird.w * 0.4;
+  for (let i = 0; i < 6; i++) {
+    const cx = trailX - i * 45 - ((scrollX * 0.9) % 45);
+    ctx.beginPath();
+    ctx.moveTo(cx, gy + 2);
+    ctx.lineTo(cx - 10, gy + 14);
+    ctx.lineTo(cx - 5, gy + 8);
+    ctx.lineTo(cx - 18, gy + 20);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
 function drawMisterFlash() {
   if (!isCangHoc() || misterFlashAlpha <= 0) return;
-
   const a = Math.max(0, misterFlashAlpha);
   ctx.save();
-
   if (misterImgEl.complete && misterImgEl.naturalHeight !== 0) {
-    // Fade in/out with slight red tint
     ctx.globalAlpha = a;
     ctx.drawImage(misterImgEl, 0, 0, C.W, C.H);
-
-    // Red flash tint on top of image
     ctx.globalAlpha = a * 0.35;
     ctx.fillStyle = '#ff0000';
     ctx.fillRect(0, 0, C.W, C.H);
   } else {
-    // Fallback: red flash if image not loaded
     ctx.globalAlpha = a * 0.7;
     ctx.fillStyle = '#cc0000';
     ctx.fillRect(0, 0, C.W, C.H);
   }
-
   ctx.restore();
 }
 
-// ── Hi Dieu: darkness overlay ──────────────────────────────────
 function drawDarkness(x, y) {
   if (!isHiDieu()) return;
   const rad = 44;
@@ -945,23 +1063,15 @@ function drawPipes(T) {
     ctx.fillStyle=makeCapG(p.x); ctx.beginPath(); ctx.roundRect(p.x-7,gB,capW,capH,4); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(p.x+6,gB+capH,10,C.H-C.GROUND_H-gB-capH);
 
-    // ── Blood drip on hell pipes ─────────────────────────────
     if (isCangHoc()) {
       ctx.save();
       ctx.fillStyle = '#8b0000';
-      ctx.shadowColor = '#ff0000';
-      ctx.shadowBlur = 6;
-      // Small drips from bottom of top pipe cap
+      ctx.shadowColor = '#ff0000'; ctx.shadowBlur = 6;
       const drips = [p.x+10, p.x+28, p.x+46];
       drips.forEach((dx, di) => {
         const dripLen = 8 + Math.sin(hellPulseTime*2 + di*1.3) * 4;
-        ctx.beginPath();
-        ctx.ellipse(dx, gT + dripLen/2, 3, dripLen/2, 0, 0, Math.PI*2);
-        ctx.fill();
-        // droplet
-        ctx.beginPath();
-        ctx.arc(dx, gT + dripLen + 3, 3.5, 0, Math.PI*2);
-        ctx.fill();
+        ctx.beginPath(); ctx.ellipse(dx, gT + dripLen/2, 3, dripLen/2, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(dx, gT + dripLen + 3, 3.5, 0, Math.PI*2); ctx.fill();
       });
       ctx.restore();
     }
@@ -1062,10 +1172,15 @@ function drawGround(T) {
 }
 
 function drawBirdSprite() {
-  ctx.save(); ctx.translate(bird.x,bird.y); ctx.rotate(bird.angle);
-  const img=currentBirdImg();
-  if (img) ctx.drawImage(img,-bird.w/2,-bird.h/2,bird.w,bird.h);
-  else drawFallbackBird(ctx,0,0,0,1);
+  ctx.save();
+  ctx.translate(bird.x, bird.y);
+  ctx.rotate(bird.angle);
+  const img = currentBirdImg();
+  if (img) {
+    ctx.drawImage(img, -bird.w/2, -bird.h/2, bird.w, bird.h);
+  } else {
+    drawFallbackBird(ctx, 0, 0, 0, isMoac() ? MOAC_SCALE : 1);
+  }
   ctx.restore();
 }
 
@@ -1101,7 +1216,10 @@ function loop(ts) {
 //  ACTIONS
 // ═══════════════════════════════════════════════════════════════
 function flap() {
-  if(state==='playing' && bird.alive) {
+  if (state==='playing' && bird.alive) {
+    // ─── MOAC cannot jump ─────────────────────────────────────
+    if (isMoac()) return;
+
     if (is09()) {
       deathChance09 += 0.0018;
       if (Math.random() < deathChance09) { die(); return; }
@@ -1132,8 +1250,9 @@ function die() {
     return;
   }
   processQuestsOnDeath();
-  // Reset any hell flash on death
   misterFlashAlpha = 0;
+  moacDeathChance  = 0;
+  updateMoacBar();
   bird.alive=false; state='over'; bgMusic.pause(); cancelAnimationFrame(animId); draw();
   ctx.fillStyle='rgba(255,0,0,.18)'; ctx.fillRect(0,0,C.W,C.H);
   document.getElementById('finalScore').textContent=score;
@@ -1161,6 +1280,7 @@ function showMenu() {
   updateCoinUI();
   document.getElementById('hud').classList.add('hidden');
   document.getElementById('pauseHint').style.opacity='0';
+  document.getElementById('moacBar').classList.remove('show');
   applyHellModeWrapper();
   showScreen('menuScreen'); drawMenuBg();
 }
@@ -1190,15 +1310,22 @@ let menuLast=null, menuBirdY=320, menuBirdVY=-80;
 function drawMenuBg(ts) {
   if (state!=='menu') return;
   const dt=menuLast ? Math.min((ts-menuLast)/1000,.1) : .016; menuLast=ts;
-  menuBirdVY+=C.GRAVITY*dt; if(menuBirdVY>200) menuBirdVY=200;
-  menuBirdY+=menuBirdVY*dt;
-  if(menuBirdY>C.H*.72){menuBirdY=C.H*.72;menuBirdVY=-200;}
-  if(menuBirdY<C.H*.25){menuBirdY=C.H*.25;menuBirdVY=80;}
-  const T=getTheme(); // use hell theme in menu too if equipped
+
+  if (isMoac()) {
+    // MOAC just rolls across the menu screen on the ground
+    menuBirdY = C.H - C.GROUND_H - BASE_BIRD_H * MOAC_SCALE / 2;
+    moacRollAngle += dt * 0.9;
+  } else {
+    menuBirdVY+=C.GRAVITY*dt; if(menuBirdVY>200) menuBirdVY=200;
+    menuBirdY+=menuBirdVY*dt;
+    if(menuBirdY>C.H*.72){menuBirdY=C.H*.72;menuBirdVY=-200;}
+    if(menuBirdY<C.H*.25){menuBirdY=C.H*.25;menuBirdVY=80;}
+  }
+
+  const T=getTheme();
   const sg=ctx.createLinearGradient(0,0,0,C.H); sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
 
-  // Hell vignette in menu
   if (isCangHoc()) {
     hellPulseTime += dt;
     const pulse = 0.12 + Math.sin(hellPulseTime * 1.2) * 0.04;
@@ -1212,12 +1339,24 @@ function drawMenuBg(ts) {
 
   scrollX=(scrollX+120*dt*.4)%(C.W*2);
   drawBg(T); drawGround(T);
-  ctx.save(); ctx.translate(100,menuBirdY); ctx.rotate(Math.sin(menuBirdY*.02)*.15);
-  const img=currentBirdImg();
-  if(img) ctx.drawImage(img,-22,-18,44,36); else drawFallbackBird(ctx,0,0,0,1);
+
+  ctx.save();
+  ctx.translate(100, menuBirdY);
+  if (isMoac()) {
+    ctx.rotate(moacRollAngle);
+    const img = currentBirdImg();
+    const hw = BASE_BIRD_W * MOAC_SCALE / 2;
+    const hh = BASE_BIRD_H * MOAC_SCALE / 2;
+    if (img) ctx.drawImage(img, -hw, -hh, BASE_BIRD_W * MOAC_SCALE, BASE_BIRD_H * MOAC_SCALE);
+    else drawFallbackBird(ctx, 0, 0, 0, MOAC_SCALE);
+  } else {
+    ctx.rotate(Math.sin(menuBirdY*.02)*.15);
+    const img=currentBirdImg();
+    if(img) ctx.drawImage(img,-22,-18,44,36); else drawFallbackBird(ctx,0,0,0,1);
+  }
   ctx.restore();
 
-  drawDarkness(100, menuBirdY);
+  if (!isMoac()) drawDarkness(100, menuBirdY);
 
   requestAnimationFrame(drawMenuBg);
 }
@@ -1248,6 +1387,9 @@ scaleGame(); window.addEventListener('resize',scaleGame);
 // ── INIT ────────────────────────────────────────────────────────
 document.getElementById('menuHS').textContent=highScore;
 updateCoinUI(); scrollX=0;
+
+// Auto-unlock MOAC (free skin)
+if (!unlockedSkins.includes(8)) { unlockedSkins.push(8); saveUnlocked(); }
 
 loadAllSkins(()=>{
   drawBirdPreview();
