@@ -45,20 +45,17 @@
     font-family:Cambria,Cochin,Georgia,serif; font-style:italic;
     text-shadow:0 0 10px rgba(126,207,255,.5);
   }
-
   .coin-ui {
     font-size:14px; color:#ffd700; margin-bottom:20px;
     text-shadow:2px 2px 0 #b8860b;
     background:rgba(0,0,0,.5); padding:8px 16px; border-radius:12px;
     border:1px solid #ffd700;
   }
-
   .bird-preview {
     width:64px; height:64px; margin-bottom:15px;
     animation:float 1.5s ease-in-out infinite;
     filter:drop-shadow(0 10px 10px rgba(0,0,0,.5));
   }
-
   .btn {
     background:linear-gradient(135deg,#ffe066,#ff9900);
     color:#1a0a00; border:2px solid rgba(255,255,255,.2);
@@ -72,35 +69,30 @@
   }
   .btn:hover  { transform:translateY(-2px); box-shadow:0 8px 0 #b05500,0 15px 25px rgba(255,153,0,.4),inset 0 2px 5px rgba(255,255,255,.5); filter:brightness(1.1); }
   .btn:active { transform:translateY(4px);  box-shadow:0 2px 0 #b05500,0 2px 5px rgba(0,0,0,.4); }
-
   .btn.secondary {
     background:linear-gradient(135deg,#2244aa,#4477ff);
     box-shadow:0 6px 0 #112266,0 10px 20px rgba(0,0,0,.4),inset 0 2px 5px rgba(255,255,255,.3); color:#eef4ff;
   }
   .btn.secondary:hover  { box-shadow:0 8px 0 #112266,0 15px 25px rgba(68,119,255,.4); }
   .btn.secondary:active { box-shadow:0 2px 0 #112266; }
-
   .btn.skin-btn {
     background:linear-gradient(135deg,#aa44cc,#ff66ff);
     box-shadow:0 6px 0 #661188,0 10px 20px rgba(0,0,0,.4),inset 0 2px 5px rgba(255,255,255,.3); color:#fff0ff;
   }
   .btn.skin-btn:hover  { box-shadow:0 8px 0 #661188,0 15px 25px rgba(255,102,255,.4); }
   .btn.skin-btn:active { box-shadow:0 2px 0 #661188; }
-
   .btn.quest-btn {
     background:linear-gradient(135deg,#2ecc71,#27ae60);
     box-shadow:0 6px 0 #1e8449,0 10px 20px rgba(0,0,0,.4),inset 0 2px 5px rgba(255,255,255,.3); color:#fff;
   }
   .btn.quest-btn:hover  { box-shadow:0 8px 0 #1e8449,0 15px 25px rgba(46,204,113,.4); }
   .btn.quest-btn:active { box-shadow:0 2px 0 #1e8449; }
-
   .highscore-disp {
     font-size:10px; color:#ccc; margin-top:15px;
     background:rgba(0,0,0,.4); padding:8px 16px; border-radius:20px;
     border:1px solid rgba(255,255,255,.1);
   }
   .highscore-disp span { color:#ffe066; text-shadow:0 0 5px #ffe066; }
-
   #gameoverScreen .go-title {
     font-size:28px; color:#ff4455;
     text-shadow:4px 4px 0 #880022,0 0 25px rgba(255,68,85,.8);
@@ -114,37 +106,29 @@
   .score-box .label { font-size:9px; color:#7ecfff; margin-bottom:10px; letter-spacing:1px; }
   .score-box .val   { font-size:32px; color:#fff; text-shadow:2px 2px 0 #000; }
   .score-box .best  { font-size:9px; color:#ffe066; margin-top:12px; background:rgba(255,224,102,.15); padding:4px 8px; border-radius:6px; }
-
   #questScreen .q-screen-title { font-size:18px; color:#2ecc71; text-shadow:3px 3px 0 #1e8449; margin-bottom:20px; }
   .quest-list { width:90%; max-height:410px; overflow-y:auto; }
   .quest-card {
     background:rgba(0,0,0,.6); border:2px solid #2ecc71; border-radius:12px;
-    padding:14px; margin-bottom:14px;
-    text-align:left; position:relative;
+    padding:14px; margin-bottom:14px; text-align:left; position:relative;
   }
   .quest-card .q-title { font-size:8px; color:#fff; margin-bottom:7px; line-height:1.5; padding-right:70px; }
   .quest-card .q-prog-text { font-size:7px; color:#aaa; margin-bottom:6px; }
-
   .q-bar-wrap { width:100%; height:8px; background:rgba(255,255,255,.1); border-radius:4px; margin-bottom:8px; overflow:hidden; }
   .q-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#2ecc71,#00ff99); transition:width .4s ease; }
   .q-bar-fill.done { background:linear-gradient(90deg,#ffe066,#ffaa00); }
-
   .quest-card .q-reward { font-size:7px; color:#ffd700; }
   .quest-card .q-claim-btn {
     position:absolute; right:10px; top:50%; transform:translateY(-50%);
     background:#555; color:#888; border:none; padding:8px 10px;
-    font-family:'Press Start 2P',monospace; font-size:7px; border-radius:6px; cursor:not-allowed;
-    white-space:nowrap;
+    font-family:'Press Start 2P',monospace; font-size:7px; border-radius:6px; cursor:not-allowed; white-space:nowrap;
   }
   .quest-card .q-claim-btn.claimable {
     background:linear-gradient(135deg,#2ecc71,#00ff99); color:#003a1f;
     cursor:pointer; animation:pulse 1s infinite; box-shadow:0 0 10px rgba(46,204,113,.5);
   }
-  .quest-card .q-claim-btn.claimable:hover { filter:brightness(1.15); }
-
   #skinScreen .skin-title { font-size:18px; color:#ff88ff; text-shadow:3px 3px 0 #660088; margin-bottom:6px; }
   #skinScreen .skin-sub   { font-size:7px; color:#cc88ff; margin-bottom:20px; background:rgba(0,0,0,.3); padding:6px 12px; border-radius:8px; }
-
   .skin-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; max-height:370px; overflow-y:auto; padding:10px; width:92%; }
   .skin-card {
     display:flex; flex-direction:column; align-items:center;
@@ -158,74 +142,222 @@
   .skin-card .skin-name  { font-size:6px; color:#eee; margin-top:8px; text-align:center; line-height:1.6; }
   .skin-card.active .skin-name { color:#ffe066; }
   .skin-card.locked  .skin-name { color:#aaa; }
-
   .skin-price-tag { font-size:7px; color:#ffd700; margin-top:4px; text-align:center; }
-  .skin-price-tag.free { color:#2ecc71; }
+  .skin-price-tag.free  { color:#2ecc71; }
   .skin-price-tag.owned { color:#2ecc71; }
   .skin-price-tag.locked-price { color:#ff9900; }
-
   .skin-buy-btn {
     margin-top:7px; padding:5px 8px; font-size:7px;
     background:linear-gradient(135deg,#ffd700,#ff9900);
     color:#000; border:none; border-radius:6px;
     cursor:pointer; font-family:'Press Start 2P',monospace;
-    box-shadow:0 3px 0 #b05500;
-    transition:all .1s;
+    box-shadow:0 3px 0 #b05500; transition:all .1s;
   }
   .skin-buy-btn:hover  { filter:brightness(1.15); transform:translateY(-1px); }
   .skin-buy-btn:active { transform:translateY(2px); box-shadow:0 1px 0 #b05500; }
   .skin-buy-btn:disabled { background:rgba(255,255,255,.1); color:#555; cursor:not-allowed; box-shadow:none; }
-
   #howScreen .how-title { font-size:18px; color:#ffe066; text-shadow:3px 3px 0 #b8860b; margin-bottom:25px; }
   .how-list { list-style:none; text-align:left; margin-bottom:30px; background:rgba(0,0,0,.4); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,.1); }
   .how-list li { font-size:8px; color:#e0e0ff; margin-bottom:14px; padding-left:20px; position:relative; line-height:1.8; }
   .how-list li:last-child { margin-bottom:0; }
   .how-list li::before { content:"▶"; position:absolute; left:0; color:#ffe066; }
-
   #hud { position:absolute; top:20px; left:0; right:0; display:flex; flex-direction:column; align-items:center; pointer-events:none; transition:opacity .3s; }
   #hud.hidden { opacity:0; }
   .hud-score { font-family:'Press Start 2P',monospace; font-size:28px; color:#fff; text-shadow:4px 4px 0 #000,0 0 15px #7ecfff; letter-spacing:2px; }
   #themeLabel { font-size:8px; color:rgba(255,255,255,.8); margin-top:8px; text-shadow:2px 2px 0 #000; letter-spacing:1px; background:rgba(0,0,0,.4); padding:4px 10px; border-radius:10px; }
-
-  /* MOAC death chance HUD */
-  #moacBar {
-    position:absolute; bottom:80px; left:10px; right:10px;
-    pointer-events:none; opacity:0; transition:opacity .3s;
-  }
+  #moacBar { position:absolute; bottom:80px; left:10px; right:10px; pointer-events:none; opacity:0; transition:opacity .3s; }
   #moacBar.show { opacity:1; }
   #moacBarLabel { font-family:'Press Start 2P',monospace; font-size:7px; color:#ff4455; text-shadow:1px 1px 0 #000; margin-bottom:4px; text-align:center; }
   #moacBarTrack { width:100%; height:10px; background:rgba(0,0,0,.6); border-radius:5px; border:1px solid rgba(255,68,85,.4); overflow:hidden; }
-  #moacBarFill  { height:100%; width:0%; background:linear-gradient(90deg,#ff4455,#ff0000); border-radius:5px; transition:width .3s ease; box-shadow: 0 0 8px rgba(255,0,0,.6); }
-
+  #moacBarFill  { height:100%; width:0%; background:linear-gradient(90deg,#ff4455,#ff0000); border-radius:5px; transition:width .3s ease; box-shadow:0 0 8px rgba(255,0,0,.6); }
   #speedBadge { position:absolute; top:80px; left:50%; transform:translateX(-50%); font-family:'Press Start 2P',monospace; font-size:9px; color:#ff4455; background:rgba(0,0,0,.8); border:2px solid #ff4455; border-radius:8px; padding:6px 12px; pointer-events:none; opacity:0; transition:opacity .5s,transform .3s; white-space:nowrap; box-shadow:0 0 15px rgba(255,68,85,.5); }
   #speedBadge.show { opacity:1; transform:translateX(-50%) scale(1.1); }
   #pauseHint { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-family:'Press Start 2P',monospace; font-size:7px; color:rgba(255,255,255,.5); pointer-events:none; white-space:nowrap; background:rgba(0,0,0,.5); padding:6px 12px; border-radius:12px; }
-
   #laserFlash { position:absolute; inset:0; background:rgba(0,220,255,.18); pointer-events:none; opacity:0; border-radius:20px; }
+  #misterOverlay { position:absolute; inset:0; pointer-events:none; opacity:0; border-radius:20px; background:#000; z-index:5; transition:none; }
+  #misterOverlay img { width:100%; height:100%; object-fit:cover; display:block; border-radius:20px; }
 
-  #misterOverlay {
+  /* ═══════════════════════════ QUIZ OVERLAY ═══════════════════════════ */
+  #quizOverlay {
     position:absolute; inset:0;
-    pointer-events:none;
-    opacity:0;
-    border-radius:20px;
-    background:#000;
-    z-index:5;
-    transition: none;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
+    z-index:30;
+    animation:quizBounceIn .35s cubic-bezier(.34,1.56,.64,1);
   }
-  #misterOverlay img {
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-    border-radius:20px;
+  #quizOverlay.hidden { display:none; }
+
+  @keyframes quizBounceIn { from{opacity:0;transform:scale(.75) rotate(-3deg)} to{opacity:1;transform:scale(1) rotate(0)} }
+  @keyframes quizShake    { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+  @keyframes correctPop   { 0%{transform:scale(1)} 40%{transform:scale(1.06)} 100%{transform:scale(1)} }
+  @keyframes timerUrgent  { 0%,100%{box-shadow:0 0 8px #f00} 50%{box-shadow:0 0 20px #f00,0 0 40px #f40} }
+  @keyframes scribbleIn   { from{opacity:0} to{opacity:1} }
+
+  .quiz-board {
+    background:#1b4d1b;
+    border:10px solid #6b3a12;
+    border-radius:6px;
+    padding:12px 14px 14px;
+    width:92%;
+    max-height:94vh;
+    overflow-y:auto;
+    box-shadow:inset 0 0 50px rgba(0,0,0,.55),0 0 0 4px #3a1e08,0 12px 50px rgba(0,0,0,.95);
+    position:relative;
+    background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 22px,rgba(255,255,255,.025) 22px,rgba(255,255,255,.025) 23px);
+  }
+  .quiz-board::before {
+    content:''; position:absolute; inset:-10px; border-radius:6px;
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.12),inset 0 -2px 0 rgba(0,0,0,.4);
+    pointer-events:none;
   }
 
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-  @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)} }
+  /* Baldi scribble overlay */
+  #baldiScribbleCanvas {
+    position:absolute; inset:0; width:100%; height:100%;
+    pointer-events:none; border-radius:6px; z-index:20;
+    opacity:0; transition:opacity .3s;
+  }
+  #baldiScribbleCanvas.show { opacity:1; animation:scribbleIn .2s ease; }
+
+  /* Timer */
+  .quiz-timer-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .quiz-timer-bar-wrap { flex:1; height:12px; background:rgba(0,0,0,.5); border-radius:6px; border:1px solid rgba(255,255,255,.2); overflow:hidden; }
+  .quiz-timer-bar { height:100%; width:100%; background:linear-gradient(90deg,#00ff80,#80ff00); border-radius:6px; transition:width .1s linear; }
+  .quiz-timer-bar.urgent { background:linear-gradient(90deg,#ff4400,#f00) !important; animation:timerUrgent .4s infinite; }
+  .quiz-timer-num { font-size:14px; color:#fff; text-shadow:2px 2px 0 #000; min-width:24px; text-align:right; }
+  .quiz-timer-num.urgent { color:#f44; animation:timerUrgent .4s infinite; }
+
+  .quiz-level-badge {
+    position:absolute; top:-14px; right:8px;
+    background:linear-gradient(135deg,#b8860b,#ffe066);
+    color:#2a1000; font-size:7px; padding:4px 10px;
+    border-radius:4px; border:2px solid #6b3a12;
+    box-shadow:0 2px 6px rgba(0,0,0,.6); white-space:nowrap;
+  }
+  .quiz-type-badge {
+    text-align:center; font-size:7px; padding:3px 10px;
+    border-radius:4px; margin-bottom:6px;
+    font-family:'Press Start 2P',monospace;
+  }
+  .quiz-type-badge.math  { background:rgba(0,100,255,.3); color:#88aaff; border:1px solid #4477ff; }
+  .quiz-type-badge.short { background:rgba(255,140,0,.3); color:#ffcc66; border:1px solid #f90; }
+
+  .quiz-teacher-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px; }
+  .quiz-teacher-emoji { font-size:26px; filter:drop-shadow(0 3px 6px rgba(0,0,0,.6)); animation:float 2s ease-in-out infinite; }
+  .quiz-teacher-text { font-size:7px; color:#ffff99; line-height:1.8; text-shadow:1px 1px 0 rgba(0,0,0,.9),0 0 8px rgba(255,255,150,.4); }
+
+  .quiz-problem {
+    font-size:18px; color:#fff; text-align:center;
+    margin:6px 0 10px; letter-spacing:3px; line-height:1.5;
+    padding:10px 8px; background:rgba(0,0,0,.25);
+    border-radius:4px; border:1px solid rgba(255,255,255,.12);
+    text-shadow:2px 2px 0 rgba(0,0,0,.6),0 0 18px rgba(255,255,255,.3);
+    white-space:pre-line;
+  }
+
+  /* MCQ */
+  .quiz-choices { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
+  .quiz-choice-btn {
+    background:rgba(255,255,255,.07); border:2px solid rgba(255,255,255,.22);
+    border-radius:6px; padding:10px 6px 8px; color:#e8ffe8;
+    font-family:'Press Start 2P',monospace; font-size:8px;
+    cursor:pointer; transition:background .1s,border-color .1s,transform .1s;
+    text-align:center; line-height:1.9;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 3px 8px rgba(0,0,0,.4);
+    -webkit-tap-highlight-color:transparent; user-select:none;
+  }
+  .quiz-choice-btn:hover { background:rgba(255,255,200,.18); border-color:rgba(255,255,120,.7); color:#fff; transform:translateY(-3px) scale(1.04); }
+  .quiz-choice-btn:active { transform:translateY(1px) scale(.97); }
+  .quiz-choice-btn.correct-flash { background:rgba(0,255,80,.3) !important; border-color:#0f5 !important; animation:correctPop .25s ease; }
+  .quiz-choice-btn.wrong-flash   { background:rgba(255,30,30,.35) !important; border-color:#f33 !important; animation:quizShake .35s ease; }
+  .choice-label { display:block; font-size:11px; color:#ff4; text-shadow:0 0 8px rgba(255,255,68,.6); margin-bottom:4px; }
+
+  /* ── SHORT ANSWER (native input) ── */
+  #shortAnswerSection { display:none; }
+  #shortAnswerSection.active { display:block; }
+
+  .quiz-pdf-link-wrap { text-align:center; margin-bottom:10px; }
+  .quiz-pdf-link {
+    display:inline-block;
+    background:linear-gradient(135deg,#f60,#f90);
+    color:#fff; font-family:'Press Start 2P',monospace;
+    font-size:8px; padding:9px 16px; border-radius:8px;
+    text-decoration:none; border:2px solid #fc0;
+    box-shadow:0 4px 0 #b05500,0 6px 15px rgba(255,100,0,.4);
+    transition:all .1s; cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .quiz-pdf-link:hover  { filter:brightness(1.15); transform:translateY(-2px); }
+  .quiz-pdf-link:active { transform:translateY(2px); box-shadow:0 1px 0 #b05500; }
+
+  /* Native input field */
+  #shortAnswerNativeInput {
+    display:block;
+    width:100%;
+    background:rgba(0,0,0,.55);
+    border:2.5px solid #ffcc00;
+    border-radius:10px;
+    padding:13px 14px;
+    text-align:center;
+    font-family:'Press Start 2P',monospace;
+    font-size:15px;
+    color:#ffff99;
+    letter-spacing:3px;
+    text-shadow:0 0 10px rgba(255,255,100,.4);
+    outline:none;
+    margin-bottom:10px;
+    box-sizing:border-box;
+    caret-color:#ffff00;
+    transition:border-color .2s, box-shadow .2s;
+    /* prevent zoom on iOS */
+    font-size: max(15px, 16px);
+  }
+  #shortAnswerNativeInput:focus {
+    border-color:#ffff00;
+    box-shadow:0 0 16px rgba(255,255,0,.45), inset 0 0 8px rgba(255,255,0,.1);
+  }
+  #shortAnswerNativeInput.wrong-anim {
+    border-color:#f33 !important;
+    animation:quizShake .35s ease;
+  }
+  #shortAnswerNativeInput.correct-anim {
+    border-color:#0f5 !important;
+    background:rgba(0,255,80,.15) !important;
+  }
+
+  .short-tap-hint {
+    font-size:7px; color:rgba(255,255,200,.55);
+    text-align:center; margin-bottom:6px;
+    letter-spacing:.5px;
+  }
+
+  .submit-answer-btn {
+    display:block; width:100%;
+    background:linear-gradient(135deg,#2ecc71,#00ff80);
+    color:#002a10; font-family:'Press Start 2P',monospace;
+    font-size:9px; padding:11px 0; border:none;
+    border-radius:8px; cursor:pointer;
+    box-shadow:0 4px 0 #1a7a45,0 6px 15px rgba(0,255,100,.3);
+    transition:all .1s;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
+  }
+  .submit-answer-btn:hover  { filter:brightness(1.1); transform:translateY(-2px); }
+  .submit-answer-btn:active { transform:translateY(3px); box-shadow:0 1px 0 #1a7a45; }
+  .submit-answer-btn:disabled { background:rgba(255,255,255,.15); color:#555; cursor:not-allowed; box-shadow:none; transform:none; }
+
+  .quiz-hint     { font-size:7px; color:#f99; text-align:center; text-shadow:1px 1px 0 rgba(0,0,0,.9); letter-spacing:.5px; line-height:1.8; margin-top:4px; }
+  .quiz-kbd-hint { font-size:6px; color:rgba(255,255,255,.3); text-align:center; margin-top:5px; letter-spacing:.5px; }
+
+  /* ═══════════════════════════════════════════════════════════ */
+  @keyframes float { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-12px)} }
+  @keyframes shake { 0%,100%{transform:translateX(0)}  20%,60%{transform:translateX(-10px)} 40%,80%{transform:translateX(10px)} }
   @keyframes pulse { 0%,100%{transform:translateY(-50%) scale(1)} 50%{transform:translateY(-50%) scale(1.08)} }
 
   #wrapper.hell-mode {
-    border-color: rgba(220,0,0,.6) !important;
-    box-shadow: 0 0 40px rgba(220,0,0,.4), 0 0 80px rgba(180,0,0,.2), inset 0 0 20px rgba(255,0,0,.08) !important;
+    border-color:rgba(220,0,0,.6) !important;
+    box-shadow:0 0 40px rgba(220,0,0,.4),0 0 80px rgba(180,0,0,.2),inset 0 0 20px rgba(255,0,0,.08) !important;
   }
 </style>
 </head>
@@ -241,13 +373,71 @@
   <div id="pauseHint">ESC / P = PAUSE</div>
   <div id="laserFlash"></div>
 
-  <!-- MOAC death-chance bar -->
   <div id="moacBar">
     <div id="moacBarLabel">☠ TỬ THẦN: <span id="moacPct">0</span>%</div>
     <div id="moacBarTrack"><div id="moacBarFill"></div></div>
   </div>
 
   <div id="misterOverlay"><img id="misterImg" src="mister.jpg" alt=""></div>
+
+  <!-- ══════ BALDI QUIZ OVERLAY ══════ -->
+  <div id="quizOverlay" class="hidden">
+    <div class="quiz-board" id="quizBoard">
+      <canvas id="baldiScribbleCanvas"></canvas>
+
+      <div class="quiz-level-badge" id="quizLevelBadge">LV 1</div>
+
+      <!-- Timer -->
+      <div class="quiz-timer-row">
+        <div class="quiz-timer-bar-wrap">
+          <div class="quiz-timer-bar" id="quizTimerBar"></div>
+        </div>
+        <div class="quiz-timer-num" id="quizTimerNum">10</div>
+      </div>
+
+      <div class="quiz-type-badge math" id="quizTypeBadge">📐 TOÁN HỌC</div>
+
+      <div class="quiz-teacher-row">
+        <span class="quiz-teacher-emoji" id="quizTeacherEmoji">👨‍🏫</span>
+        <div class="quiz-teacher-text" id="quizTeacherText">
+          Giải được thì chơi tiếp!<br>
+          <span style="color:#ff8888;">Sai/Hết giờ = CHẾT! 💀</span>
+        </div>
+      </div>
+
+      <div class="quiz-problem" id="quizProblem">1 + 1 = ?</div>
+
+      <!-- MCQ -->
+      <div class="quiz-choices" id="quizChoices"></div>
+
+      <!-- Short answer — native input -->
+      <div id="shortAnswerSection">
+        <div class="quiz-pdf-link-wrap">
+          <a id="quizPdfLink" class="quiz-pdf-link" href="#" target="_blank" rel="noopener noreferrer">
+            📄 XEM TÀI LIỆU
+          </a>
+        </div>
+        <div class="short-tap-hint">📱 Nhấn vào ô bên dưới để nhập</div>
+        <input
+          type="text"
+          id="shortAnswerNativeInput"
+          placeholder="Nhập đáp án tại đây..."
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          inputmode="text"
+        />
+        <button class="submit-answer-btn" id="submitAnswerBtn" onclick="submitShortAnswer()">
+          ✓ NỘP ĐÁP ÁN
+        </button>
+      </div>
+
+      <div class="quiz-hint"     id="quizHint">⌨️ Nhấn A / B / C / D</div>
+      <div class="quiz-kbd-hint" id="quizKbdHint"></div>
+    </div>
+  </div>
+  <!-- ═══════════════════════════════ -->
 
   <audio id="bgMusic" preload="auto"></audio>
 
@@ -256,9 +446,9 @@
     <div class="sub">— Tuất tày tuất lộc —</div>
     <div class="coin-ui">💰 <span id="coinDisplay">0</span> xu</div>
     <canvas class="bird-preview" id="birdPreview" width="64" height="64"></canvas>
-    <button class="btn" onclick="startGame()">▶  CHƠI NGAY</button>
+    <button class="btn"           onclick="startGame()">▶  CHƠI NGAY</button>
     <button class="btn quest-btn" onclick="showQuests()">📋 NHIỆM VỤ</button>
-    <button class="btn skin-btn" onclick="showSkins()">🎨 CHỌN SKIN</button>
+    <button class="btn skin-btn"  onclick="showSkins()">🎨 CHỌN SKIN</button>
     <button class="btn secondary" onclick="showHow()">?  HƯỚNG DẪN</button>
     <div class="highscore-disp">KỶ LỤC: <span id="menuHS">0</span></div>
   </div>
@@ -285,11 +475,15 @@
       <li>Ăn Ngọc (Orb) = +20 điểm</li>
       <li><b style="color:#ff66ff">halo.png</b>: 13% xóa cột + bắn LASER 🔵</li>
       <li><b style="color:#ff66ff">concu.png</b>: Hồi sinh 1 lần/mạng</li>
-      <li><b style="color:#ff66ff">mq.png</b>: Thử đi r biết 😱</li>
+      <li><b style="color:#ff66ff">mq.png</b>: Thử đi r biết</li>
       <li><b style="color:#ff66ff">hello.png</b>: +0.0018% đột tử mỗi lần nhảy 💀</li>
       <li><b style="color:#ff66ff">alr.png</b>: Tắt điện toàn map 🔦</li>
       <li><b style="color:#ff4444">didi.png</b>: REDROOM 🩸 map đỏ địa ngục</li>
-      <li><b style="color:#ffaa00">map.png (MOAC)</b>: To 12.5x, chỉ lăn 🫏<br>Mỗi cột phá = +5% tử thần 💥</li>
+      <li><b style="color:#ffaa00">map.png (MOAC)</b>: Rollin Moac</li>
+      <li><b style="color:#00ddff">tung.png (TTT)</b>: Mỗi cột qua → 20% xuất hiện câu hỏi<br>
+        Hết 10 giây hoặc sai = CHẾT 💀<br>
+        Cứ câu thứ 3 là câu hỏi đặc biệt 📄<br>
+        ≥1000đ: bảng bị bôi xóa kiểu Baldi!</li>
     </ul>
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
@@ -298,288 +492,222 @@
     <div class="go-title">GAME OVER</div>
     <div class="score-box">
       <div class="label">ĐIỂM SỐ</div>
-      <div class="val" id="finalScore">0</div>
+      <div class="val"  id="finalScore">0</div>
       <div class="best" id="bestScore"></div>
     </div>
-    <button class="btn" onclick="startGame()">↺  CHƠI LẠI</button>
+    <button class="btn"           onclick="startGame()">↺  CHƠI LẠI</button>
     <button class="btn quest-btn" onclick="showQuests()">📋 NHIỆM VỤ</button>
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 
   <div class="screen hidden" id="pauseScreen">
     <div style="font-size:24px;color:#ffe066;text-shadow:3px 3px 0 #b8860b;margin-bottom:35px;animation:float 2s infinite;">TẠM DỪNG</div>
-    <button class="btn" onclick="resumeGame()">▶  TIẾP TỤC</button>
+    <button class="btn"           onclick="resumeGame()">▶  TIẾP TỤC</button>
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-//  MUSIC
+//  ╔══════════════════════════════════════════════════════╗
+//  ║   CÀI ĐẶT CÂU HỎI NGẮN — CHỈNH SỬA TẠI ĐÂY       ║
+//  ╚══════════════════════════════════════════════════════╝
+//
+//  question : Nội dung hiển thị trên bảng
+//  pdfLink  : Link PDF / tài liệu (dùng Google Drive share link)
+//  answer   : Đáp án đúng (không phân biệt hoa/thường khi so sánh)
+//  hint     : Gợi ý nhỏ bên dưới
+//  emoji    : Emoji thầy giáo
+//
+const SHORT_ANSWER_QUESTIONS = [
+  // ── CÂU 1 ─────────────────────────────────────────
+  {
+    question : "Giải pt Delta a= 1, b= -5, c= 6:",
+    pdfLink  : "https://drive.google.com/file/d/THAY_LINK_PDF_1_O_DAY/view",
+    answer   : "x1​=2,x2=3",
+    hint     : "💡 VD định dạng: x1=3/2,x2=-3",
+    emoji    : "📄"
+  },
+  // ── CÂU 2 ─────────────────────────────────────────
+  {
+    question : ".... Ăn cứt(tiếng anh):",
+    pdfLink  : "https://drive.google.com/file/d/THAY_LINK_PDF_2_O_DAY/view",
+    answer   : "Dog",
+    hint     : "💡 Gợi ý: ...Bảo Kha, tiếng Anh",
+    emoji    : "🐶"
+  },
+  // ── CÂU 3 ─────────────────────────────────────────
+  {
+    question : "Rau má ?",
+    pdfLink  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRfr7a6wssUzKnUcc65URsvgtQ-ewkYBspw&sw",
+    answer   : "36",
+    hint     : "💡 Gợi ý: Thanh hóa",
+    emoji    : "😱"
+  },
+   {
+    question : "giải phương trình sau",
+    pdfLink  : "https://docs.google.com/document/d/1MSohj3vqdme2pdnLeClRDHN8plBEqi4_-NM9fmIOzRs/edit?tab=t.0",
+    answer   : "=m^2-m+1",
+    hint     : "💡 Gợi ý định dạng: =(m-3 + m^2)^2",
+    emoji    : "😱"
+  },
+  // ── THÊM CÂU 4, 5... THEO MẪU TRÊN ──────────────
+];
 // ═══════════════════════════════════════════════════════════════
+//  HẾT PHẦN CÀI ĐẶT CÂU HỎI
+// ═══════════════════════════════════════════════════════════════
+
+// ─── MUSIC ──────────────────────────────────────────────────────
 const bgMusic = document.getElementById('bgMusic');
 const PLAYLIST = ["maybe in another life.mp3","goodnight.mp3","dep.mp3"];
 let currentSongIndex = 0;
-bgMusic.addEventListener('ended',()=>{
-  if (isCangHoc()) {
-    bgMusic.src = 'ligma.mp3';
-    bgMusic.play().catch(()=>{});
-  } else {
-    currentSongIndex = (currentSongIndex+1) % PLAYLIST.length;
-    bgMusic.src = PLAYLIST[currentSongIndex];
-    bgMusic.play().catch(()=>{});
-  }
+bgMusic.addEventListener('ended', () => {
+  if (isCangHoc()) { bgMusic.src='ligma.mp3'; bgMusic.play().catch(()=>{}); }
+  else { currentSongIndex=(currentSongIndex+1)%PLAYLIST.length; bgMusic.src=PLAYLIST[currentSongIndex]; bgMusic.play().catch(()=>{}); }
 });
-
 function setMusicForSkin() {
   const src = isCangHoc() ? 'ligma.mp3' : PLAYLIST[currentSongIndex];
-  if (bgMusic.src !== src && !bgMusic.src.endsWith(encodeURIComponent(src)) && !bgMusic.src.endsWith(src)) {
-    bgMusic.src = src;
-  }
+  if (!bgMusic.src.endsWith(src) && !bgMusic.src.endsWith(encodeURIComponent(src))) bgMusic.src = src;
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  CURRENCY & QUESTS
-// ═══════════════════════════════════════════════════════════════
-let coins      = parseInt(localStorage.getItem('flappy_coins'))      || 0;
-let highScore  = parseInt(localStorage.getItem('flappy_hs'))         || 0;
-let totalScoreGlobal = parseInt(localStorage.getItem('flappy_totalScore')) || 0;
-let quests     = JSON.parse(localStorage.getItem('flappy_quests'))   || [generateQuest(0),generateQuest(1),generateQuest(2)];
+// ─── CURRENCY & QUESTS ──────────────────────────────────────────
+let coins            = parseInt(localStorage.getItem('flappy_coins'))       || 0;
+let highScore        = parseInt(localStorage.getItem('flappy_hs'))          || 0;
+let totalScoreGlobal = parseInt(localStorage.getItem('flappy_totalScore'))  || 0;
+let quests           = JSON.parse(localStorage.getItem('flappy_quests'))    || [generateQuest(0),generateQuest(1),generateQuest(2)];
 
 function updateCoinUI() {
-  document.getElementById('coinDisplay').textContent      = coins;
-  document.getElementById('questCoinDisplay').textContent = coins;
-  const sh = document.getElementById('shopCoinDisplay');
-  if (sh) sh.textContent = coins;
+  ['coinDisplay','questCoinDisplay','shopCoinDisplay'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = coins;
+  });
 }
-
 function generateQuest(type) {
   let req,rew,title;
-  if (type===0) {
-    req   = Math.floor(Math.random()*200+1)*100;
-    rew   = Math.floor(Math.random()*26)+5;
-    title = `Cộng dồn điểm đạt ${req} điểm`;
-  } else if (type===1) {
-    req   = Math.floor(Math.random()*10+1)*100;
-    rew   = Math.floor(Math.random()*26)+5;
-    title = `Đạt ${req} điểm trong 1 lần chơi`;
-  } else {
-    req   = Math.floor(Math.random()*18)+3;
-    rew   = Math.floor(Math.random()*26)+5;
-    title = `Thu thập ${req} Orbs`;
-  }
+  if      (type===0) { req=Math.floor(Math.random()*200+1)*100; rew=Math.floor(Math.random()*26)+5; title=`Cộng dồn điểm đạt ${req} điểm`; }
+  else if (type===1) { req=Math.floor(Math.random()*10+1)*100;  rew=Math.floor(Math.random()*26)+5; title=`Đạt ${req} điểm trong 1 lần chơi`; }
+  else               { req=Math.floor(Math.random()*18)+3;      rew=Math.floor(Math.random()*26)+5; title=`Thu thập ${req} Orbs`; }
   return {type,title,req,prog:0,rew,done:false};
 }
-
 function saveQuests() { localStorage.setItem('flappy_quests',JSON.stringify(quests)); }
 function saveCoins()  { localStorage.setItem('flappy_coins',coins); updateCoinUI(); }
 
 function showQuests() {
   updateCoinUI();
-  const list = document.getElementById('questList');
-  list.innerHTML = '';
-  quests.forEach((q,i)=>{
-    const pct    = Math.min(100, Math.round((q.prog/q.req)*100));
-    const isDone = q.done;
-    const card   = document.createElement('div');
-    card.className = 'quest-card';
-    card.innerHTML = `
-      <div class="q-title">${q.title}</div>
-      <div class="q-prog-text">${q.prog} / ${q.req}</div>
-      <div class="q-bar-wrap">
-        <div class="q-bar-fill${isDone?' done':''}" style="width:${pct}%"></div>
-      </div>
-      <div class="q-reward">🎁 Thưởng: +${q.rew} xu</div>
-      <button class="q-claim-btn${isDone?' claimable':''}" 
-              ${isDone?`onclick="claimQuest(${i})"`:''} 
-              ${isDone?'':'disabled'}>
-        ${isDone?'NHẬN':'CHƯA ĐẠT'}
-      </button>
-    `;
+  const list = document.getElementById('questList'); list.innerHTML = '';
+  quests.forEach((q,i) => {
+    const pct = Math.min(100,Math.round((q.prog/q.req)*100)), isDone = q.done;
+    const card = document.createElement('div'); card.className = 'quest-card';
+    card.innerHTML = `<div class="q-title">${q.title}</div><div class="q-prog-text">${q.prog}/${q.req}</div><div class="q-bar-wrap"><div class="q-bar-fill${isDone?' done':''}" style="width:${pct}%"></div></div><div class="q-reward">🎁 Thưởng: +${q.rew} xu</div><button class="q-claim-btn${isDone?' claimable':''}" ${isDone?`onclick="claimQuest(${i})"`:''} ${isDone?'':'disabled'}>${isDone?'NHẬN':'CHƯA ĐẠT'}</button>`;
     list.appendChild(card);
   });
   showScreen('questScreen');
 }
-
 function claimQuest(idx) {
-  if (quests[idx].done) {
-    coins += quests[idx].rew;
-    saveCoins();
-    quests[idx] = generateQuest(quests[idx].type);
-    saveQuests();
-    showQuests();
-    const sh = document.getElementById('shopCoinDisplay');
-    if (sh) sh.textContent = coins;
-  }
+  if (quests[idx].done) { coins+=quests[idx].rew; saveCoins(); quests[idx]=generateQuest(quests[idx].type); saveQuests(); showQuests(); }
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  SKINS & SHOP
-// ═══════════════════════════════════════════════════════════════
+// ─── SKINS ──────────────────────────────────────────────────────
 const BIRD_SKINS = [
-  { name:"Mặc Định",             src:null,        price:0  },
-  { name:"Thiên phịt",           src:"helo.png",  price:0  },
-  { name:"Tí Đẫn\n(Bar where?)", src:"halo.png",  price:0  },
-  { name:"09\n(Tu than rau cau)", src:"hello.png", price:0  },
-  { name:"Móm\n(BA SÁU)",        src:"mq.png",    price:5  },
-  { name:"CHO DAI\n(Nội tại sống chó)", src:"concu.png", price:30 },
-  { name:"HD\n(Tắt điện)",       src:"alr.png",   price:40 },
-  { name:"Cang Hoc\n(REDROOM)",  src:"didi.png",  price:40 },
-  { name:"MOAC\n(Lăn Ta Lăn Tăng)",  src:"map.png",   price: 60 },
+  { name:"Mặc Định",                   src:null,        price:0   },
+  { name:"Thiên phịt",                 src:"helo.png",  price:0   },
+  { name:"Tí Đẫn\n(Bar where?)",       src:"halo.png",  price:0   },
+  { name:"09\n(Tu than rau cau)",       src:"hello.png", price:0   },
+  { name:"Móm\n(BA SÁU)",              src:"mq.png",    price:5   },
+  { name:"CHO DAI\n(Nội tại sống chó)",src:"concu.png", price:30  },
+  { name:"HD\n(Tắt điện)",             src:"alr.png",   price:40  },
+  { name:"Cang Hoc\n(REDROOM)",        src:"didi.png",  price:40  },
+  { name:"MOAC\n(Lăn Ta Lăn Tăng)",   src:"map.png",   price:60  },
+  { name:"TTT\n(Toán Toàn Toang)",     src:"tung.png",  price:100 },
 ];
 
 let unlockedSkins = JSON.parse(localStorage.getItem('flappy_unlocked')) || [0,1,2];
 function saveUnlocked() { localStorage.setItem('flappy_unlocked',JSON.stringify(unlockedSkins)); }
-
 let selectedSkin = Math.min(+localStorage.getItem('flappy_skin')||0, BIRD_SKINS.length-1);
 if (!unlockedSkins.includes(selectedSkin)) selectedSkin = 0;
-
 let skinImages = [];
+const orbImg     = new Image(); orbImg.src     = "al.png";
+const misterImgEl= new Image(); misterImgEl.src= "mister.jpg";
+const misterSfx  = new Audio('r.mp3'); misterSfx.preload = 'auto';
 
-const orbImg = new Image();
-orbImg.src = "al.png";
-
-const misterImgEl = new Image();
-misterImgEl.src = "mister.jpg";
-
-const misterSfx = new Audio('r.mp3');
-misterSfx.preload = 'auto';
-
-function currentBirdImg() { return skinImages[selectedSkin] || null; }
-function isHalo()    { return BIRD_SKINS[selectedSkin].src==='halo.png';  }
+function currentBirdImg() { return skinImages[selectedSkin]||null; }
+function isHalo()    { return BIRD_SKINS[selectedSkin].src==='halo.png'; }
 function isConcu()   { return BIRD_SKINS[selectedSkin].src==='concu.png'; }
-function isMq()      { return BIRD_SKINS[selectedSkin].src==='mq.png';    }
+function isMq()      { return BIRD_SKINS[selectedSkin].src==='mq.png'; }
 function is09()      { return BIRD_SKINS[selectedSkin].src==='hello.png'; }
-function isHiDieu()  { return BIRD_SKINS[selectedSkin].src==='alr.png';   }
-function isCangHoc() { return BIRD_SKINS[selectedSkin].src==='didi.png';  }
-// ─── MOAC helper ────────────────────────────────────────────────
-function isMoac()    { return BIRD_SKINS[selectedSkin].src==='map.png';   }
+function isHiDieu()  { return BIRD_SKINS[selectedSkin].src==='alr.png'; }
+function isCangHoc() { return BIRD_SKINS[selectedSkin].src==='didi.png'; }
+function isMoac()    { return BIRD_SKINS[selectedSkin].src==='map.png'; }
+function isTTT()     { return BIRD_SKINS[selectedSkin].src==='tung.png'; }
 
-// Normal bird base size
-const BASE_BIRD_W = 44;
-const BASE_BIRD_H = 36;
-// MOAC is 12.5× bigger
-const MOAC_SCALE  = 12.5;
-const MOAC_W = BASE_BIRD_W * MOAC_SCALE; // 550
-const MOAC_H = BASE_BIRD_H * MOAC_SCALE; // 450
+const BASE_BIRD_W=44, BASE_BIRD_H=36, MOAC_SCALE=12.5;
+const MOAC_W=BASE_BIRD_W*MOAC_SCALE, MOAC_H=BASE_BIRD_H*MOAC_SCALE;
 
 function loadAllSkins(cb) {
-  skinImages = [];
-  let pending = BIRD_SKINS.length;
-  BIRD_SKINS.forEach((s,i)=>{
-    if (!s.src) { skinImages[i]=null; if(--pending===0) cb(); return; }
-    const img=new Image();
-    img.onload  = ()=>{ skinImages[i]=img;  if(--pending===0) cb(); };
-    img.onerror = ()=>{ skinImages[i]=null; if(--pending===0) cb(); };
+  skinImages = []; let pending = BIRD_SKINS.length;
+  BIRD_SKINS.forEach((s,i) => {
+    if (!s.src) { skinImages[i]=null; if(--pending===0)cb(); return; }
+    const img = new Image();
+    img.onload  = () => { skinImages[i]=img;  if(--pending===0)cb(); };
+    img.onerror = () => { skinImages[i]=null; if(--pending===0)cb(); };
     img.src = s.src;
   });
 }
 
 function buildSkinGrid() {
-  const shopCoins = document.getElementById('shopCoinDisplay');
-  if (shopCoins) shopCoins.textContent = coins;
-
-  const grid = document.getElementById('skinGrid');
-  grid.innerHTML = '';
-  BIRD_SKINS.forEach((s,i)=>{
-    const owned    = unlockedSkins.includes(i);
-    const isFree   = s.price === 0;
-    const isActive = i === selectedSkin;
-
-    const card = document.createElement('div');
-    card.className = 'skin-card' + (isActive?' active':'') + (!owned?' locked':'');
-
-    const cv = document.createElement('canvas');
-    cv.width=52; cv.height=52;
-    const px = cv.getContext('2d');
-    if (!owned) { px.globalAlpha=0.4; }
-    if (skinImages[i]) { px.drawImage(skinImages[i],0,0,52,52); }
-    else { drawFallbackBird(px,26,26,0,1.8); }
-
-    const nm = document.createElement('div');
-    nm.className='skin-name'; nm.innerText=s.name;
-
-    card.appendChild(cv);
-    card.appendChild(nm);
-
+  updateCoinUI();
+  const grid = document.getElementById('skinGrid'); grid.innerHTML='';
+  BIRD_SKINS.forEach((s,i) => {
+    const owned=unlockedSkins.includes(i), isActive=i===selectedSkin;
+    const card=document.createElement('div');
+    card.className='skin-card'+(isActive?' active':'')+(!owned?' locked':'');
+    const cv=document.createElement('canvas'); cv.width=52; cv.height=52;
+    const px=cv.getContext('2d'); if(!owned) px.globalAlpha=0.4;
+    if(skinImages[i]) px.drawImage(skinImages[i],0,0,52,52); else drawFallbackBird(px,26,26,0,1.8);
+    const nm=document.createElement('div'); nm.className='skin-name'; nm.innerText=s.name;
+    card.appendChild(cv); card.appendChild(nm);
     if (owned) {
-      const pt = document.createElement('div');
-      pt.className = 'skin-price-tag ' + (isFree?'free':'owned');
-      pt.textContent = isFree ? '✓ FREE' : '✓ Đã mua';
-      card.appendChild(pt);
-      card.onclick = ()=> selectSkin(i);
+      const pt=document.createElement('div'); pt.className='skin-price-tag '+(s.price===0?'free':'owned');
+      pt.textContent=s.price===0?'✓ FREE':'✓ Đã mua'; card.appendChild(pt);
+      card.onclick=()=>selectSkin(i);
     } else {
-      const pt = document.createElement('div');
-      pt.className = 'skin-price-tag locked-price';
-      pt.textContent = `🔒 ${s.price} xu`;
-      card.appendChild(pt);
-
-      const bb = document.createElement('button');
-      bb.className = 'skin-buy-btn';
-      bb.textContent = coins >= s.price ? 'MUA' : `Cần ${s.price}xu`;
-      bb.disabled    = coins < s.price;
-      bb.onclick = (e)=>{ e.stopPropagation(); buySkin(i); };
-      card.appendChild(bb);
+      const pt=document.createElement('div'); pt.className='skin-price-tag locked-price';
+      pt.textContent=`🔒 ${s.price} xu`; card.appendChild(pt);
+      const bb=document.createElement('button'); bb.className='skin-buy-btn';
+      bb.textContent=coins>=s.price?'MUA':`Cần ${s.price}xu`; bb.disabled=coins<s.price;
+      bb.onclick=(e)=>{ e.stopPropagation(); buySkin(i); }; card.appendChild(bb);
     }
-
     grid.appendChild(card);
   });
 }
-
 function selectSkin(i) {
   if (!unlockedSkins.includes(i)) return;
-  selectedSkin = i;
-  localStorage.setItem('flappy_skin',i);
-  buildSkinGrid();
-  drawBirdPreview();
-  applyHellModeWrapper();
-  if (state === 'playing' || state === 'menu') {
-    setMusicForSkin();
-    if (!bgMusic.paused) bgMusic.play().catch(()=>{});
-  }
+  selectedSkin=i; localStorage.setItem('flappy_skin',i);
+  buildSkinGrid(); drawBirdPreview(); applyHellModeWrapper();
+  if (state==='playing'||state==='menu') { setMusicForSkin(); if(!bgMusic.paused) bgMusic.play().catch(()=>{}); }
 }
-
 function buySkin(i) {
-  const skin = BIRD_SKINS[i];
-  if (coins < skin.price) return;
-  coins -= skin.price;
-  saveCoins();
-  unlockedSkins.push(i);
-  saveUnlocked();
-  buildSkinGrid();
-  selectSkin(i);
+  const s=BIRD_SKINS[i]; if(coins<s.price) return;
+  coins-=s.price; saveCoins(); unlockedSkins.push(i); saveUnlocked();
+  buildSkinGrid(); selectSkin(i);
 }
-
 function showSkins() { buildSkinGrid(); showScreen('skinScreen'); }
-
 function applyHellModeWrapper() {
-  const w = document.getElementById('wrapper');
-  if (isCangHoc()) w.classList.add('hell-mode');
-  else w.classList.remove('hell-mode');
+  const w=document.getElementById('wrapper');
+  if(isCangHoc()) w.classList.add('hell-mode'); else w.classList.remove('hell-mode');
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  THEMES & CONSTANTS
-// ═══════════════════════════════════════════════════════════════
-const THEMES = [
-  { name:"🌿 XANH LÁ",    sky:['#0d1b2a','#1a3050','#0d2a1f'], pipe:['#27ae60','#2ecc71'], cap:'#1d8348', ground:['#2d5a1b','#1a3a0e'], turf:'#4a8c2a', bump:'#5aa33a' },
-  { name:"🔥 CAM RỰC",    sky:['#1a0a00','#2e1500','#1a0800'], pipe:['#cc4400','#ff6600'], cap:'#993300', ground:['#3d1a00','#1a0800'], turf:'#7a3300', bump:'#aa4400' },
-  { name:"🌋 ĐỎ LỬA",    sky:['#1a0010','#350020','#1a0010'], pipe:['#cc0022','#ff2244'], cap:'#880011', ground:['#3a0010','#1a0008'], turf:'#770020', bump:'#aa0030' },
-  { name:"⚡ VÀNG ĐIỆN",  sky:['#1a1500','#2e2800','#1a1000'], pipe:['#b8860b','#ffe066'], cap:'#8a6200', ground:['#3a3000','#1a1800'], turf:'#6a5500', bump:'#9a7a00' },
-  { name:"🌊 XANH DƯƠNG", sky:['#00101a','#001e36','#00101a'], pipe:['#0066bb','#00aaff'], cap:'#004488', ground:['#001830','#000e1a'], turf:'#003366', bump:'#0055aa' },
+// ─── THEMES ─────────────────────────────────────────────────────
+const THEMES=[
+  {name:"🌿 XANH LÁ",   sky:['#0d1b2a','#1a3050','#0d2a1f'],pipe:['#27ae60','#2ecc71'],cap:'#1d8348',ground:['#2d5a1b','#1a3a0e'],turf:'#4a8c2a',bump:'#5aa33a'},
+  {name:"🔥 CAM RỰC",   sky:['#1a0a00','#2e1500','#1a0800'],pipe:['#cc4400','#ff6600'],cap:'#993300',ground:['#3d1a00','#1a0800'],turf:'#7a3300',bump:'#aa4400'},
+  {name:"🌋 ĐỎ LỬA",   sky:['#1a0010','#350020','#1a0010'],pipe:['#cc0022','#ff2244'],cap:'#880011',ground:['#3a0010','#1a0008'],turf:'#770020',bump:'#aa0030'},
+  {name:"⚡ VÀNG ĐIỆN", sky:['#1a1500','#2e2800','#1a1000'],pipe:['#b8860b','#ffe066'],cap:'#8a6200',ground:['#3a3000','#1a1800'],turf:'#6a5500',bump:'#9a7a00'},
+  {name:"🌊 XANH DƯƠNG",sky:['#00101a','#001e36','#00101a'],pipe:['#0066bb','#00aaff'],cap:'#004488',ground:['#001830','#000e1a'],turf:'#003366',bump:'#0055aa'},
 ];
+const HELL_THEME={name:"🩸 REDROOM",   sky:['#080000','#150000','#080000'],pipe:['#8b0000','#cc0000'],cap:'#5a0000',ground:['#150000','#080000'],turf:'#4a0000',bump:'#6b0000'};
+const TTT_THEME ={name:"📐 LỚP HỌC TTT",sky:['#0a1a0a','#0e250e','#0a1a0a'],pipe:['#2a6b2a','#3d9e3d'],cap:'#1e4e1e',ground:['#1a2e0a','#0a1a00'],turf:'#2a5a10',bump:'#3a7a18'};
 
-const HELL_THEME = {
-  name:"🩸 REDROOM",
-  sky:   ['#080000','#150000','#080000'],
-  pipe:  ['#8b0000','#cc0000'],
-  cap:   '#5a0000',
-  ground:['#150000','#080000'],
-  turf:  '#4a0000',
-  bump:  '#6b0000'
-};
-
-const C = {
+const C={
   W:420, H:640, GRAVITY:900, JUMP_VY:-310, MAX_FALL:520,
   ANGLE_UP:-0.40, ANGLE_DOWN:1.20, BASE_SPEED:140, SPEED_STEP:30, SPEED_MILESTONE:100,
   SCORE_PER_PIPE:10, PIPE_W:62, GAP:160, PIPE_INTERVAL:1.6, GROUND_H:72,
@@ -589,194 +717,384 @@ const canvas = document.getElementById('gameCanvas');
 const ctx    = canvas.getContext('2d');
 
 // ═══════════════════════════════════════════════════════════════
+//  QUIZ SYSTEM
+// ═══════════════════════════════════════════════════════════════
+const QUIZ_TIME_SEC   = 10;
+const QUIZ_PIPE_PROB  = 0.20;   // ← 20% mỗi cột
+
+let quizCount          = 0;
+let currentQuiz        = null;
+let quizAnswerLocked   = false;
+let quizTimerRAF       = null;
+let quizStartTime      = null;
+let shortAnswerQuizIdx = 0;
+
+function isBaldiScribble() { return isTTT() && score >= 1000; }
+
+// ── Level by quiz count ────────────────────────────────────────
+function getQuizLevel() { return Math.max(1, Math.ceil(quizCount / 2)); }
+
+// ── Quiz type ─────────────────────────────────────────────────
+function getNextQuizType() {
+  return (quizCount % 3 === 2 && SHORT_ANSWER_QUESTIONS.length > 0) ? 'short' : 'math';
+}
+
+// ── Math generator ────────────────────────────────────────────
+function generateMathProblem(level) {
+  let a, b, answer, question, opPool;
+  if      (level <= 1) opPool=['+','-'];
+  else if (level <= 3) opPool=['+','-','×'];
+  else if (level <= 5) opPool=['+','-','×','÷'];
+  else                 opPool=['+','-','×','÷','²'];
+
+  const op     = opPool[Math.floor(Math.random()*opPool.length)];
+  const maxNum = Math.min(10+level*8, 150);
+
+  switch(op) {
+    case '+': a=Math.floor(Math.random()*maxNum)+1; b=Math.floor(Math.random()*maxNum)+1; answer=a+b; question=`${a}  +  ${b}  =  ?`; break;
+    case '-': a=Math.floor(Math.random()*maxNum)+Math.ceil(maxNum/2); b=Math.floor(Math.random()*(a-1))+1; answer=a-b; question=`${a}  −  ${b}  =  ?`; break;
+    case '×': a=Math.floor(Math.random()*Math.min(12,3+level))+2; b=Math.floor(Math.random()*Math.min(12,3+level))+2; answer=a*b; question=`${a}  ×  ${b}  =  ?`; break;
+    case '÷': b=Math.floor(Math.random()*Math.min(12,3+level))+2; answer=Math.floor(Math.random()*10)+1; a=b*answer; question=`${a}  ÷  ${b}  =  ?`; break;
+    case '²': a=Math.floor(Math.random()*Math.min(15,5+level))+2; answer=a*a; question=`${a}²  =  ?`; break;
+    default:  a=1; b=1; answer=2; question='1 + 1 = ?';
+  }
+
+  if (level >= 7) {
+    const op2 = Math.random()<.5 ? '+' : '-';
+    const cc  = Math.floor(Math.random()*20)+1;
+    question  = `(${question.replace('= ?','')})  ${op2==='+'?'+':'−'}  ${cc}  =  ?`;
+    answer   += op2==='+' ? cc : -cc;
+  }
+
+  const choicesSet = new Set([answer]);
+  const spread     = Math.max(5, Math.floor(Math.abs(answer)*0.25));
+  let tries = 0;
+  while (choicesSet.size < 4 && tries < 80) {
+    const off   = Math.floor(Math.random()*spread*2)-spread;
+    const wrong = answer + (off===0?1:off);
+    if (wrong!==answer) choicesSet.add(wrong);
+    tries++;
+  }
+  let fill=1; while(choicesSet.size<4){ if(!choicesSet.has(answer+fill)) choicesSet.add(answer+fill); fill++; }
+  const choices=[...choicesSet];
+  for(let i=choices.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [choices[i],choices[j]]=[choices[j],choices[i]]; }
+  return {type:'math', question, answer, choices, level};
+}
+
+// ── Trigger ───────────────────────────────────────────────────
+function triggerQuiz() {
+  quizCount++;
+  state            = 'quiz';
+  cancelAnimationFrame(animId);
+  bgMusic.pause();
+  quizAnswerLocked = false;
+
+  const level    = getQuizLevel();
+  const quizType = getNextQuizType();
+
+  if (quizType === 'short') {
+    const qIdx = shortAnswerQuizIdx % SHORT_ANSWER_QUESTIONS.length;
+    shortAnswerQuizIdx++;
+    currentQuiz = { type:'short', ...SHORT_ANSWER_QUESTIONS[qIdx], level };
+  } else {
+    currentQuiz = generateMathProblem(level);
+  }
+
+  renderQuizOverlay(currentQuiz);
+  document.getElementById('quizOverlay').classList.remove('hidden');
+  startQuizTimer();
+  if (isBaldiScribble()) drawBaldiScribble();
+}
+
+// ── Render ────────────────────────────────────────────────────
+function renderQuizOverlay(quiz) {
+  const lv = quiz.level || 1;
+  document.getElementById('quizLevelBadge').textContent = `LV ${lv}  📐`;
+
+  const tb = document.getElementById('quizTypeBadge');
+  if (quiz.type === 'short') {
+    tb.className   = 'quiz-type-badge short';
+    tb.textContent = '📄 CÂU HỎI ĐẶC BIỆT';
+  } else {
+    tb.className   = 'quiz-type-badge math';
+    tb.textContent = `📐 TOÁN HỌC — CẤP ${lv}`;
+  }
+
+  document.getElementById('quizTeacherEmoji').textContent = quiz.emoji || (quiz.type==='short'?'🧑‍🏫':'👨‍🏫');
+  document.getElementById('quizTeacherText').innerHTML = quiz.type==='short'
+    ? `Xem tài liệu & nhập đáp án!<br><span style="color:#ff8888;">Hết giờ = CHẾT! 💀</span>`
+    : `Giải đúng thì chơi tiếp!<br><span style="color:#ff8888;">Sai/Hết giờ = CHẾT! 💀</span>`;
+  document.getElementById('quizProblem').textContent = quiz.question;
+
+  const choicesDiv   = document.getElementById('quizChoices');
+  const shortSection = document.getElementById('shortAnswerSection');
+  const hintEl       = document.getElementById('quizHint');
+  const kbdEl        = document.getElementById('quizKbdHint');
+
+  if (quiz.type === 'short') {
+    // ── Short answer: show native input ──────────────────────
+    choicesDiv.style.display = 'none';
+    shortSection.classList.add('active');
+    hintEl.textContent = quiz.hint || '💡 Xem tài liệu rồi nhập đáp án';
+    kbdEl.textContent  = '';
+
+    const link = document.getElementById('quizPdfLink');
+    link.href  = quiz.pdfLink || '#';
+    link.textContent = '📄 XEM TÀI LIỆU';
+
+    // Reset & focus native input
+    const inp = document.getElementById('shortAnswerNativeInput');
+    inp.value          = '';
+    inp.disabled       = false;
+    inp.style.borderColor = '#ffcc00';
+    inp.style.background  = 'rgba(0,0,0,.55)';
+    inp.classList.remove('wrong-anim','correct-anim');
+
+    document.getElementById('submitAnswerBtn').disabled = false;
+
+    // Auto-focus (works on desktop; on iOS needs user gesture, but we try)
+    setTimeout(() => { try { inp.focus(); } catch(e){} }, 120);
+
+  } else {
+    // ── MCQ ──────────────────────────────────────────────────
+    choicesDiv.style.display = '';
+    shortSection.classList.remove('active');
+    hintEl.textContent = '⌨️ Nhấn A / B / C / D để chọn';
+
+    const labels = ['A','B','C','D'];
+    choicesDiv.innerHTML = '';
+    quiz.choices.forEach((choice, i) => {
+      const btn       = document.createElement('button');
+      btn.className   = 'quiz-choice-btn';
+      btn.dataset.idx = i;
+      btn.innerHTML   = `<span class="choice-label">${labels[i]}</span>${choice}`;
+      btn.onclick     = () => answerMCQ(btn, choice === quiz.answer);
+      choicesDiv.appendChild(btn);
+    });
+    kbdEl.textContent = `[A] ${quiz.choices[0]}  [B] ${quiz.choices[1]}  [C] ${quiz.choices[2]}  [D] ${quiz.choices[3]}`;
+  }
+
+  const sc = document.getElementById('baldiScribbleCanvas');
+  if (isBaldiScribble()) sc.classList.add('show'); else sc.classList.remove('show');
+}
+
+// ── MCQ answer ────────────────────────────────────────────────
+function answerMCQ(btnEl, correct) {
+  if (quizAnswerLocked) return;
+  quizAnswerLocked = true; stopQuizTimer();
+  document.querySelectorAll('.quiz-choice-btn').forEach(b=>{ b.onclick=null; b.style.cursor='default'; });
+  if (correct) {
+    btnEl.classList.add('correct-flash');
+    setTimeout(dismissQuizCorrect, 380);
+  } else {
+    btnEl.classList.add('wrong-flash');
+    document.querySelectorAll('.quiz-choice-btn').forEach(b => {
+      if (+b.textContent.replace(/\D/g,'') === currentQuiz.answer) b.classList.add('correct-flash');
+    });
+    setTimeout(dismissQuizWrong, 750);
+  }
+}
+
+// ── Short answer submit ───────────────────────────────────────
+function submitShortAnswer() {
+  if (quizAnswerLocked) return;
+
+  const inp       = document.getElementById('shortAnswerNativeInput');
+  const userInput = inp ? inp.value.trim() : '';
+  const correct   = userInput.toLowerCase() === (currentQuiz.answer||'').trim().toLowerCase();
+
+  quizAnswerLocked = true; stopQuizTimer();
+  if (inp) inp.disabled = true;
+  document.getElementById('submitAnswerBtn').disabled = true;
+
+  if (correct) {
+    if (inp) inp.classList.add('correct-anim');
+    setTimeout(dismissQuizCorrect, 450);
+  } else {
+    if (inp) {
+      inp.classList.add('wrong-anim');
+      setTimeout(() => inp.classList.remove('wrong-anim'), 400);
+    }
+    setTimeout(dismissQuizWrong, 850);
+  }
+}
+
+function dismissQuizCorrect() {
+  document.getElementById('quizOverlay').classList.add('hidden');
+  state = 'playing'; lastTime = null;
+  bgMusic.play().catch(()=>{});
+  animId = requestAnimationFrame(loop);
+}
+function dismissQuizWrong() {
+  document.getElementById('quizOverlay').classList.add('hidden');
+  state = 'playing';
+  die();
+}
+
+// ── Timer ─────────────────────────────────────────────────────
+function startQuizTimer() {
+  quizStartTime = performance.now(); stopQuizTimer(); updateQuizTimer();
+}
+function stopQuizTimer() {
+  if (quizTimerRAF) { cancelAnimationFrame(quizTimerRAF); quizTimerRAF=null; }
+}
+function updateQuizTimer() {
+  if (state !== 'quiz') return;
+  const elapsed   = (performance.now()-quizStartTime)/1000;
+  const remaining = Math.max(0, QUIZ_TIME_SEC-elapsed);
+  const pct       = (remaining/QUIZ_TIME_SEC)*100;
+
+  const bar   = document.getElementById('quizTimerBar');
+  const numEl = document.getElementById('quizTimerNum');
+  bar.style.width   = pct+'%';
+  numEl.textContent = Math.ceil(remaining);
+
+  const urgent     = remaining < 4;
+  bar.className    = 'quiz-timer-bar'+(urgent?' urgent':'');
+  numEl.className  = 'quiz-timer-num'+(urgent?' urgent':'');
+  if      (pct > 60) bar.style.background = 'linear-gradient(90deg,#00ff80,#80ff00)';
+  else if (pct > 30) bar.style.background = 'linear-gradient(90deg,#ffcc00,#ff8800)';
+  else               bar.style.background = '';
+
+  if (remaining <= 0) {
+    if (!quizAnswerLocked) { quizAnswerLocked=true; setTimeout(dismissQuizWrong, 300); }
+    return;
+  }
+  quizTimerRAF = requestAnimationFrame(updateQuizTimer);
+}
+
+// ── Baldi scribble ────────────────────────────────────────────
+function drawBaldiScribble() {
+  const board = document.getElementById('quizBoard');
+  const sc    = document.getElementById('baldiScribbleCanvas');
+  sc.width    = board.offsetWidth  || 350;
+  sc.height   = board.offsetHeight || 400;
+  const c = sc.getContext('2d'); c.clearRect(0,0,sc.width,sc.height);
+  const intensity  = Math.min(1,(score-1000)/2000);
+  const numStrokes = Math.floor(6+intensity*20);
+  const colors     = ['#000','#c00','#000','#1a1a1a','#800','#000'];
+  for (let i=0;i<numStrokes;i++) {
+    c.beginPath(); c.strokeStyle=colors[Math.floor(Math.random()*colors.length)];
+    c.lineWidth=2+Math.random()*5; c.globalAlpha=.55+Math.random()*.35;
+    c.lineCap='round'; c.lineJoin='round';
+    let x=Math.random()*sc.width, y=Math.random()*sc.height; c.moveTo(x,y);
+    for (let s=0;s<3+Math.floor(Math.random()*5);s++) {
+      x=Math.max(0,Math.min(sc.width, x+(Math.random()-.5)*sc.width*.7));
+      y=Math.max(0,Math.min(sc.height,y+(Math.random()-.5)*sc.height*.4));
+      c.lineTo(x,y);
+    }
+    c.stroke();
+  }
+  c.globalAlpha=1;
+}
+
+// ── Keyboard handler ──────────────────────────────────────────
+function handleQuizKey(key) {
+  if (state!=='quiz'||quizAnswerLocked) return;
+  if (currentQuiz && currentQuiz.type==='short') {
+    if (key==='Enter') { submitShortAnswer(); return; }
+    return; // all other typing goes to native input
+  }
+  const map={a:0,b:1,c:2,d:3};
+  const idx=map[key.toLowerCase()];
+  if (idx===undefined) return;
+  const btns=document.querySelectorAll('.quiz-choice-btn');
+  if (btns[idx]) btns[idx].click();
+}
+
+// ═══════════════════════════════════════════════════════════════
 //  GAME STATE
 // ═══════════════════════════════════════════════════════════════
 let state='menu', bird, pipes, orbs, score, lastTime, animId;
 let scrollX=0, currentSpeed=C.BASE_SPEED, speedLevel=0, pipeTimer=0;
 let currentThemeIdx=0, revivedThisRun=false;
 let laserEffects=[], particles=[], orbTimer=0, nextOrbDelay=getRandOrbDelay();
-let deathChance09 = 0;
-
-// ─── Cang Hoc / REDROOM state ────────────────────────────────────
-let misterFlashAlpha  = 0;
-let misterFlashTimer  = 0;
-let hellPulseTime     = 0;
-
-// ─── MOAC state ─────────────────────────────────────────────────
-let moacDeathChance = 0;   // cumulative death chance (0–1)
-let moacRollAngle   = 0;   // rolling rotation in radians
+let deathChance09=0;
+let misterFlashAlpha=0, misterFlashTimer=0, hellPulseTime=0;
+let moacDeathChance=0, moacRollAngle=0;
 
 function getTheme() {
-  if (isCangHoc()) return HELL_THEME;
-  return THEMES[currentThemeIdx % THEMES.length];
+  if(isCangHoc()) return HELL_THEME;
+  if(isTTT())     return TTT_THEME;
+  return THEMES[currentThemeIdx%THEMES.length];
 }
-function getRandOrbDelay() { return 2.5 + Math.random()*2.5; }
+function getRandOrbDelay() { return 2.5+Math.random()*2.5; }
 
-// ─── MOAC bar UI helper ─────────────────────────────────────────
 function updateMoacBar() {
-  const bar  = document.getElementById('moacBar');
-  const fill = document.getElementById('moacBarFill');
-  const pct  = document.getElementById('moacPct');
-  if (isMoac() && state === 'playing') {
+  const bar=document.getElementById('moacBar'),fill=document.getElementById('moacBarFill'),pct=document.getElementById('moacPct');
+  if (isMoac()&&state==='playing') {
     bar.classList.add('show');
-    const p = Math.min(100, Math.round(moacDeathChance * 100));
-    fill.style.width = p + '%';
-    pct.textContent  = p;
-    // Turn orange → red as danger rises
-    if (p < 40) fill.style.background = 'linear-gradient(90deg,#ffaa00,#ff6600)';
-    else if (p < 70) fill.style.background = 'linear-gradient(90deg,#ff6600,#ff2200)';
-    else fill.style.background = 'linear-gradient(90deg,#ff2200,#ff0000)';
-  } else {
-    bar.classList.remove('show');
-  }
+    const p=Math.min(100,Math.round(moacDeathChance*100));
+    fill.style.width=p+'%'; pct.textContent=p;
+    if(p<40)       fill.style.background='linear-gradient(90deg,#ffaa00,#f60)';
+    else if(p<70)  fill.style.background='linear-gradient(90deg,#f60,#f20)';
+    else           fill.style.background='linear-gradient(90deg,#f20,#f00)';
+  } else bar.classList.remove('show');
 }
 
 function initGame() {
-  bird   = {x:90, y:C.H/2, vy:0, angle:0, w:BASE_BIRD_W, h:BASE_BIRD_H, alive:true};
-  pipes  = []; orbs = []; score=0; pipeTimer=0; scrollX=0;
+  bird={x:90,y:C.H/2,vy:0,angle:0,w:BASE_BIRD_W,h:BASE_BIRD_H,alive:true};
+  pipes=[]; orbs=[]; score=0; pipeTimer=0; scrollX=0;
   speedLevel=0; currentThemeIdx=0; revivedThisRun=false;
-  laserEffects=[]; particles=[];
-  orbTimer=0; nextOrbDelay=getRandOrbDelay();
-  deathChance09 = 0;
-
-  // Reset hell state
-  misterFlashAlpha = 0;
-  misterFlashTimer = 0;
-  hellPulseTime    = 0;
+  laserEffects=[]; particles=[]; orbTimer=0; nextOrbDelay=getRandOrbDelay();
+  deathChance09=0; misterFlashAlpha=0; misterFlashTimer=0; hellPulseTime=0;
   hideMisterOverlay();
+  moacDeathChance=0; moacRollAngle=0;
+  if (isMoac()) { bird.w=MOAC_W; bird.h=MOAC_H; bird.y=C.H-C.GROUND_H-bird.h/2; bird.vy=0; }
 
-  // ─── MOAC init ─────────────────────────────────────────────
-  moacDeathChance = 0;
-  moacRollAngle   = 0;
-  if (isMoac()) {
-    bird.w = MOAC_W;
-    bird.h = MOAC_H;
-    // Park MOAC on the ground (bottom of bird touches ground surface)
-    bird.y = C.H - C.GROUND_H - bird.h / 2;
-    bird.vy = 0;
-  }
+  // Quiz reset
+  quizCount=0; currentQuiz=null; quizAnswerLocked=false;
+  shortAnswerQuizIdx=0; stopQuizTimer();
+  document.getElementById('quizOverlay').classList.add('hidden');
+  document.getElementById('baldiScribbleCanvas').classList.remove('show');
 
   currentSpeed = isMq() ? C.BASE_SPEED*20 : C.BASE_SPEED;
-  updateScore(0); updateThemeLabel();
-  updateMoacBar();
+  updateScore(0); updateThemeLabel(); updateMoacBar();
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  SPAWN
-// ═══════════════════════════════════════════════════════════════
+// ─── SPAWN ──────────────────────────────────────────────────────
 function spawnPipe() {
   const minTop=80, maxTop=C.H-C.GROUND_H-C.GAP-80;
-  const topH = minTop + Math.random()*(maxTop-minTop);
-  const deleted = isHalo() && Math.random()<0.13;
+  const topH=minTop+Math.random()*(maxTop-minTop);
+  const deleted=isHalo()&&Math.random()<0.13;
   pipes.push({x:C.W+20, topH, scored:false, deleted, laserFired:false});
 }
-
 function spawnRandomOrb() {
-  const minY = 45;
-  const maxY = C.H - C.GROUND_H - 45;
-
-  let safe = false;
-  let attempts = 0;
-  let orbX = C.W + 40;
-  let orbY;
-
-  while (!safe && attempts < 10) {
-    orbY = minY + Math.random() * (maxY - minY);
-    safe = true;
+  const minY=45, maxY=C.H-C.GROUND_H-45;
+  let safe=false, attempts=0, orbX=C.W+40, orbY;
+  while (!safe&&attempts<10) {
+    orbY=minY+Math.random()*(maxY-minY); safe=true;
     for (const p of pipes) {
-      if (p.deleted) continue;
-      if (orbX + 25 > p.x && orbX - 25 < p.x + C.PIPE_W) {
-        if (orbY - 25 < p.topH || orbY + 25 > p.topH + C.GAP) {
-          safe = false;
-          break;
-        }
-      }
+      if(p.deleted) continue;
+      if(orbX+25>p.x&&orbX-25<p.x+C.PIPE_W) { if(orbY-25<p.topH||orbY+25>p.topH+C.GAP){safe=false;break;} }
     }
-    if (!safe) orbX += 60;
-    attempts++;
+    if(!safe) orbX+=60; attempts++;
   }
-  orbs.push({x: orbX, y: orbY, collected: false, wobble: Math.random()*Math.PI*2});
+  orbs.push({x:orbX, y:orbY, collected:false, wobble:Math.random()*Math.PI*2});
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  MOAC CRASH PARTICLES
-// ═══════════════════════════════════════════════════════════════
+// ─── PARTICLES ──────────────────────────────────────────────────
 function spawnMoacCrashParticles(p) {
-  const colors = ['#ff4400','#ff8800','#ffcc00','#ffffff','#ff2200'];
-  const cx = p.x + C.PIPE_W / 2;
-  // Spray from top and bottom pipe area near MOAC
-  for (let i = 0; i < 28; i++) {
-    const spd = 120 + Math.random() * 320;
-    const ang = Math.random() * Math.PI * 2;
-    const yOff = (Math.random() - 0.5) * C.H * 0.6;
-    particles.push({
-      x: cx, y: C.H / 2 + yOff,
-      vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
-      life: 0.5 + Math.random() * 0.5, maxLife: 1.0,
-      r: 3 + Math.random() * 5,
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
+  const colors=['#f40','#f80','#fc0','#fff','#f20'], cx=p.x+C.PIPE_W/2;
+  for(let i=0;i<28;i++){
+    const spd=120+Math.random()*320, ang=Math.random()*Math.PI*2;
+    particles.push({x:cx,y:C.H/2+(Math.random()-.5)*C.H*.6,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,life:.5+Math.random()*.5,maxLife:1,r:3+Math.random()*5,color:colors[Math.floor(Math.random()*colors.length)]});
   }
-  // Screen shake via canvas offset (brief)
-  const fl = document.getElementById('laserFlash');
-  fl.style.background = 'rgba(255,100,0,.25)';
-  fl.style.opacity = '1';
-  setTimeout(()=>{
-    fl.style.transition = 'opacity .25s';
-    fl.style.opacity = '0';
-    setTimeout(()=>{ fl.style.transition=''; fl.style.background='rgba(0,220,255,.18)'; }, 280);
-  }, 40);
+  const fl=document.getElementById('laserFlash'); fl.style.background='rgba(255,100,0,.25)'; fl.style.opacity='1';
+  setTimeout(()=>{fl.style.transition='opacity .25s';fl.style.opacity='0';setTimeout(()=>{fl.style.transition='';fl.style.background='rgba(0,220,255,.18)';},280);},40);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  MISTER FLASH HELPERS
-// ═══════════════════════════════════════════════════════════════
-function triggerMisterFlash() {
-  misterFlashAlpha = 1.0;
-  misterSfx.currentTime = 0;
-  misterSfx.play().catch(()=>{});
-}
-function hideMisterOverlay() {
-  const ov = document.getElementById('misterOverlay');
-  if (ov) ov.style.opacity = '0';
-}
+// ─── MISTER ─────────────────────────────────────────────────────
+function triggerMisterFlash() { misterFlashAlpha=1; misterSfx.currentTime=0; misterSfx.play().catch(()=>{}); }
+function hideMisterOverlay()  { const ov=document.getElementById('misterOverlay'); if(ov) ov.style.opacity='0'; }
 
-// ═══════════════════════════════════════════════════════════════
-//  LASER EFFECT HELPERS
-// ═══════════════════════════════════════════════════════════════
+// ─── LASER ──────────────────────────────────────────────────────
 function fireLaser(pipe) {
-  laserEffects.push({
-    bx: bird.x, by: bird.y,
-    px: pipe.x + C.PIPE_W/2,
-    topH: pipe.topH,
-    life: 0.7, maxLife: 0.7
-  });
-
-  const colors = ['#00ffff','#ffffff','#aaffff','#66ffff','#00ddff'];
-  for (let i=0; i<18; i++) {
-    const spd = 80 + Math.random()*280;
-    const ang = Math.random()*Math.PI*2;
-    particles.push({
-      x: pipe.x + C.PIPE_W/2, y: bird.y,
-      vx: Math.cos(ang)*spd, vy: Math.sin(ang)*spd,
-      life: 0.4+Math.random()*0.4, maxLife: 0.8,
-      r: 2+Math.random()*3,
-      color: colors[Math.floor(Math.random()*colors.length)]
-    });
-  }
-  for (let i=0; i<8; i++) {
-    const spd = 60+Math.random()*160;
-    particles.push({
-      x: pipe.x+C.PIPE_W/2, y: pipe.topH*0.5,
-      vx:(Math.random()-.5)*spd*2, vy:(Math.random()-.5)*spd*2,
-      life:.3+Math.random()*.4, maxLife:.7, r:2+Math.random()*3,
-      color: colors[Math.floor(Math.random()*colors.length)]
-    });
-  }
-  const fl = document.getElementById('laserFlash');
-  fl.style.opacity='1';
-  setTimeout(()=>{ fl.style.transition='opacity .35s'; fl.style.opacity='0';
-    setTimeout(()=>{ fl.style.transition=''; },400); },60);
+  laserEffects.push({bx:bird.x,by:bird.y,px:pipe.x+C.PIPE_W/2,topH:pipe.topH,life:.7,maxLife:.7});
+  const colors=['#0ff','#fff','#aff','#6ff','#0df'];
+  for(let i=0;i<18;i++){const spd=80+Math.random()*280,ang=Math.random()*Math.PI*2;particles.push({x:pipe.x+C.PIPE_W/2,y:bird.y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,life:.4+Math.random()*.4,maxLife:.8,r:2+Math.random()*3,color:colors[Math.floor(Math.random()*colors.length)]});}
+  const fl=document.getElementById('laserFlash'); fl.style.opacity='1';
+  setTimeout(()=>{fl.style.transition='opacity .35s';fl.style.opacity='0';setTimeout(()=>{fl.style.transition='';},400);},60);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -784,618 +1102,390 @@ function fireLaser(pipe) {
 // ═══════════════════════════════════════════════════════════════
 function update(dt) {
   if (state!=='playing') return;
-
   hellPulseTime += dt;
 
-  // ── Cang Hoc: mister flash logic ─────────────────────────────
+  // Cang Hoc flash
   if (isCangHoc()) {
-    misterFlashTimer += dt;
-    if (misterFlashTimer >= 1.0) {
-      misterFlashTimer = 0;
-      if (Math.random() < 0.10) triggerMisterFlash();
-    }
-    if (misterFlashAlpha > 0) {
-      misterFlashAlpha -= dt * 2.5;
-      if (misterFlashAlpha < 0) misterFlashAlpha = 0;
-    }
-  } else {
-    misterFlashAlpha = 0;
-  }
+    misterFlashTimer+=dt;
+    if(misterFlashTimer>=1){misterFlashTimer=0;if(Math.random()<.10)triggerMisterFlash();}
+    if(misterFlashAlpha>0){misterFlashAlpha-=dt*2.5;if(misterFlashAlpha<0)misterFlashAlpha=0;}
+  } else misterFlashAlpha=0;
 
-  // ── Bird physics ─────────────────────────────────────────────
+  // Bird physics
   if (isMoac()) {
-    // MOAC stays glued to the ground — no gravity, no jumping
-    bird.y  = C.H - C.GROUND_H - bird.h / 2;
-    bird.vy = 0;
-    // Roll clockwise as it moves (radius ≈ half height)
-    moacRollAngle += (currentSpeed / (bird.h * 0.45)) * dt;
-    bird.angle = moacRollAngle;
+    bird.y=C.H-C.GROUND_H-bird.h/2; bird.vy=0;
+    moacRollAngle+=(currentSpeed/(bird.h*.45))*dt; bird.angle=moacRollAngle;
   } else {
-    bird.vy = Math.min(bird.vy + C.GRAVITY*dt, C.MAX_FALL);
-    bird.y  += bird.vy*dt;
-    const tA = bird.vy<0 ? C.ANGLE_UP : C.ANGLE_UP+(C.ANGLE_DOWN-C.ANGLE_UP)*(bird.vy/C.MAX_FALL);
-    bird.angle += (tA-bird.angle)*Math.min(1,dt*8);
+    bird.vy=Math.min(bird.vy+C.GRAVITY*dt,C.MAX_FALL); bird.y+=bird.vy*dt;
+    const tA=bird.vy<0?C.ANGLE_UP:C.ANGLE_UP+(C.ANGLE_DOWN-C.ANGLE_UP)*(bird.vy/C.MAX_FALL);
+    bird.angle+=(tA-bird.angle)*Math.min(1,dt*8);
   }
 
   pipeTimer += isMq() ? dt*100 : dt;
   if (pipeTimer>=C.PIPE_INTERVAL) { pipeTimer=0; spawnPipe(); }
+  orbTimer+=dt;
+  if (orbTimer>=nextOrbDelay) { orbTimer=0; nextOrbDelay=getRandOrbDelay(); spawnRandomOrb(); }
 
-  orbTimer += dt;
-  if (orbTimer >= nextOrbDelay) {
-    orbTimer=0; nextOrbDelay=getRandOrbDelay();
-    spawnRandomOrb();
-  }
-
-  // ── Pipes ────────────────────────────────────────────────────
+  // ── Pipes: move, laser, score, 20% quiz chance ────────────────
+  let quizPending = false;
   for (const p of pipes) {
+    if (quizPending) break;           // stop processing if quiz about to trigger
     p.x -= currentSpeed*dt;
-
-    // Halo laser trigger
-    if (p.deleted && !p.laserFired && p.x - bird.x < 180 && p.x > bird.x - 80) {
-      p.laserFired = true;
-      fireLaser(p);
-    }
-
-    // Scoring
+    if (p.deleted&&!p.laserFired&&p.x-bird.x<180&&p.x>bird.x-80) { p.laserFired=true; fireLaser(p); }
     if (!p.scored && p.x+C.PIPE_W < bird.x) {
       p.scored=true; score+=C.SCORE_PER_PIPE; updateScore(score);
-      if (!isMq() && !isMoac()) {
-        const newLevel = Math.floor(score/C.SPEED_MILESTONE);
-        if (newLevel>speedLevel) {
-          speedLevel=newLevel;
-          currentSpeed=C.BASE_SPEED+speedLevel*C.SPEED_STEP;
-          if (!isCangHoc()) currentThemeIdx=speedLevel;
+      if (!isMq()&&!isMoac()) {
+        const nL=Math.floor(score/C.SPEED_MILESTONE);
+        if (nL>speedLevel) {
+          speedLevel=nL;
+          if(!isTTT()) currentSpeed=C.BASE_SPEED+speedLevel*C.SPEED_STEP;
+          if(!isCangHoc()&&!isTTT()) currentThemeIdx=speedLevel;
           updateThemeLabel(); activateBadge(speedLevel);
         }
       }
+      // ── 20% quiz trigger ──────────────────────────────────
+      if (isTTT() && Math.random() < QUIZ_PIPE_PROB) quizPending = true;
     }
   }
   pipes = pipes.filter(p=>p.x+C.PIPE_W>-120);
 
-  // ── Orbs ─────────────────────────────────────────────────────
+  if (quizPending) { triggerQuiz(); return; }
+
+  // Orbs
   for (const o of orbs) {
-    o.x -= currentSpeed*dt;
-    if (o.wobble!==undefined) o.wobble += dt*3;
+    o.x-=currentSpeed*dt; if(o.wobble!==undefined) o.wobble+=dt*3;
     if (!o.collected) {
-      const dx=o.x-bird.x, dy=o.y-bird.y;
-      // For MOAC use a much bigger collection radius (it's massive)
-      const collectR = isMoac() ? (bird.w * 0.45) : 32;
-      if (dx*dx+dy*dy < collectR*collectR) {
-        o.collected=true;
-        score+=20; updateScore(score);
-        if (quests[2].type===2 && !quests[2].done) {
-          quests[2].prog++;
-          if (quests[2].prog>=quests[2].req) quests[2].done=true;
-          saveQuests();
-        }
-        for (let i=0;i<8;i++) {
-          const spd=60+Math.random()*100, ang=Math.random()*Math.PI*2;
-          particles.push({x:o.x,y:o.y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,
-            life:.4,maxLife:.4,r:2+Math.random()*2,color:'#ff00ff'});
-        }
+      const dx=o.x-bird.x, dy=o.y-bird.y, cr=isMoac()?bird.w*.45:32;
+      if (dx*dx+dy*dy<cr*cr) {
+        o.collected=true; score+=20; updateScore(score);
+        if(quests[2].type===2&&!quests[2].done){quests[2].prog++;if(quests[2].prog>=quests[2].req)quests[2].done=true;saveQuests();}
+        for(let i=0;i<8;i++){const spd=60+Math.random()*100,ang=Math.random()*Math.PI*2;particles.push({x:o.x,y:o.y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,life:.4,maxLife:.4,r:2+Math.random()*2,color:'#f0f'});}
       }
     }
   }
-  orbs = orbs.filter(o=>o.x>-60);
+  orbs=orbs.filter(o=>o.x>-60);
 
-  for (const l of laserEffects) { l.life -= dt; }
-  laserEffects = laserEffects.filter(l=>l.life>0);
+  for (const l of laserEffects) l.life-=dt;
+  laserEffects=laserEffects.filter(l=>l.life>0);
+  for (const p of particles) { p.x+=p.vx*dt; p.y+=p.vy*dt; p.vx*=.92; p.vy*=.92; p.life-=dt; }
+  particles=particles.filter(p=>p.life>0);
+  scrollX=(scrollX+currentSpeed*dt*.4)%(C.W*2);
 
-  for (const p of particles) {
-    p.x+=p.vx*dt; p.y+=p.vy*dt;
-    p.vx*=0.92; p.vy*=0.92;
-    p.life-=dt;
-  }
-  particles = particles.filter(p=>p.life>0);
-
-  scrollX=(scrollX+currentSpeed*dt*0.4)%(C.W*2);
-
-  // ── Collisions ───────────────────────────────────────────────
+  // Collisions
   if (isMoac()) {
-    // MOAC cannot die from ground/ceiling — it lives on the ground
-    // MOAC destroys pipes on contact; each adds +5% death chance
     for (const p of pipes) {
-      if (p.deleted) continue;
-      // Use a tighter horizontal box (don't use the full 550 width visually)
-      const bx1 = bird.x - bird.w * 0.42;
-      const bx2 = bird.x + bird.w * 0.42;
-      if (bx2 > p.x && bx1 < p.x + C.PIPE_W) {
-        // BOOM — pipe destroyed
-        p.deleted = true;
-        moacDeathChance = Math.min(1, moacDeathChance + 0.05);
-        spawnMoacCrashParticles(p);
-        updateMoacBar();
-        if (Math.random() < moacDeathChance) { die(); return; }
-      }
+      if(p.deleted) continue;
+      const bx1=bird.x-bird.w*.42, bx2=bird.x+bird.w*.42;
+      if(bx2>p.x&&bx1<p.x+C.PIPE_W){p.deleted=true;moacDeathChance=Math.min(1,moacDeathChance+.05);spawnMoacCrashParticles(p);updateMoacBar();if(Math.random()<moacDeathChance){die();return;}}
     }
   } else {
-    // Normal collision
-    if (bird.y+bird.h/2 > C.H-C.GROUND_H || bird.y-bird.h/2 < 0) { die(); return; }
+    if(bird.y+bird.h/2>C.H-C.GROUND_H||bird.y-bird.h/2<0){die();return;}
     for (const p of pipes) {
-      if (p.deleted) continue;
+      if(p.deleted) continue;
       const gT=p.topH, gB=p.topH+C.GAP;
       const bx1=bird.x-bird.w/2+6, bx2=bird.x+bird.w/2-6;
       const by1=bird.y-bird.h/2+4, by2=bird.y+bird.h/2-4;
-      if (bx2>p.x && bx1<p.x+C.PIPE_W) {
-        if (by1<gT||by2>gB) { die(); return; }
-      }
+      if(bx2>p.x&&bx1<p.x+C.PIPE_W){if(by1<gT||by2>gB){die();return;}}
     }
   }
 }
 
-function updateThemeLabel() {
-  const el=document.getElementById('themeLabel');
-  if(el) el.textContent=getTheme().name;
-}
+function updateThemeLabel() { const el=document.getElementById('themeLabel'); if(el) el.textContent=getTheme().name; }
 function activateBadge(level) {
   const T=getTheme(), badge=document.getElementById('speedBadge');
   badge.textContent=`${T.name}  ×${level+1} ⚡`;
-  badge.classList.add('show');
-  clearTimeout(badge._t); badge._t=setTimeout(()=>badge.classList.remove('show'),2800);
+  badge.classList.add('show'); clearTimeout(badge._t);
+  badge._t=setTimeout(()=>badge.classList.remove('show'),2800);
 }
-function updateScore(s) { document.getElementById('scoreDisplay').textContent=s; }
+function updateScore(s) {
+  document.getElementById('scoreDisplay').textContent = s;
+  // Note: quiz is now triggered from pipe scoring in update(), not here
+}
 
 // ═══════════════════════════════════════════════════════════════
 //  DRAW
 // ═══════════════════════════════════════════════════════════════
 function draw() {
   const T=getTheme();
-
   const sg=ctx.createLinearGradient(0,0,0,C.H);
-  sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
+  sg.addColorStop(0,T.sky[0]); sg.addColorStop(.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
 
   if (isCangHoc()) {
-    const pulse = 0.12 + Math.sin(hellPulseTime * 1.2) * 0.04;
-    const hellGrad = ctx.createRadialGradient(C.W/2, C.H/2, 60, C.W/2, C.H/2, C.W*0.85);
-    hellGrad.addColorStop(0, `rgba(80,0,0,0)`);
-    hellGrad.addColorStop(0.6, `rgba(140,0,0,${pulse})`);
-    hellGrad.addColorStop(1, `rgba(200,0,0,${pulse * 2})`);
-    ctx.fillStyle = hellGrad;
-    ctx.fillRect(0,0,C.W,C.H);
-
-    ctx.save();
-    ctx.globalAlpha = 0.06 + Math.sin(hellPulseTime * 3) * 0.02;
-    ctx.fillStyle = '#ff0000';
-    for (let y = 0; y < C.H; y += 6) { ctx.fillRect(0, y, C.W, 1); }
-    ctx.restore();
+    const pulse=.12+Math.sin(hellPulseTime*1.2)*.04;
+    const hg=ctx.createRadialGradient(C.W/2,C.H/2,60,C.W/2,C.H/2,C.W*.85);
+    hg.addColorStop(0,`rgba(80,0,0,0)`); hg.addColorStop(.6,`rgba(140,0,0,${pulse})`); hg.addColorStop(1,`rgba(200,0,0,${pulse*2})`);
+    ctx.fillStyle=hg; ctx.fillRect(0,0,C.W,C.H);
+    ctx.save(); ctx.globalAlpha=.06+Math.sin(hellPulseTime*3)*.02; ctx.fillStyle='#f00';
+    for(let y=0;y<C.H;y+=6) ctx.fillRect(0,y,C.W,1); ctx.restore();
   }
+  if (isTTT()) drawChalkGrid();
 
-  drawBg(T);
-  drawPipes(T);
-  drawLasers();
-  drawOrbs();
-  drawGround(T);
-  drawBirdSprite();
-  drawParticles();
-  drawDarkness(bird.x, bird.y);
-  drawMisterFlash();
-
-  // ── MOAC: draw destruction streak on ground ──────────────────
-  if (isMoac()) {
-    drawMoacGroundTrail();
-  }
+  drawBg(T); drawPipes(T); drawLasers(); drawOrbs(); drawGround(T);
+  drawBirdSprite(); drawParticles();
+  drawDarkness(bird.x,bird.y); drawMisterFlash();
+  if (isMoac()) drawMoacGroundTrail();
 }
 
-// ─── MOAC ground crack/trail effect ────────────────────────────
+function drawChalkGrid() {
+  ctx.save(); ctx.globalAlpha=.07; ctx.strokeStyle='#8f8'; ctx.lineWidth=1;
+  for(let y=0;y<C.H;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(C.W,y);ctx.stroke();}
+  for(let x=0;x<C.W;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,C.H);ctx.stroke();}
+  ctx.restore();
+}
+
 function drawMoacGroundTrail() {
-  const gy = C.H - C.GROUND_H;
-  ctx.save();
-  ctx.globalAlpha = 0.45;
-  ctx.strokeStyle = '#ff4400';
-  ctx.lineWidth = 3;
-  ctx.shadowColor = '#ff6600';
-  ctx.shadowBlur = 6;
-  // Draw cracks behind MOAC (scroll with terrain)
-  const trailX = bird.x - bird.w * 0.4;
-  for (let i = 0; i < 6; i++) {
-    const cx = trailX - i * 45 - ((scrollX * 0.9) % 45);
-    ctx.beginPath();
-    ctx.moveTo(cx, gy + 2);
-    ctx.lineTo(cx - 10, gy + 14);
-    ctx.lineTo(cx - 5, gy + 8);
-    ctx.lineTo(cx - 18, gy + 20);
-    ctx.stroke();
-  }
+  const gy=C.H-C.GROUND_H; ctx.save(); ctx.globalAlpha=.45;
+  ctx.strokeStyle='#f40'; ctx.lineWidth=3; ctx.shadowColor='#f60'; ctx.shadowBlur=6;
+  const tx=bird.x-bird.w*.4;
+  for(let i=0;i<6;i++){const cx=tx-i*45-((scrollX*.9)%45);ctx.beginPath();ctx.moveTo(cx,gy+2);ctx.lineTo(cx-10,gy+14);ctx.lineTo(cx-5,gy+8);ctx.lineTo(cx-18,gy+20);ctx.stroke();}
   ctx.restore();
 }
-
 function drawMisterFlash() {
-  if (!isCangHoc() || misterFlashAlpha <= 0) return;
-  const a = Math.max(0, misterFlashAlpha);
+  if(!isCangHoc()||misterFlashAlpha<=0) return;
   ctx.save();
-  if (misterImgEl.complete && misterImgEl.naturalHeight !== 0) {
-    ctx.globalAlpha = a;
-    ctx.drawImage(misterImgEl, 0, 0, C.W, C.H);
-    ctx.globalAlpha = a * 0.35;
-    ctx.fillStyle = '#ff0000';
-    ctx.fillRect(0, 0, C.W, C.H);
-  } else {
-    ctx.globalAlpha = a * 0.7;
-    ctx.fillStyle = '#cc0000';
-    ctx.fillRect(0, 0, C.W, C.H);
-  }
+  if(misterImgEl.complete&&misterImgEl.naturalHeight!==0){ctx.globalAlpha=misterFlashAlpha;ctx.drawImage(misterImgEl,0,0,C.W,C.H);ctx.globalAlpha=misterFlashAlpha*.35;ctx.fillStyle='#f00';ctx.fillRect(0,0,C.W,C.H);}
+  else{ctx.globalAlpha=misterFlashAlpha*.7;ctx.fillStyle='#c00';ctx.fillRect(0,0,C.W,C.H);}
   ctx.restore();
 }
-
-function drawDarkness(x, y) {
-  if (!isHiDieu()) return;
-  const rad = 44;
-  ctx.save();
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  const grad = ctx.createRadialGradient(x, y, rad * 0.4, x, y, rad * 3.5);
-  grad.addColorStop(0, 'rgba(0,0,0,0)');
-  grad.addColorStop(0.4, 'rgba(255, 255, 0, 0.15)');
-  grad.addColorStop(0.8, 'rgba(0,0,0,0.98)');
-  grad.addColorStop(1, '#000000');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, C.W, C.H);
-  ctx.restore();
+function drawDarkness(x,y) {
+  if(!isHiDieu()) return; ctx.save(); ctx.setTransform(1,0,0,1,0,0);
+  const g=ctx.createRadialGradient(x,y,44*.4,x,y,44*3.5);
+  g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(.4,'rgba(255,255,0,.15)');
+  g.addColorStop(.8,'rgba(0,0,0,.98)'); g.addColorStop(1,'#000');
+  ctx.fillStyle=g; ctx.fillRect(0,0,C.W,C.H); ctx.restore();
 }
-
 function drawBg(T) {
-  ctx.save(); ctx.globalAlpha=0.22; ctx.fillStyle='#fff';
+  ctx.save(); ctx.globalAlpha=.22; ctx.fillStyle='#fff';
   const sx=[30,110,200,320,370], sy=[60,110,80,140,90];
-  for (let i=0;i<5;i++){
-    const ox=((sx[i]-scrollX*0.3)%C.W+C.W)%C.W, oy=sy[i];
-    ctx.beginPath(); ctx.arc(ox,oy,10,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.arc(ox+18,oy-6,14,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.arc(ox+36,oy,10,0,Math.PI*2); ctx.fill();
-  }
-  ctx.globalAlpha=0.45; ctx.fillStyle='#fff';
+  for(let i=0;i<5;i++){const ox=((sx[i]-scrollX*.3)%C.W+C.W)%C.W,oy=sy[i];ctx.beginPath();ctx.arc(ox,oy,10,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(ox+18,oy-6,14,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(ox+36,oy,10,0,Math.PI*2);ctx.fill();}
+  ctx.globalAlpha=.45; ctx.fillStyle='#fff';
   [[50,30],[150,20],[300,45],[380,25],[220,55],[100,75],[340,70]].forEach(([a,b])=>ctx.fillRect(a,b,2,2));
   ctx.restore();
 }
-
 function drawPipes(T) {
   for (const p of pipes) {
-    if (p.deleted) continue;
-    const gT=p.topH, gB=p.topH+C.GAP;
-    const pw=C.PIPE_W, capW=pw+14, capH=22;
-    const makeG=(x)=>{ const g=ctx.createLinearGradient(x,0,x+pw,0); g.addColorStop(0,T.pipe[0]); g.addColorStop(0.5,T.pipe[1]); g.addColorStop(1,T.pipe[0]); return g; };
-    const makeCapG=(x)=>{ const g=ctx.createLinearGradient(x-7,0,x-7+capW,0); g.addColorStop(0,T.cap); g.addColorStop(0.5,T.pipe[1]); g.addColorStop(1,T.cap); return g; };
-
-    ctx.fillStyle=makeG(p.x); ctx.beginPath(); ctx.roundRect(p.x,0,pw,gT-capH,[0,0,4,4]); ctx.fill();
-    ctx.fillStyle=makeCapG(p.x); ctx.beginPath(); ctx.roundRect(p.x-7,gT-capH,capW,capH,4); ctx.fill();
+    if(p.deleted) continue;
+    const gT=p.topH, gB=p.topH+C.GAP, pw=C.PIPE_W, capW=pw+14, capH=22;
+    const mG=(x)=>{const g=ctx.createLinearGradient(x,0,x+pw,0);g.addColorStop(0,T.pipe[0]);g.addColorStop(.5,T.pipe[1]);g.addColorStop(1,T.pipe[0]);return g;};
+    const mCG=(x)=>{const g=ctx.createLinearGradient(x-7,0,x-7+capW,0);g.addColorStop(0,T.cap);g.addColorStop(.5,T.pipe[1]);g.addColorStop(1,T.cap);return g;};
+    ctx.fillStyle=mG(p.x);  ctx.beginPath(); ctx.roundRect(p.x,0,pw,gT-capH,[0,0,4,4]); ctx.fill();
+    ctx.fillStyle=mCG(p.x); ctx.beginPath(); ctx.roundRect(p.x-7,gT-capH,capW,capH,4); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(p.x+6,0,10,gT-capH);
-
-    ctx.fillStyle=makeG(p.x); ctx.beginPath(); ctx.roundRect(p.x,gB+capH,pw,C.H-C.GROUND_H-gB-capH,[4,4,0,0]); ctx.fill();
-    ctx.fillStyle=makeCapG(p.x); ctx.beginPath(); ctx.roundRect(p.x-7,gB,capW,capH,4); ctx.fill();
+    ctx.fillStyle=mG(p.x);  ctx.beginPath(); ctx.roundRect(p.x,gB+capH,pw,C.H-C.GROUND_H-gB-capH,[4,4,0,0]); ctx.fill();
+    ctx.fillStyle=mCG(p.x); ctx.beginPath(); ctx.roundRect(p.x-7,gB,capW,capH,4); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(p.x+6,gB+capH,10,C.H-C.GROUND_H-gB-capH);
 
-    if (isCangHoc()) {
-      ctx.save();
-      ctx.fillStyle = '#8b0000';
-      ctx.shadowColor = '#ff0000'; ctx.shadowBlur = 6;
-      const drips = [p.x+10, p.x+28, p.x+46];
-      drips.forEach((dx, di) => {
-        const dripLen = 8 + Math.sin(hellPulseTime*2 + di*1.3) * 4;
-        ctx.beginPath(); ctx.ellipse(dx, gT + dripLen/2, 3, dripLen/2, 0, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.arc(dx, gT + dripLen + 3, 3.5, 0, Math.PI*2); ctx.fill();
-      });
-      ctx.restore();
-    }
+    if(isCangHoc()){ctx.save();ctx.fillStyle='#8b0000';ctx.shadowColor='#f00';ctx.shadowBlur=6;[p.x+10,p.x+28,p.x+46].forEach((dx,di)=>{const dl=8+Math.sin(hellPulseTime*2+di*1.3)*4;ctx.beginPath();ctx.ellipse(dx,gT+dl/2,3,dl/2,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(dx,gT+dl+3,3.5,0,Math.PI*2);ctx.fill();});ctx.restore();}
+    if(isTTT()){ctx.save();ctx.globalAlpha=.25;ctx.fillStyle='#cfc';ctx.font="7px 'Press Start 2P',monospace";ctx.textAlign='center';const eqs=['2+2','3×3','8÷2','7-4','5+6'];const eq=eqs[Math.floor(p.x/80)%eqs.length];if(gT>40)ctx.fillText(eq,p.x+pw/2,gT/2);ctx.fillText(eq,p.x+pw/2,gB+(C.H-C.GROUND_H-gB)/2);ctx.restore();}
   }
 }
-
 function drawLasers() {
   for (const l of laserEffects) {
-    const t   = l.life/l.maxLife;
-    const a   = Math.pow(t, 0.5);
-    const grd = C.H - C.GROUND_H;
-
-    ctx.save();
-    ctx.globalAlpha = a;
-
-    const beamY = l.by;
-    ctx.shadowColor='#00ffff'; ctx.shadowBlur=30;
-    ctx.strokeStyle='#00ffff'; ctx.lineWidth=5;
-    ctx.beginPath(); ctx.moveTo(l.bx,beamY); ctx.lineTo(l.px,beamY); ctx.stroke();
-    ctx.strokeStyle='#ffffff'; ctx.lineWidth=2; ctx.shadowBlur=0;
-    ctx.beginPath(); ctx.moveTo(l.bx,beamY); ctx.lineTo(l.px,beamY); ctx.stroke();
-
-    const ringR = (1-t)*55 + 15;
-    ctx.shadowColor='#00ffff'; ctx.shadowBlur=25;
-    ctx.strokeStyle=`rgba(0,255,255,${a*0.7})`;
-    ctx.lineWidth=4;
-    ctx.beginPath(); ctx.arc(l.px, beamY, ringR,0,Math.PI*2); ctx.stroke();
-
-    const cx = l.px;
-    ctx.shadowBlur=20; ctx.lineWidth=6;
+    const t=l.life/l.maxLife, a=Math.pow(t,.5), grd=C.H-C.GROUND_H;
+    ctx.save(); ctx.globalAlpha=a;
+    ctx.shadowColor='#0ff'; ctx.shadowBlur=30; ctx.strokeStyle='#0ff'; ctx.lineWidth=5;
+    ctx.beginPath(); ctx.moveTo(l.bx,l.by); ctx.lineTo(l.px,l.by); ctx.stroke();
+    ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.shadowBlur=0;
+    ctx.beginPath(); ctx.moveTo(l.bx,l.by); ctx.lineTo(l.px,l.by); ctx.stroke();
+    const rR=(1-t)*55+15; ctx.shadowColor='#0ff'; ctx.shadowBlur=25;
+    ctx.strokeStyle=`rgba(0,255,255,${a*.7})`; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.arc(l.px,l.by,rR,0,Math.PI*2); ctx.stroke();
     const tG=ctx.createLinearGradient(0,0,0,l.topH);
-    tG.addColorStop(0,'rgba(0,255,255,0)');
-    tG.addColorStop(0.7,`rgba(0,255,255,${a})`);
-    tG.addColorStop(1,`rgba(255,255,255,${a})`);
-    ctx.strokeStyle=tG;
-    ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,l.topH); ctx.stroke();
+    tG.addColorStop(0,'rgba(0,255,255,0)'); tG.addColorStop(.7,`rgba(0,255,255,${a})`); tG.addColorStop(1,`rgba(255,255,255,${a})`);
+    ctx.strokeStyle=tG; ctx.lineWidth=6; ctx.beginPath(); ctx.moveTo(l.px,0); ctx.lineTo(l.px,l.topH); ctx.stroke();
     const bG=ctx.createLinearGradient(0,l.topH+C.GAP,0,grd);
-    bG.addColorStop(0,`rgba(255,255,255,${a})`);
-    bG.addColorStop(0.3,`rgba(0,255,255,${a})`);
-    bG.addColorStop(1,'rgba(0,255,255,0)');
-    ctx.strokeStyle=bG;
-    ctx.beginPath(); ctx.moveTo(cx,l.topH+C.GAP); ctx.lineTo(cx,grd); ctx.stroke();
-
-    if (t > 0.4) {
-      const crossA = (t-0.4)/0.6;
-      ctx.globalAlpha=a*crossA*0.5;
-      ctx.strokeStyle='#aaffff'; ctx.lineWidth=2; ctx.shadowBlur=10;
-      const hs=30*(1-t)+5;
-      ctx.beginPath(); ctx.moveTo(l.px-hs,beamY-hs); ctx.lineTo(l.px+hs,beamY+hs); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(l.px+hs,beamY-hs); ctx.lineTo(l.px-hs,beamY+hs); ctx.stroke();
-    }
-
+    bG.addColorStop(0,`rgba(255,255,255,${a})`); bG.addColorStop(.3,`rgba(0,255,255,${a})`); bG.addColorStop(1,'rgba(0,255,255,0)');
+    ctx.strokeStyle=bG; ctx.beginPath(); ctx.moveTo(l.px,l.topH+C.GAP); ctx.lineTo(l.px,grd); ctx.stroke();
     ctx.restore();
   }
 }
-
 function drawOrbs() {
-  const now = performance.now()/1000;
+  const now=performance.now()/1000;
   for (const o of orbs) {
-    if (o.collected) continue;
-    const wobY = Math.sin((o.wobble||0) + now*2)*5;
-    ctx.save();
-    ctx.shadowColor='#ff00ff'; ctx.shadowBlur=16;
-    if (orbImg.complete && orbImg.naturalHeight!==0) {
-      ctx.drawImage(orbImg, o.x-18, o.y+wobY-18, 36,36);
-    } else {
-      ctx.fillStyle='#ff00ff';
-      ctx.beginPath(); ctx.arc(o.x, o.y+wobY,15,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle='#fff';
-      ctx.beginPath(); ctx.arc(o.x-4, o.y+wobY-4,4,0,Math.PI*2); ctx.fill();
-    }
+    if(o.collected) continue;
+    const wobY=Math.sin((o.wobble||0)+now*2)*5;
+    ctx.save(); ctx.shadowColor='#f0f'; ctx.shadowBlur=16;
+    if(orbImg.complete&&orbImg.naturalHeight!==0) ctx.drawImage(orbImg,o.x-18,o.y+wobY-18,36,36);
+    else { ctx.fillStyle='#f0f'; ctx.beginPath(); ctx.arc(o.x,o.y+wobY,15,0,Math.PI*2); ctx.fill(); }
     ctx.restore();
   }
 }
-
 function drawParticles() {
   for (const p of particles) {
-    const a = p.life/p.maxLife;
-    ctx.save();
-    ctx.globalAlpha=a;
-    ctx.fillStyle=p.color;
+    ctx.save(); ctx.globalAlpha=p.life/p.maxLife; ctx.fillStyle=p.color;
     ctx.shadowColor=p.color; ctx.shadowBlur=8;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-    ctx.restore();
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); ctx.restore();
   }
 }
-
 function drawGround(T) {
   const gy=C.H-C.GROUND_H;
   const gg=ctx.createLinearGradient(0,gy,0,C.H); gg.addColorStop(0,T.ground[0]); gg.addColorStop(1,T.ground[1]);
   ctx.fillStyle=gg; ctx.fillRect(0,gy,C.W,C.GROUND_H);
   ctx.fillStyle=T.turf; ctx.fillRect(0,gy,C.W,16);
-  const bx=(-scrollX*0.9%60+60)%60;
-  ctx.fillStyle=T.bump;
-  for (let x=bx-30;x<C.W+30;x+=60){ ctx.beginPath(); ctx.arc(x,gy+3,18,Math.PI,0); ctx.fill(); }
+  const bx=(-scrollX*.9%60+60)%60; ctx.fillStyle=T.bump;
+  for(let x=bx-30;x<C.W+30;x+=60){ctx.beginPath();ctx.arc(x,gy+3,18,Math.PI,0);ctx.fill();}
   ctx.strokeStyle='rgba(255,255,255,.08)'; ctx.lineWidth=2;
   ctx.beginPath(); ctx.moveTo(0,gy+16); ctx.lineTo(C.W,gy+16); ctx.stroke();
 }
-
 function drawBirdSprite() {
-  ctx.save();
-  ctx.translate(bird.x, bird.y);
-  ctx.rotate(bird.angle);
-  const img = currentBirdImg();
-  if (img) {
-    ctx.drawImage(img, -bird.w/2, -bird.h/2, bird.w, bird.h);
-  } else {
-    drawFallbackBird(ctx, 0, 0, 0, isMoac() ? MOAC_SCALE : 1);
-  }
+  ctx.save(); ctx.translate(bird.x,bird.y); ctx.rotate(bird.angle);
+  const img=currentBirdImg();
+  if(img) ctx.drawImage(img,-bird.w/2,-bird.h/2,bird.w,bird.h);
+  else drawFallbackBird(ctx,0,0,0,isMoac()?MOAC_SCALE:1);
   ctx.restore();
 }
-
-function drawFallbackBird(cx,x,y,angle,scale=1){
+function drawFallbackBird(cx,x,y,angle,scale=1) {
   cx.save(); cx.translate(x,y); cx.rotate(angle); cx.scale(scale,scale);
-  cx.fillStyle='#ffe066'; cx.beginPath(); cx.ellipse(0,0,14,10,0,0,Math.PI*2); cx.fill();
-  cx.fillStyle='#ffaa00'; cx.beginPath(); cx.ellipse(-4,2,9,5,-0.4,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#fe6'; cx.beginPath(); cx.ellipse(0,0,14,10,0,0,Math.PI*2); cx.fill();
+  cx.fillStyle='#fa0'; cx.beginPath(); cx.ellipse(-4,2,9,5,-.4,0,Math.PI*2); cx.fill();
   cx.fillStyle='#fff'; cx.beginPath(); cx.arc(8,-2,4,0,Math.PI*2); cx.fill();
   cx.fillStyle='#333'; cx.beginPath(); cx.arc(9,-2,2,0,Math.PI*2); cx.fill();
   cx.fillStyle='#fff'; cx.beginPath(); cx.arc(10,-3,.8,0,Math.PI*2); cx.fill();
-  cx.fillStyle='#ff7700'; cx.beginPath(); cx.moveTo(12,1); cx.lineTo(20,3); cx.lineTo(12,5); cx.closePath(); cx.fill();
+  cx.fillStyle='#f70'; cx.beginPath(); cx.moveTo(12,1); cx.lineTo(20,3); cx.lineTo(12,5); cx.closePath(); cx.fill();
   cx.restore();
 }
-
-function drawBirdPreview(){
+function drawBirdPreview() {
   const pc=document.getElementById('birdPreview'), px=pc.getContext('2d');
-  px.clearRect(0,0,64,64);
-  const img=currentBirdImg();
-  if (img) px.drawImage(img,0,0,64,64); else drawFallbackBird(px,32,32,0,1.6);
+  px.clearRect(0,0,64,64); const img=currentBirdImg();
+  if(img) px.drawImage(img,0,0,64,64); else drawFallbackBird(px,32,32,0,1.6);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  GAME LOOP
-// ═══════════════════════════════════════════════════════════════
+// ─── LOOP ──────────────────────────────────────────────────────
 function loop(ts) {
-  if (!lastTime) lastTime=ts;
+  if(!lastTime) lastTime=ts;
   const dt=Math.min((ts-lastTime)/1000,.1); lastTime=ts;
-  update(dt); draw();
-  animId=requestAnimationFrame(loop);
+  update(dt); draw(); animId=requestAnimationFrame(loop);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  ACTIONS
-// ═══════════════════════════════════════════════════════════════
+// ─── ACTIONS ───────────────────────────────────────────────────
 function flap() {
-  if (state==='playing' && bird.alive) {
-    // ─── MOAC cannot jump ─────────────────────────────────────
-    if (isMoac()) return;
-
-    if (is09()) {
-      deathChance09 += 0.0018;
-      if (Math.random() < deathChance09) { die(); return; }
-    }
-    bird.vy = C.JUMP_VY;
+  if(state==='playing'&&bird.alive){
+    if(isMoac()) return;
+    if(is09()){deathChance09+=.0018;if(Math.random()<deathChance09){die();return;}}
+    bird.vy=C.JUMP_VY;
   }
 }
-
 function processQuestsOnDeath() {
-  totalScoreGlobal += score;
-  localStorage.setItem('flappy_totalScore',totalScoreGlobal);
-  if (quests[0].type===0 && !quests[0].done) {
-    quests[0].prog+=score;
-    if (quests[0].prog>=quests[0].req) { quests[0].prog=quests[0].req; quests[0].done=true; }
-  }
-  if (quests[1].type===1 && !quests[1].done) {
-    if (score>=quests[1].req) { quests[1].prog=quests[1].req; quests[1].done=true; }
-    else { quests[1].prog=Math.max(quests[1].prog,score); }
-  }
+  totalScoreGlobal+=score; localStorage.setItem('flappy_totalScore',totalScoreGlobal);
+  if(quests[0].type===0&&!quests[0].done){quests[0].prog+=score;if(quests[0].prog>=quests[0].req){quests[0].prog=quests[0].req;quests[0].done=true;}}
+  if(quests[1].type===1&&!quests[1].done){if(score>=quests[1].req){quests[1].prog=quests[1].req;quests[1].done=true;}else quests[1].prog=Math.max(quests[1].prog,score);}
   saveQuests();
 }
-
 function die() {
-  if (isConcu() && !revivedThisRun) {
-    revivedThisRun=true;
-    bird.vy=C.JUMP_VY; bird.y=C.H/2;
-    pipes=pipes.filter(p=>p.x>bird.x+200);
-    return;
-  }
-  processQuestsOnDeath();
-  misterFlashAlpha = 0;
-  moacDeathChance  = 0;
-  updateMoacBar();
+  if(isConcu()&&!revivedThisRun){revivedThisRun=true;bird.vy=C.JUMP_VY;bird.y=C.H/2;pipes=pipes.filter(p=>p.x>bird.x+200);return;}
+  processQuestsOnDeath(); stopQuizTimer();
+  misterFlashAlpha=0; moacDeathChance=0; updateMoacBar();
+  document.getElementById('quizOverlay').classList.add('hidden');
   bird.alive=false; state='over'; bgMusic.pause(); cancelAnimationFrame(animId); draw();
   ctx.fillStyle='rgba(255,0,0,.18)'; ctx.fillRect(0,0,C.W,C.H);
   document.getElementById('finalScore').textContent=score;
-  if (score>highScore) {
-    highScore=score; localStorage.setItem('flappy_hs',highScore);
-    document.getElementById('bestScore').textContent='🏆 KỶ LỤC MỚI!';
-  } else {
-    document.getElementById('bestScore').textContent='Kỷ lục: '+highScore;
-  }
+  if(score>highScore){highScore=score;localStorage.setItem('flappy_hs',highScore);document.getElementById('bestScore').textContent='🏆 KỶ LỤC MỚI!';}
+  else document.getElementById('bestScore').textContent='Kỷ lục: '+highScore;
   document.getElementById('menuHS').textContent=highScore;
   showScreen('gameoverScreen');
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  SCREENS
-// ═══════════════════════════════════════════════════════════════
+// ─── SCREENS ───────────────────────────────────────────────────
 function showScreen(id) {
   ['menuScreen','skinScreen','howScreen','gameoverScreen','pauseScreen','questScreen']
     .forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==id));
 }
-
 function showMenu() {
-  state='menu'; cancelAnimationFrame(animId); bgMusic.pause();
-  document.getElementById('menuHS').textContent=highScore;
-  updateCoinUI();
+  state='menu'; cancelAnimationFrame(animId); bgMusic.pause(); stopQuizTimer();
+  document.getElementById('menuHS').textContent=highScore; updateCoinUI();
   document.getElementById('hud').classList.add('hidden');
   document.getElementById('pauseHint').style.opacity='0';
   document.getElementById('moacBar').classList.remove('show');
-  applyHellModeWrapper();
-  showScreen('menuScreen'); drawMenuBg();
+  document.getElementById('quizOverlay').classList.add('hidden');
+  applyHellModeWrapper(); showScreen('menuScreen'); drawMenuBg();
 }
-
-function showHow()  { showScreen('howScreen'); }
-
+function showHow() { showScreen('howScreen'); }
 function startGame() {
   showScreen('');
   document.getElementById('hud').classList.remove('hidden');
   document.getElementById('pauseHint').style.opacity='1';
-  setMusicForSkin();
-  bgMusic.play().catch(()=>{});
-  applyHellModeWrapper();
+  setMusicForSkin(); bgMusic.play().catch(()=>{}); applyHellModeWrapper();
   initGame(); state='playing'; cancelAnimationFrame(animId); lastTime=null; animId=requestAnimationFrame(loop);
 }
-
-function resumeGame() { showScreen(''); state='playing'; lastTime=null; bgMusic.play(); animId=requestAnimationFrame(loop); }
+function resumeGame() {
+  showScreen(''); document.getElementById('quizOverlay').classList.add('hidden');
+  state='playing'; lastTime=null; bgMusic.play(); animId=requestAnimationFrame(loop);
+}
 function togglePause() {
-  if      (state==='playing') { state='paused'; cancelAnimationFrame(animId); bgMusic.pause(); showScreen('pauseScreen'); }
-  else if (state==='paused')  { resumeGame(); }
+  if(state==='playing'){ state='paused'; cancelAnimationFrame(animId); stopQuizTimer(); bgMusic.pause(); showScreen('pauseScreen'); }
+  else if(state==='paused'){ resumeGame(); }
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  MENU BACKGROUND ANIMATION
-// ═══════════════════════════════════════════════════════════════
+// ─── MENU BG ───────────────────────────────────────────────────
 let menuLast=null, menuBirdY=320, menuBirdVY=-80;
 function drawMenuBg(ts) {
-  if (state!=='menu') return;
-  const dt=menuLast ? Math.min((ts-menuLast)/1000,.1) : .016; menuLast=ts;
-
-  if (isMoac()) {
-    // MOAC just rolls across the menu screen on the ground
-    menuBirdY = C.H - C.GROUND_H - BASE_BIRD_H * MOAC_SCALE / 2;
-    moacRollAngle += dt * 0.9;
-  } else {
-    menuBirdVY+=C.GRAVITY*dt; if(menuBirdVY>200) menuBirdVY=200;
-    menuBirdY+=menuBirdVY*dt;
-    if(menuBirdY>C.H*.72){menuBirdY=C.H*.72;menuBirdVY=-200;}
-    if(menuBirdY<C.H*.25){menuBirdY=C.H*.25;menuBirdVY=80;}
-  }
-
+  if(state!=='menu') return;
+  const dt=menuLast?Math.min((ts-menuLast)/1000,.1):.016; menuLast=ts;
+  if(isMoac()){menuBirdY=C.H-C.GROUND_H-BASE_BIRD_H*MOAC_SCALE/2;moacRollAngle+=dt*.9;}
+  else{menuBirdVY+=C.GRAVITY*dt;if(menuBirdVY>200)menuBirdVY=200;menuBirdY+=menuBirdVY*dt;if(menuBirdY>C.H*.72){menuBirdY=C.H*.72;menuBirdVY=-200;}if(menuBirdY<C.H*.25){menuBirdY=C.H*.25;menuBirdVY=80;}}
   const T=getTheme();
-  const sg=ctx.createLinearGradient(0,0,0,C.H); sg.addColorStop(0,T.sky[0]); sg.addColorStop(0.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
+  const sg=ctx.createLinearGradient(0,0,0,C.H); sg.addColorStop(0,T.sky[0]); sg.addColorStop(.6,T.sky[1]); sg.addColorStop(1,T.sky[2]);
   ctx.fillStyle=sg; ctx.fillRect(0,0,C.W,C.H);
-
-  if (isCangHoc()) {
-    hellPulseTime += dt;
-    const pulse = 0.12 + Math.sin(hellPulseTime * 1.2) * 0.04;
-    const hellGrad = ctx.createRadialGradient(C.W/2, C.H/2, 60, C.W/2, C.H/2, C.W*0.85);
-    hellGrad.addColorStop(0, `rgba(80,0,0,0)`);
-    hellGrad.addColorStop(0.6, `rgba(140,0,0,${pulse})`);
-    hellGrad.addColorStop(1, `rgba(200,0,0,${pulse * 2})`);
-    ctx.fillStyle = hellGrad;
-    ctx.fillRect(0,0,C.W,C.H);
-  }
-
-  scrollX=(scrollX+120*dt*.4)%(C.W*2);
-  drawBg(T); drawGround(T);
-
-  ctx.save();
-  ctx.translate(100, menuBirdY);
-  if (isMoac()) {
-    ctx.rotate(moacRollAngle);
-    const img = currentBirdImg();
-    const hw = BASE_BIRD_W * MOAC_SCALE / 2;
-    const hh = BASE_BIRD_H * MOAC_SCALE / 2;
-    if (img) ctx.drawImage(img, -hw, -hh, BASE_BIRD_W * MOAC_SCALE, BASE_BIRD_H * MOAC_SCALE);
-    else drawFallbackBird(ctx, 0, 0, 0, MOAC_SCALE);
-  } else {
-    ctx.rotate(Math.sin(menuBirdY*.02)*.15);
-    const img=currentBirdImg();
-    if(img) ctx.drawImage(img,-22,-18,44,36); else drawFallbackBird(ctx,0,0,0,1);
-  }
+  if(isCangHoc()){hellPulseTime+=dt;const pulse=.12+Math.sin(hellPulseTime*1.2)*.04;const hg=ctx.createRadialGradient(C.W/2,C.H/2,60,C.W/2,C.H/2,C.W*.85);hg.addColorStop(0,'rgba(80,0,0,0)');hg.addColorStop(.6,`rgba(140,0,0,${pulse})`);hg.addColorStop(1,`rgba(200,0,0,${pulse*2})`);ctx.fillStyle=hg;ctx.fillRect(0,0,C.W,C.H);}
+  if(isTTT()){hellPulseTime+=dt;drawChalkGrid();}
+  scrollX=(scrollX+120*dt*.4)%(C.W*2); drawBg(T); drawGround(T);
+  ctx.save(); ctx.translate(100,menuBirdY);
+  if(isMoac()){ctx.rotate(moacRollAngle);const img=currentBirdImg(),hw=BASE_BIRD_W*MOAC_SCALE/2,hh=BASE_BIRD_H*MOAC_SCALE/2;if(img)ctx.drawImage(img,-hw,-hh,BASE_BIRD_W*MOAC_SCALE,BASE_BIRD_H*MOAC_SCALE);else drawFallbackBird(ctx,0,0,0,MOAC_SCALE);}
+  else{ctx.rotate(Math.sin(menuBirdY*.02)*.15);const img=currentBirdImg();if(img)ctx.drawImage(img,-22,-18,44,36);else drawFallbackBird(ctx,0,0,0,1);}
   ctx.restore();
-
-  if (!isMoac()) drawDarkness(100, menuBirdY);
-
+  if(!isMoac()) drawDarkness(100,menuBirdY);
   requestAnimationFrame(drawMenuBg);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  INPUT & BOOT
-// ═══════════════════════════════════════════════════════════════
-document.addEventListener('keydown',e=>{
-  if(e.code==='Space'||e.code==='ArrowUp'){
+// ─── INPUT ─────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  // ── Quiz state ───────────────────────────────────────────────
+  if (state === 'quiz') {
+    if (currentQuiz && currentQuiz.type === 'short') {
+      // Enter submits; all other keys pass through to native input
+      if (e.key === 'Enter') { e.preventDefault(); submitShortAnswer(); }
+      // Don't preventDefault on other keys so native input receives them
+      return;
+    }
+    // MCQ: A/B/C/D
+    if (['KeyA','KeyB','KeyC','KeyD'].includes(e.code)) {
+      e.preventDefault();
+      handleQuizKey(e.code.replace('Key',''));
+    }
+    return;
+  }
+  // ── Game state ───────────────────────────────────────────────
+  if (e.code==='Space'||e.code==='ArrowUp') {
     e.preventDefault();
     if(state==='playing') flap();
     else if(state==='menu'||state==='over') startGame();
   }
-  if(e.code==='Escape'||e.code==='KeyP'){
+  if (e.code==='Escape'||e.code==='KeyP') {
     if(state==='playing'||state==='paused') togglePause();
   }
 });
-canvas.addEventListener('click',()=>{ if(state==='playing') flap(); });
-canvas.addEventListener('touchstart',e=>{ e.preventDefault(); if(state==='playing') flap(); },{passive:false});
+
+// Native input: Enter to submit (backup listener directly on element)
+document.getElementById('shortAnswerNativeInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); submitShortAnswer(); }
+});
+
+canvas.addEventListener('click',    ()=>{ if(state==='playing') flap(); });
+canvas.addEventListener('touchstart', e=>{ e.preventDefault(); if(state==='playing') flap(); }, {passive:false});
 
 function scaleGame() {
   const w=document.getElementById('wrapper');
-  const s=Math.min(window.innerWidth/420,window.innerHeight/640,1);
+  const s=Math.min(window.innerWidth/420, window.innerHeight/640, 1);
   w.style.transform=`scale(${s})`;
 }
-scaleGame(); window.addEventListener('resize',scaleGame);
+scaleGame(); window.addEventListener('resize', scaleGame);
 
-// ── INIT ────────────────────────────────────────────────────────
-document.getElementById('menuHS').textContent=highScore;
+// ─── INIT ──────────────────────────────────────────────────────
+document.getElementById('menuHS').textContent = highScore;
 updateCoinUI(); scrollX=0;
-
-// Auto-unlock MOAC (free skin)
-if (!unlockedSkins.includes(8)) { unlockedSkins.push(8); saveUnlocked(); }
-
-loadAllSkins(()=>{
-  drawBirdPreview();
-  applyHellModeWrapper();
-  requestAnimationFrame(drawMenuBg);
-});
+if(!unlockedSkins.includes(8)){ unlockedSkins.push(8); saveUnlocked(); }
+loadAllSkins(() => { drawBirdPreview(); applyHellModeWrapper(); requestAnimationFrame(drawMenuBg); });
 </script>
 </body>
 </html>
