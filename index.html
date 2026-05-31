@@ -50,8 +50,40 @@
     font-family:'Press Start 2P',monospace; font-size:11px; padding:15px 24px;
     cursor:pointer; box-shadow:0 6px 0 #b05500,0 10px 20px rgba(0,0,0,.4),inset 0 2px 5px rgba(255,255,255,.4);
     transition:all .15s ease; margin:6px 0; min-width:210px; text-align:center;
-    text-transform:uppercase; letter-spacing:1px;
+    text-transform:uppercase; letter-spacing:1px; }
+  /* Style cho cụm nút sao lưu dữ liệu */
+#menuScreen {
+    padding-bottom: 50px; 
   }
+
+.backup-container {
+    position: relative; /* Thay vì absolute */
+    margin-top: 20px;   /* Tạo khoảng cách dưới dòng Kỷ Lục */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-backup {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 8px 12px;
+  background: #121225;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-backup:hover {
+  background: #00ffff;
+  color: #050510;
+  box-shadow: 0 0 12px #00ffff;
+}
+
+.btn-backup:active {
+  transform: scale(0.95);
+}
   .btn:hover  { transform:translateY(-2px); box-shadow:0 8px 0 #b05500,0 15px 25px rgba(255,153,0,.4),inset 0 2px 5px rgba(255,255,255,.5); filter:brightness(1.1); }
   .btn:active { transform:translateY(4px); box-shadow:0 2px 0 #b05500,0 2px 5px rgba(0,0,0,.4); }
   .btn.secondary { background:linear-gradient(135deg,#2244aa,#4477ff); box-shadow:0 6px 0 #112266,0 10px 20px rgba(0,0,0,.4),inset 0 2px 5px rgba(255,255,255,.3); color:#eef4ff; }
@@ -112,6 +144,7 @@
     background:rgba(255,255,255,.05); border:2px solid rgba(255,255,255,.15);
     border-radius:12px; padding:10px 6px; cursor:pointer; transition:all .2s; position:relative;
   }
+  
   .skin-card:hover:not(.locked) { background:rgba(255,180,255,.15); border-color:#ff66ff; transform:translateY(-5px) scale(1.05); box-shadow:0 8px 15px rgba(255,102,255,.3); }
   .skin-card.active  { border-color:#ffe066; background:rgba(255,224,102,.2); box-shadow:0 0 20px rgba(255,224,102,.5); transform:scale(1.08); }
   .skin-card.locked  { opacity:.75; cursor:default; border-color:rgba(255,255,255,.1); }
@@ -291,6 +324,7 @@
   #wrapper.hell-mode { border-color:rgba(220,0,0,.6) !important; box-shadow:0 0 40px rgba(220,0,0,.4),0 0 80px rgba(180,0,0,.2),inset 0 0 20px rgba(255,0,0,.08) !important; }
   #wrapper.goldrush-mode { border-color:rgba(255,220,0,.8) !important; box-shadow:0 0 40px rgba(255,220,0,.5),0 0 80px rgba(255,150,0,.3),inset 0 0 20px rgba(255,200,0,.1) !important; }
 </style>
+
 </head>
 <body>
 <div id="wrapper">
@@ -305,7 +339,6 @@
   <div id="laserFlash"></div>
   <div id="goldRushActiveOverlay"></div>
 
-  <!-- Gold Rush Bar -->
   <div id="goldRushWrap">
     <div id="goldRushTopRow">
       <span id="goldRushLabelLeft">⚡ GOLD RUSH</span>
@@ -314,18 +347,15 @@
     <div id="goldRushTrack"><div id="goldRushFillBar"></div></div>
   </div>
 
-  <!-- MOAC Bar -->
   <div id="moacBar">
     <div id="moacBarLabel">☠ TỬ THẦN: <span id="moacPct">0</span>%</div>
     <div id="moacBarTrack"><div id="moacBarFill"></div></div>
   </div>
 
-  <!-- Gravity Indicator -->
   <div id="gravityIndicator">⬇ 20s</div>
 
   <div id="misterOverlay"><img id="misterImg" src="mister.jpg" alt=""></div>
 
-  <!-- QUIZ -->
   <div id="quizOverlay" class="hidden">
     <div class="quiz-board" id="quizBoard">
       <canvas id="baldiScribbleCanvas"></canvas>
@@ -356,7 +386,6 @@
 
   <audio id="bgMusic" preload="auto"></audio>
 
-  <!-- MENU -->
   <div class="screen" id="menuScreen">
     <div class="logo">FLAPPY TUẤT</div>
     <div class="sub">— Tuất tày tuất lộc —</div>
@@ -367,9 +396,14 @@
     <button class="btn skin-btn"  onclick="showSkins()">🎨 CHỌN SKIN</button>
     <button class="btn secondary" onclick="showHow()">?  HƯỚNG DẪN</button>
     <div class="highscore-disp">KỶ LỤC: <span id="menuHS">0</span></div>
-  </div>
+    
+    <div class="backup-container">
+      <button id="btnExport" class="btn-backup">XUẤT SAVE</button>
+      <button id="btnImport" class="btn-backup">NHẬP SAVE</button>
+    </div>
 
-  <!-- QUESTS -->
+  </div> 
+
   <div class="screen hidden" id="questScreen">
     <div class="q-screen-title">📋 NHIỆM VỤ</div>
     <div class="coin-ui" style="margin-bottom:12px;">💰 <span id="questCoinDisplay">0</span> xu</div>
@@ -377,7 +411,6 @@
     <button class="btn secondary" onclick="showMenu()" style="margin-top:12px;">← QUAY LẠI</button>
   </div>
 
-  <!-- SKINS -->
   <div class="screen hidden" id="skinScreen">
     <div class="skin-title">🎨 SHOP SKIN</div>
     <div class="skin-sub">💰 <span id="shopCoinDisplay">0</span> xu</div>
@@ -385,7 +418,6 @@
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- HOW TO -->
   <div class="screen hidden" id="howScreen">
     <div class="how-title">HƯỚNG DẪN</div>
     <ul class="how-list">
@@ -407,7 +439,6 @@
     <button class="btn secondary" onclick="showMenu()">← QUAY LẠI</button>
   </div>
 
-  <!-- GAME OVER -->
   <div class="screen hidden" id="gameoverScreen">
     <div class="go-title">GAME OVER</div>
     <div class="score-box">
@@ -420,7 +451,6 @@
     <button class="btn secondary" onclick="showMenu()">⌂  MENU</button>
   </div>
 
-  <!-- PAUSE -->
   <div class="screen hidden" id="pauseScreen">
     <div style="font-size:24px;color:#ffe066;text-shadow:3px 3px 0 #b8860b;margin-bottom:35px;animation:float 2s infinite;">TẠM DỪNG</div>
     <button class="btn"           onclick="resumeGame()">▶  TIẾP TỤC</button>
@@ -1561,6 +1591,112 @@ scaleGame();window.addEventListener('resize',scaleGame);
 document.getElementById('menuHS').textContent=highScore;updateCoinUI();scrollX=0;
 if(!unlockedSkins.includes(8)){unlockedSkins.push(8);saveUnlocked();}
 loadAllSkins(()=>{drawBirdPreview();applyHellModeWrapper();requestAnimationFrame(drawMenuBg);});
+
+ // ==========================================
+// HỆ THỐNG XUẤT / NHẬP SAVE DATA (CÓ CHỐNG HACK)
+// ==========================================
+const SECRET_SALT = "FlPC@PJpAGFHsswtqsxrtcsaqD0g__*S3cr3t!qopnigga_K3y_2)024@e!!!";
+
+// Hàm tạo mã băm (Hash) đơn giản
+function generateHash(string) {
+  let hash = 0;
+  for (let i = 0; i < string.length; i++) {
+    let char = string.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash.toString(36);
+}
+
+// 1. Chức năng XUẤT SAVE (Export)
+document.getElementById('btnExport').addEventListener('click', function(e) {
+  e.stopPropagation(); // Ngăn click lọt xuống canvas
+  
+  const saveData = {
+    coins: localStorage.getItem('flappy_coins') || 0,
+    hs: localStorage.getItem('flappy_hs') || 0,
+    totalScore: localStorage.getItem('flappy_totalScore') || 0,
+    quests: localStorage.getItem('flappy_quests') || "",
+    unlocked: localStorage.getItem('flappy_unlocked') || "",
+    skin: localStorage.getItem('flappy_skin') || ""
+  };
+  
+  // Chuyển thành JSON gốc
+  const rawJson = JSON.stringify(saveData);
+  
+  // Mã hóa Base64 (Làm rối dữ liệu)
+  const encodedData = btoa(rawJson); 
+  
+  // Tạo chữ ký
+  const signature = generateHash(encodedData + SECRET_SALT);
+  
+  // Đóng gói
+  const secureSave = {
+    data: encodedData,
+    sig: signature
+  };
+  
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(secureSave));
+  
+  const downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href", dataStr);
+  downloadAnchorNode.setAttribute("download", "FlappyDog_SecureSave.json");
+  document.body.appendChild(downloadAnchorNode); 
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+  
+  alert("✅ Đã xuất file save an toàn!");
+});
+
+// 2. Chức năng NHẬP SAVE (Import)
+document.getElementById('btnImport').addEventListener('click', function(e) {
+  e.stopPropagation(); // Ngăn click lọt xuống canvas
+  
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  
+  input.onchange = ev => {
+    const file = ev.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.readAsText(file, 'UTF-8');
+    
+    reader.onload = readerEvent => {
+      try {
+        const content = readerEvent.target.result;
+        const secureSave = JSON.parse(content);
+        
+        // BƯỚC KIỂM TRA CHỐNG CHEAT
+        const expectedSignature = generateHash(secureSave.data + SECRET_SALT);
+        if (secureSave.sig !== expectedSignature) {
+          alert("🚨 PHÁT HIỆN GIAN LẬN! File save đã bị chỉnh sửa trái phép.");
+          return; 
+        }
+        
+        // Nếu qua ải, tiến hành giải mã Base64
+        const decodedJson = atob(secureSave.data);
+        const saveData = JSON.parse(decodedJson);
+        
+        // Nạp dữ liệu vào game
+        if (saveData.coins) localStorage.setItem('flappy_coins', saveData.coins);
+        if (saveData.hs) localStorage.setItem('flappy_hs', saveData.hs);
+        if (saveData.totalScore) localStorage.setItem('flappy_totalScore', saveData.totalScore);
+        if (saveData.quests) localStorage.setItem('flappy_quests', saveData.quests);
+        if (saveData.unlocked) localStorage.setItem('flappy_unlocked', saveData.unlocked);
+        if (saveData.skin) localStorage.setItem('flappy_skin', saveData.skin);
+        
+        alert("🎮 Đã nhập save thành công! Trò chơi sẽ tải lại.");
+        location.reload(); 
+      } catch (error) {
+        alert("❌ File save không hợp lệ hoặc bị lỗi định dạng!");
+      }
+    }
+  }
+  
+  input.click();
+});
 </script>
 </body>
 </html>
