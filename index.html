@@ -56,13 +56,15 @@
     padding-bottom: 50px; 
   }
 
-.backup-container {
-    position: relative; /* Thay vì absolute */
-    margin-top: 20px;   /* Tạo khoảng cách dưới dòng Kỷ Lục */
+  .backup-container {
+    margin-top: 25px;
+    width: 100%;
     display: flex;
+    gap: 15px;
     justify-content: center;
-    gap: 10px;
-}
+    z-index: 50; 
+  }
+
 .btn-backup {
   font-family: 'Press Start 2P', monospace;
   font-size: 9px;
@@ -1625,7 +1627,7 @@ document.getElementById('btnExport').addEventListener('click', function(e) {
   const rawJson = JSON.stringify(saveData);
   
   // Mã hóa Base64 (Làm rối dữ liệu)
-  const encodedData = btoa(rawJson); 
+  const encodedData = btoa(unescape(encodeURIComponent(rawJson)));
   
   // Tạo chữ ký
   const signature = generateHash(encodedData + SECRET_SALT);
@@ -1676,7 +1678,7 @@ document.getElementById('btnImport').addEventListener('click', function(e) {
         }
         
         // Nếu qua ải, tiến hành giải mã Base64
-        const decodedJson = atob(secureSave.data);
+        const decodedJson = decodeURIComponent(escape(atob(secureSave.data)));
         const saveData = JSON.parse(decodedJson);
         
         // Nạp dữ liệu vào game
